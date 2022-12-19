@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/future/presentation/pages/detail_page.dart';
 import 'package:mega_intern/future/presentation/widget/svg_icon_widget.dart';
 
 class NewsCardWidget extends StatelessWidget {
@@ -18,94 +19,99 @@ class NewsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: Container(
-            width: 359,
-            height: 272,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/images/wall.png',
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) => DetailScreen()));
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 359,
+              height: 272,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    'assets/images/wall.png',
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                date,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Color.fromRGBO(133, 128, 128, 1),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  date,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color.fromRGBO(133, 128, 128, 1),
+                  ),
                 ),
-              ),
-              IconButton(
-                iconSize: 30,
-                onPressed: () {},
-                icon: isFavourite
-                    ? const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )
-                    : const Icon(Icons.favorite_border),
-              ),
-            ],
+                IconButton(
+                  iconSize: 30,
+                  onPressed: () {},
+                  icon: isFavourite
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : const Icon(Icons.favorite_border),
+                ),
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+            ),
+            child: Text(
+              title,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            ),
           ),
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 10),
-          child: Text(
-            description,
-            style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: Color.fromRGBO(133, 128, 128, 1)),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 10,
-            left: 20,
-          ),
-          child: InkWell(
-            onTap: () {},
-            child: const Text(
-              'Читать дальше>>',
-              style: TextStyle(
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 10),
+            child: Text(
+              description,
+              style: const TextStyle(
                   fontSize: 16,
-                  decoration: TextDecoration.underline,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(126, 91, 194, 1)),
+                  color: Color.fromRGBO(133, 128, 128, 1)),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 10,
+              left: 20,
+            ),
+            child: InkWell(
+              onTap: () {},
+              child: const Text(
+                'Читать дальше>>',
+                style: TextStyle(
+                    fontSize: 16,
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromRGBO(126, 91, 194, 1)),
+              ),
+            ),
           ),
-          child: SvgIconButtonWidget(
-            icon: SvgPicture.asset('assets/icons/share.svg'),
-            onPressed: () {},
-          ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+            ),
+            child: SvgIconButtonWidget(
+              icon: SvgPicture.asset('assets/icons/share.svg'),
+              onPressed: () {},
+            ),
+          )
+        ],
+      ),
     );
   }
 }

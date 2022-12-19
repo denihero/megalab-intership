@@ -1,21 +1,23 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mega_intern/future/presentation/pages/sign_in_page.dart';
 import 'package:mega_intern/future/presentation/widget/primary_button.dart';
 
 import '../widget/text_form_field_widget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         toolbarHeight: 80,
         title: SvgPicture.asset(
@@ -66,7 +68,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextStyle(color: Color.fromRGBO(90, 90, 90, 1), fontSize: 13),
               ),
               TextSpan(
-                  recognizer: TapGestureRecognizer()..onTap = () {},
+                  recognizer: TapGestureRecognizer()..onTap = () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignInScreen()),
+                    );
+                  },
                   style: const TextStyle(
                       color: Color.fromRGBO(45, 78, 194, 1),
                       decoration: TextDecoration.underline),

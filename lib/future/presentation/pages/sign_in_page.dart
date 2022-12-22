@@ -32,13 +32,13 @@ class _SignInScreenState extends State<SignInScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextFormFieldWidget(
+          const TextFormFieldWidget(
             title: 'Никнейм',
           ),
-          TextFormFieldWidget(
+          const TextFormFieldWidget(
             title: 'Пароль',
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           PrimaryButton(
@@ -53,23 +53,25 @@ class _SignInScreenState extends State<SignInScreen> {
             padding: const EdgeInsets.only(bottom: 18),
             child: RichText(
                 text: TextSpan(children: [
-                  const TextSpan(
-                    text: 'Нету аккаунта ? ',
-                    style:
-                    TextStyle(color: Color.fromRGBO(90, 90, 90, 1), fontSize: 13),
-                  ),
-                  TextSpan(
-                      recognizer: TapGestureRecognizer()..onTap = () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const RegistrationScreen()),
-                        );
-                      },
-                      style: const TextStyle(
-                          color: Color.fromRGBO(45, 78, 194, 1),
-                          decoration: TextDecoration.underline),
-                      text: 'Регистрация'),
-                ])),
+              const TextSpan(
+                text: 'Нету аккаунта ? ',
+                style: TextStyle(
+                    color: Color.fromRGBO(90, 90, 90, 1), fontSize: 13),
+              ),
+              TextSpan(
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegistrationScreen()),
+                      );
+                    },
+                  style: const TextStyle(
+                      color: Color.fromRGBO(45, 78, 194, 1),
+                      decoration: TextDecoration.underline),
+                  text: 'Регистрация'),
+            ])),
           )
         ],
       ),

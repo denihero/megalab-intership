@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mega_intern/future/presentation/pages/registration_page.dart';
+import 'package:mega_intern/future/presentation/pages/home_page.dart';
+import 'package:mega_intern/future/presentation/pages/profile_page.dart';
 
-import 'future/presentation/pages/home_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

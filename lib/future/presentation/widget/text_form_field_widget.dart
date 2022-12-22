@@ -8,20 +8,24 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Padding(
-            padding: const EdgeInsets.only(top: 8,right: 8,bottom: 8),
+          Padding(
+            padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
             child: Text(
               title,
-              style: const TextStyle(fontSize: 16,color: Colors.black, fontWeight: FontWeight.w400),
+              style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400),
             ),
           ),
           TextFormField(
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical:15,horizontal: 10),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               border: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: Color.fromRGBO(228, 223, 220, 1),

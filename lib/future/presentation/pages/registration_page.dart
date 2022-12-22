@@ -22,7 +22,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         toolbarHeight: 80,
         title: SvgPicture.asset(
           'assets/icons/megalab_icon.svg',
-          color: Color.fromRGBO(126, 91, 194, 1),
+          color: const Color.fromRGBO(126, 91, 194, 1),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -32,22 +32,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextFormFieldWidget(
+          const TextFormFieldWidget(
             title: 'Фамилия',
           ),
-          TextFormFieldWidget(
+          const TextFormFieldWidget(
             title: 'Имя',
           ),
-          TextFormFieldWidget(
+          const TextFormFieldWidget(
             title: 'Никнейм',
           ),
-          TextFormFieldWidget(
+          const TextFormFieldWidget(
             title: 'Пароль',
           ),
-          TextFormFieldWidget(
+          const TextFormFieldWidget(
             title: 'Подтверждение пароля',
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           PrimaryButton(
@@ -64,16 +64,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 text: TextSpan(children: [
               const TextSpan(
                 text: 'Уже есть логин ? ',
-                style:
-                    TextStyle(color: Color.fromRGBO(90, 90, 90, 1), fontSize: 13),
+                style: TextStyle(
+                    color: Color.fromRGBO(90, 90, 90, 1), fontSize: 13),
               ),
               TextSpan(
-                  recognizer: TapGestureRecognizer()..onTap = () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SignInScreen()),
-                    );
-                  },
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInScreen()),
+                      );
+                    },
                   style: const TextStyle(
                       color: Color.fromRGBO(45, 78, 194, 1),
                       decoration: TextDecoration.underline),

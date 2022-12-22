@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mega_intern/future/presentation/pages/favourite_page.dart';
 
 class FooterWidget extends StatelessWidget {
   const FooterWidget({Key? key}) : super(key: key);
@@ -28,19 +29,27 @@ class FooterWidget extends StatelessWidget {
             children: [
               TextButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.white
-                  ),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
                 ),
                 onPressed: () {},
-                child: const Text('Мой профиль',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+                child: const Text(
+                  'Мой профиль',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                ),
               ),
               TextButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.white
-                  ),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
                 ),
-                onPressed: () {},
-                child: const Text('Избранные новости',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400)),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const FavouriteScreen()));
+                },
+                child: const Text('Избранные новости',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
               ),
             ],
           )

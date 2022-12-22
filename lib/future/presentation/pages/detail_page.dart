@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/presentation/widget/footer_widget.dart';
+import 'package:mega_intern/future/presentation/widget/share_window_widget.dart';
 
+import '../widget/comment_widget.dart';
 import '../widget/svg_icon_widget.dart';
+import '../widget/write_comment_form_widget.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -124,18 +127,53 @@ class _DetailScreenState extends State<DetailScreen> {
                       fontSize: 16,
                     ),
                   ),
-
                   SvgIconButtonWidget(
-                    padding: const EdgeInsets.only(top: 10,bottom: 10),
-                    icon: SvgPicture.asset('assets/icons/share.svg',width: 28,height: 28,),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    icon: SvgPicture.asset(
+                      'assets/icons/share.svg',
+                      width: 24,
+                      height: 24,
+                    ),
                     onPressed: () {
-
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return const ShareWidget();
+                          });
                     },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    'Комментарий',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  SizedBox(
+                    height: 700,
+                    child: RepaintBoundary(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: 2,
+                          itemBuilder: (context, index) {
+                            return const CommentWidget();
+                          }),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const SizedBox(height: 70, child: WriteCommentFormWidget()),
+                  const SizedBox(
+                    height: 40,
                   ),
                 ],
               ),
             ),
-
             const FooterWidget()
           ],
         ),

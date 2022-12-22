@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/future/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/future/presentation/widget/svg_icon_widget.dart';
 
@@ -54,23 +55,28 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: SvgIconButtonWidget(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-              icon: SvgPicture.asset('assets/icons/sliders.svg'),
-              onPressed: () {},
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: SvgIconButtonWidget(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                icon: SvgPicture.asset('assets/icons/sliders.svg'),
+                onPressed: () {},
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView.separated(
+            ListView.separated(
               itemCount: 10,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return const NewsCardWidget(
                   title: 'Заголок новости',
-                  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+                  description:
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
                   date: '29.11.2022',
                   isFavourite: true,
                 );
@@ -84,8 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
-          )
-        ],
+            FooterWidget(),
+          ],
+        ),
       ),
     );
   }

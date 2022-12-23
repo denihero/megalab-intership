@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/future/presentation/pages/profile_page.dart';
 import 'package:mega_intern/future/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/future/presentation/widget/svg_icon_widget.dart';
@@ -30,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SvgIconButtonWidget(
               icon: SvgPicture.asset('assets/icons/profile.svg'),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+              },
             ),
             SvgIconButtonWidget(
               icon: SvgPicture.asset('assets/icons/menu.svg'),

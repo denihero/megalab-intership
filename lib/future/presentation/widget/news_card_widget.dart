@@ -26,7 +26,7 @@ class NewsCardWidget extends StatelessWidget {
             context, MaterialPageRoute(builder: (_) => DetailScreen()));
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -83,6 +83,8 @@ class NewsCardWidget extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 10),
               child: Text(
                 description,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,

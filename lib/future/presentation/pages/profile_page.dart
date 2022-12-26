@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/future/presentation/pages/home_page.dart';
 import 'package:mega_intern/future/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/future/presentation/widget/personal_info_widget.dart';
@@ -21,11 +22,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: SvgPicture.asset(
-          'assets/icons/megalab_icon.svg',
-          color: Color.fromRGBO(128, 81, 194, 1),
+        title: SvgIconButtonWidget(
+          padding: EdgeInsets.zero,
+          icon: SvgPicture.asset(
+              'assets/icons/megalab_icon.svg',
+            color: Color.fromRGBO(128, 81, 194, 1),
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+          },
         ),
         actions: [
           SvgIconButtonWidget(
@@ -40,7 +48,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               'assets/icons/profile.svg',
               color: Color.fromRGBO(128, 81, 194, 1),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+            },
           ),
           SvgIconButtonWidget(
             icon: SvgPicture.asset(

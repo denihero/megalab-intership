@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mega_intern/future/presentation/pages/favourite_page.dart';
+import 'package:mega_intern/future/presentation/pages/profile_page.dart';
 
 class FooterWidget extends StatelessWidget {
   const FooterWidget({Key? key}) : super(key: key);
@@ -31,7 +32,9 @@ class FooterWidget extends StatelessWidget {
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all(Colors.white),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+                },
                 child: const Text(
                   'Мой профиль',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),

@@ -18,6 +18,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         title: SvgPicture.asset(
           'assets/icons/megalab_icon.svg',

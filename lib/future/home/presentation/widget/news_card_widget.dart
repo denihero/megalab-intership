@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mega_intern/future/presentation/pages/detail_page.dart';
-import 'package:mega_intern/future/presentation/widget/share_window_widget.dart';
-import 'package:mega_intern/future/presentation/widget/svg_icon_widget.dart';
+import 'package:mega_intern/future/home/presentation/pages/detail_page.dart';
+import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
+import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 
 class NewsCardWidget extends StatelessWidget {
   const NewsCardWidget(
@@ -23,7 +23,7 @@ class NewsCardWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => DetailScreen()));
+            context, MaterialPageRoute(builder: (_) => const DetailScreen()));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),

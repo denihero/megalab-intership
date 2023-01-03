@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mega_intern/future/presentation/pages/home_page.dart';
-import 'package:mega_intern/future/presentation/pages/profile_page.dart';
+import 'package:mega_intern/future/auth/login/presentation/page/login_page.dart';
 
 
 class App extends StatelessWidget {
@@ -10,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mega_intern/future/presentation/pages/favourite_page.dart';
-import 'package:mega_intern/future/presentation/pages/profile_page.dart';
-import 'package:mega_intern/future/presentation/pages/sign_in_page.dart';
-import 'package:mega_intern/future/presentation/widget/filter_widget.dart';
-import 'package:mega_intern/future/presentation/widget/footer_widget.dart';
-import 'package:mega_intern/future/presentation/widget/news_card_widget.dart';
-import 'package:mega_intern/future/presentation/widget/svg_icon_widget.dart';
+import 'package:mega_intern/future/auth/login/presentation/page/login_page.dart';
+import 'package:mega_intern/future/home/presentation/widget/filter_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
+import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
+
+import 'favourite_page.dart';
+import 'profile_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -97,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (_) => const SignInScreen()),
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
                   ModalRoute.withName('/'),
                 );
               },

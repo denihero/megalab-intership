@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mega_intern/future/presentation/pages/sign_in_page.dart';
-import 'package:mega_intern/future/presentation/widget/primary_button.dart';
+import 'package:mega_intern/future/widgets/primary_button.dart';
+import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 
-import '../widget/text_form_field_widget.dart';
+import '../../../login/presentation/page/login_page.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -73,7 +73,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SignInScreen()),
+                            builder: (context) => const LoginScreen()),
                       );
                     },
                   style: const TextStyle(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mega_intern/future/presentation/widget/footer_widget.dart';
-import 'package:mega_intern/future/presentation/widget/news_card_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
 
-import '../widget/svg_icon_widget.dart';
+import '../../../widgets/svg_icon_widget.dart';
+import '../widget/footer_widget.dart';
 
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({Key? key}) : super(key: key);

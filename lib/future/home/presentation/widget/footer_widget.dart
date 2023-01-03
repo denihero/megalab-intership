@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mega_intern/future/presentation/pages/favourite_page.dart';
-import 'package:mega_intern/future/presentation/pages/profile_page.dart';
+import 'package:mega_intern/future/home/presentation/pages/favourite_page.dart';
+import 'package:mega_intern/future/home/presentation/pages/profile_page.dart';
 
 class FooterWidget extends StatelessWidget {
   const FooterWidget({Key? key}) : super(key: key);

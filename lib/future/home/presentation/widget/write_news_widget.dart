@@ -1,9 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mega_intern/future/presentation/widget/categories_widget.dart';
-import 'package:mega_intern/future/presentation/widget/primary_button.dart';
-import 'package:mega_intern/future/presentation/widget/text_form_field_widget.dart';
-import 'package:mega_intern/future/presentation/widget/text_with_icon_widget.dart';
+import 'package:mega_intern/future/widgets/primary_button.dart';
+import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
+import 'package:mega_intern/future/widgets/text_with_icon_widget.dart';
+
+import 'categories_widget.dart';
 
 class WriteNewsWidget extends StatelessWidget {
   const WriteNewsWidget({Key? key}) : super(key: key);
@@ -21,9 +21,9 @@ class WriteNewsWidget extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                constraints: BoxConstraints(),
+                constraints: const BoxConstraints(),
                 padding: EdgeInsets.zero,
-                icon: Icon(Icons.close,size: 30,),
+                icon: const Icon(Icons.close,size: 30,),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -74,18 +74,18 @@ class WriteNewsWidget extends StatelessWidget {
               borderRadius: 5,
               maxLines: null,
             )),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            Text('Выбрать категорию'),
-            SizedBox(
+            const Text('Выбрать категорию'),
+            const SizedBox(
               height: 5,
             ),
             const FilterSortButton(),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            PrimaryButton(child: Text('Создать'), onPressed: () {})
+            PrimaryButton(child: const Text('Создать'), onPressed: () {})
           ],
         ),
       ),

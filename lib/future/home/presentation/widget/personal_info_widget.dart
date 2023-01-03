@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mega_intern/future/presentation/widget/primary_button.dart';
-import 'package:mega_intern/future/presentation/widget/text_form_field_widget.dart';
-import 'package:mega_intern/future/presentation/widget/text_with_icon_widget.dart';
+import 'package:mega_intern/future/widgets/primary_button.dart';
+import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
+import 'package:mega_intern/future/widgets/text_with_icon_widget.dart';
 
 class PersonalInfoWidget extends StatefulWidget {
   const PersonalInfoWidget({Key? key}) : super(key: key);

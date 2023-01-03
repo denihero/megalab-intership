@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mega_intern/future/presentation/widget/footer_widget.dart';
-import 'package:mega_intern/future/presentation/widget/share_window_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
 
 import '../widget/comment_widget.dart';
-import '../widget/svg_icon_widget.dart';
+import '../../../widgets/svg_icon_widget.dart';
 import '../widget/write_comment_form_widget.dart';
 
 class DetailScreen extends StatefulWidget {

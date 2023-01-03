@@ -11,7 +11,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
     this.height,
-    this.borderRadius = 10, this.maxLines = 1,
+    this.borderRadius = 10, this.maxLines = 1, this.obscureText = false,
   }) : super(key: key);
 
   final String title;
@@ -19,6 +19,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final EdgeInsets contentPadding;
   final String initialValue;
   final bool enabled;
+  final bool obscureText;
   final Widget? suffixIcon;
   final double? height;
   final double borderRadius;
@@ -47,6 +48,7 @@ class TextFormFieldWidget extends StatelessWidget {
               initialValue: initialValue,
               keyboardType: TextInputType.multiline,
               maxLines: maxLines,
+              obscureText: obscureText,
               //readOnly: enabled,
               decoration: InputDecoration(
                   suffixIcon: suffixIcon,

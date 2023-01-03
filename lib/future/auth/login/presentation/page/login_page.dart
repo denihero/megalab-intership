@@ -1,19 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mega_intern/future/presentation/pages/registration_page.dart';
+import 'package:mega_intern/future/auth/register/presentation/pages/registration_page.dart';
+import 'package:mega_intern/future/widgets/primary_button.dart';
+import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 
-import '../widget/primary_button.dart';
-import '../widget/text_form_field_widget.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +33,12 @@ class _SignInScreenState extends State<SignInScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const TextFormFieldWidget(
+            enabled: true,
             title: 'Никнейм',
           ),
           const TextFormFieldWidget(
+            enabled: true,
+            obscureText: true,
             title: 'Пароль',
           ),
           const SizedBox(

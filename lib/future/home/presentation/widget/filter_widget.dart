@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mega_intern/future/presentation/widget/primary_button.dart';
+import 'package:mega_intern/future/widgets/primary_button.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({Key? key}) : super(key: key);

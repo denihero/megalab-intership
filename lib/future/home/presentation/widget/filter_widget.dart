@@ -55,7 +55,7 @@ class FilterWidget extends StatelessWidget {
             CheckboxListTile(
                 contentPadding: EdgeInsets.zero,
                 controlAffinity: ListTileControlAffinity.leading,
-                title: const Text('Мода'),
+                title: Text('Мода',style: UBUNTU_16_400_BLACK,),
                 value: false,
                 tristate: true,
                 checkboxShape: RoundedRectangleBorder(
@@ -63,7 +63,7 @@ class FilterWidget extends StatelessWidget {
                 onChanged: (va) {}),
             PrimaryButton(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: const Text('Применить'),
+                child: Text('Применить',style: UBUNTU_16_500_WHITE,),
                 onPressed: () {})
           ],
         ),

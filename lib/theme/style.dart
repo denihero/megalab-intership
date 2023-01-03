@@ -43,7 +43,7 @@ TextStyle UBUNTU_16_400_PURPLE = GoogleFonts.ubuntu(
 TextStyle UBUNTU_16_400_GREY = GoogleFonts.ubuntu(
     textStyle: const TextStyle(
   color: GREY,
-  fontSize: 16,
+  fontSize: 17,
   fontWeight: FontWeight.w400,
 ));
 
@@ -57,7 +57,7 @@ TextStyle UBUNTU_15_500_BLACK = GoogleFonts.ubuntu(
 TextStyle UBUNTU_13_400_BLACK = GoogleFonts.ubuntu(
     textStyle: const TextStyle(
   color: BLACK,
-  fontSize: 13,
+  fontSize: 12,
   fontWeight: FontWeight.w400,
 ));
 

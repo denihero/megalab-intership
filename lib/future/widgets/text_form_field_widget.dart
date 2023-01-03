@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
@@ -39,10 +40,7 @@ class TextFormFieldWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
             child: Text(
               title,
-              style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400),
+              style: UBUNTU_16_400_BLACK,
             ),
           ),
           SizedBox(

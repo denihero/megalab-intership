@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(bottom: 17),
                   child: Text(
                     'Новости',
-                    style: UBUNTU_42_400_WHITE,
+                    style: UBUNTU_42_400_WHITE.copyWith(fontWeight: FontWeight.w500),
                   ),
                 )),
           ),

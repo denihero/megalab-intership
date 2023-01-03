@@ -32,7 +32,7 @@ class CommentWidget extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     'Ответить',
-                    style: UBUNTU_16_400_GREY.copyWith(
+                    style: UBUNTU_16_400_PURPLE.copyWith(
                         decoration: TextDecoration.underline),
                   ))
             ],
@@ -77,7 +77,7 @@ class CommentWidget extends StatelessWidget {
                                 onPressed: () {},
                                 child: Text(
                                   'Ответить',
-                                  style: UBUNTU_16_400_GREY.copyWith(
+                                  style: UBUNTU_16_400_PURPLE.copyWith(
                                       decoration: TextDecoration.underline),
                                 ))
                           ],

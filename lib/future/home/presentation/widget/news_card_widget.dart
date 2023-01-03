@@ -58,7 +58,7 @@ class NewsCardWidget extends StatelessWidget {
                     icon: isFavourite
                         ? const Icon(
                             Icons.favorite,
-                            color: RED,
+                            color: Colors.red,
                           )
                         : const Icon(Icons.favorite_border),
                   ),

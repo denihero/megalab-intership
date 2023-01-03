@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
+import 'package:mega_intern/theme/style.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({Key? key}) : super(key: key);
@@ -13,7 +14,8 @@ class FilterWidget extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Фильтрация',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+            Text('Фильтрация',
+                style: UBUNTU_24_500_BLACK.copyWith(fontSize: 18)),
             CheckboxListTile(
                 contentPadding: EdgeInsets.zero,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -22,9 +24,7 @@ class FilterWidget extends StatelessWidget {
                 tristate: true,
                 checkboxShape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5)),
-                onChanged: (va) {
-
-                }),
+                onChanged: (va) {}),
             CheckboxListTile(
                 contentPadding: EdgeInsets.zero,
                 controlAffinity: ListTileControlAffinity.leading,

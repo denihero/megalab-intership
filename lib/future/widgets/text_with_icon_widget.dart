@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 class TextWithIconWidget extends StatelessWidget {
-  const TextWithIconWidget({Key? key, required this.text, required this.icon, required this.onPressed}) : super(key: key);
+  const TextWithIconWidget(
+      {Key? key,
+      required this.text,
+      required this.icon,
+      required this.onPressed})
+      : super(key: key);
   final String text;
   final Widget icon;
   final Function() onPressed;
@@ -14,8 +21,7 @@ class TextWithIconWidget extends StatelessWidget {
         children: [
           Text(
             text,
-            style: const TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+            style: UBUNTU_13_400_BLACK.copyWith(fontSize: 14),
           ),
           const SizedBox(
             width: 5,

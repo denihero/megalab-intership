@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mega_intern/theme/palette.dart';
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({Key? key, required this.child, required this.onPressed, this.padding = const EdgeInsets.symmetric(horizontal: 70)})
+  const PrimaryButton(
+      {Key? key,
+      required this.child,
+      required this.onPressed,
+      this.padding = const EdgeInsets.symmetric(horizontal: 70)})
       : super(key: key);
 
   final Widget child;
@@ -16,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
-                const Color.fromRGBO(126, 91, 194, 1),
+                PURPLE,
               ),
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)))),

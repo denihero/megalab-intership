@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 import '../../../widgets/svg_icon_widget.dart';
 import '../widget/footer_widget.dart';
@@ -22,27 +24,27 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         backgroundColor: Colors.transparent,
         title: SvgPicture.asset(
           'assets/icons/megalab_icon.svg',
-          color: const Color.fromRGBO(128, 81, 194, 1),
+          color: PURPLE,
         ),
         actions: [
           SvgIconButtonWidget(
             icon: SvgPicture.asset(
               'assets/icons/search.svg',
-              color: const Color.fromRGBO(128, 81, 194, 1),
+              color: PURPLE,
             ),
             onPressed: () {},
           ),
           SvgIconButtonWidget(
             icon: SvgPicture.asset(
               'assets/icons/profile.svg',
-              color: const Color.fromRGBO(128, 81, 194, 1),
+              color: PURPLE,
             ),
             onPressed: () {},
           ),
           SvgIconButtonWidget(
             icon: SvgPicture.asset(
               'assets/icons/menu.svg',
-              color: const Color.fromRGBO(128, 81, 194, 1),
+              color: PURPLE,
             ),
             onPressed: () {},
           ),
@@ -54,9 +56,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             const SizedBox(
               height: 20,
             ),
-            const Text(
+            Text(
               'Избранные новости',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+              style: UBUNTU_30_500_BLACK,
             ),
             SingleChildScrollView(
               child: ListView.separated(

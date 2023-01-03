@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/home/presentation/pages/detail_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 class NewsCardWidget extends StatelessWidget {
   const NewsCardWidget(
@@ -49,20 +51,14 @@ class NewsCardWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    date,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Color.fromRGBO(133, 128, 128, 1),
-                    ),
-                  ),
+                  Text(date, style: UBUNTU_16_400_GREY),
                   IconButton(
                     iconSize: 30,
                     onPressed: () {},
                     icon: isFavourite
                         ? const Icon(
                             Icons.favorite,
-                            color: Colors.red,
+                            color: RED,
                           )
                         : const Icon(Icons.favorite_border),
                   ),
@@ -75,8 +71,7 @@ class NewsCardWidget extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                style: UBUNTU_24_500_BLACK,
               ),
             ),
             Padding(
@@ -85,10 +80,7 @@ class NewsCardWidget extends StatelessWidget {
                 description,
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromRGBO(133, 128, 128, 1)),
+                style: UBUNTU_16_400_GREY,
               ),
             ),
             Padding(
@@ -101,13 +93,10 @@ class NewsCardWidget extends StatelessWidget {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const DetailScreen()));
                 },
-                child: const Text(
+                child: Text(
                   'Читать дальше>>',
-                  style: TextStyle(
-                      fontSize: 16,
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.w400,
-                      color: Color.fromRGBO(126, 91, 194, 1)),
+                  style: UBUNTU_16_400_PURPLE.copyWith(
+                      decoration: TextDecoration.underline),
                 ),
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 import 'package:mega_intern/future/widgets/text_with_icon_widget.dart';
+import 'package:mega_intern/theme/palette.dart';
 
 class PersonalInfoWidget extends StatefulWidget {
   const PersonalInfoWidget({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                           text: 'Удалить',
                           icon: const Icon(
                             Icons.delete_outline,
-                            color: Colors.red,
+                            color: RED,
                           ),
                           onPressed: () {},
                         ),
@@ -61,7 +62,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                               padding:
                                   MaterialStateProperty.all(EdgeInsets.zero),
                               foregroundColor:
-                                  MaterialStateProperty.all(Colors.black)),
+                                  MaterialStateProperty.all(BLACK)),
                           onPressed: () {
                             isEditedProfileMode.value =
                                 !isEditedProfileMode.value;

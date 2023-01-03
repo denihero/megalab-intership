@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 class ShareWidget extends StatelessWidget {
   const ShareWidget({Key? key}) : super(key: key);
@@ -9,18 +11,19 @@ class ShareWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 250,
-      color: Colors.white,
+      color: WHITE,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 13, bottom: 16),
+              Padding(
+                padding: const EdgeInsets.only(left: 13, bottom: 16),
                 child: Text(
                   'Поделиться',
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
+                  style: UBUNTU_16_400_BLACK.copyWith(
+                      fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
               Padding(
@@ -37,7 +40,7 @@ class ShareWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               CircleAvatar(
-                backgroundColor: const Color.fromRGBO(251, 249, 251, 1),
+                backgroundColor: WHITE,
                 radius: 30,
                 child: SvgPicture.asset(
                   'assets/icons/telegram.svg',
@@ -46,7 +49,7 @@ class ShareWidget extends StatelessWidget {
                 ),
               ),
               CircleAvatar(
-                backgroundColor: const Color.fromRGBO(251, 249, 251, 1),
+                backgroundColor: BONE,
                 radius: 30,
                 child: SvgPicture.asset(
                   'assets/icons/twitter.svg',
@@ -55,7 +58,7 @@ class ShareWidget extends StatelessWidget {
                 ),
               ),
               CircleAvatar(
-                backgroundColor: const Color.fromRGBO(251, 249, 251, 1),
+                backgroundColor: BONE,
                 radius: 30,
                 child: SvgPicture.asset(
                   'assets/icons/facebook.svg',
@@ -64,7 +67,7 @@ class ShareWidget extends StatelessWidget {
                 ),
               ),
               CircleAvatar(
-                backgroundColor: const Color.fromRGBO(251, 249, 251, 1),
+                backgroundColor: BONE,
                 radius: 30,
                 child: SvgPicture.asset(
                   'assets/icons/whats.svg',
@@ -74,11 +77,12 @@ class ShareWidget extends StatelessWidget {
               ),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 13, top: 17),
+          Padding(
+            padding: const EdgeInsets.only(left: 13, top: 17),
             child: Text(
               'Короткая ссылка',
-              style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
+              style: UBUNTU_16_400_BLACK.copyWith(
+                  fontSize: 18, fontWeight: FontWeight.w500),
             ),
           ),
           const SizedBox(
@@ -95,22 +99,23 @@ class ShareWidget extends StatelessWidget {
                     filled: true,
                     suffixIcon: IconButton(
                         onPressed: () async {
-                          await Clipboard.setData(ClipboardData(text: "link"));
+                          await Clipboard.setData(
+                              const ClipboardData(text: "link"));
                         },
                         icon: const Icon(
                           Icons.copy,
                           color: Colors.black,
                         )),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                    fillColor: const Color.fromRGBO(251, 249, 251, 1),
+                    fillColor: BONE,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(
-                        color: Colors.white,
+                        color: WHITE,
                       ),
                     ),
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white))),
+                        borderSide: BorderSide(color: WHITE))),
               ),
             ),
           ),

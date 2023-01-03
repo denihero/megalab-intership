@@ -6,7 +6,8 @@ import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dar
 import 'package:mega_intern/future/home/presentation/widget/personal_info_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/write_news_widget.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
-
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 import '../../../widgets/svg_icon_widget.dart';
 
@@ -29,34 +30,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: SvgIconButtonWidget(
           padding: EdgeInsets.zero,
           icon: SvgPicture.asset(
-              'assets/icons/megalab_icon.svg',
-            color: Color.fromRGBO(128, 81, 194, 1),
+            'assets/icons/megalab_icon.svg',
+            color: PURPLE,
           ),
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => const HomeScreen()));
           },
         ),
         actions: [
           SvgIconButtonWidget(
             icon: SvgPicture.asset(
               'assets/icons/search.svg',
-              color: Color.fromRGBO(128, 81, 194, 1),
+              color: PURPLE,
             ),
             onPressed: () {},
           ),
           SvgIconButtonWidget(
             icon: SvgPicture.asset(
               'assets/icons/profile.svg',
-              color: Color.fromRGBO(128, 81, 194, 1),
+              color: PURPLE,
             ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) => const ProfileScreen()));
             },
           ),
           SvgIconButtonWidget(
             icon: SvgPicture.asset(
               'assets/icons/menu.svg',
-              color: Color.fromRGBO(128, 81, 194, 1),
+              color: PURPLE,
             ),
             onPressed: () {},
           ),
@@ -66,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.only(left: 19,top: 15),
+              padding: EdgeInsets.only(left: 19, top: 15),
               child: PersonalInfoWidget(),
             ),
             Padding(
@@ -74,9 +77,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Мои публикаций',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                    style: UBUNTU_24_500_BLACK,
                   ),
                   SizedBox(
                     width: 70,
@@ -88,9 +91,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         size: 30,
                       ),
                       onPressed: () {
-                        showDialog(context: context, builder: (context){
-                          return WriteNewsWidget();
-                        });
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return WriteNewsWidget();
+                            });
                       },
                     ),
                   )
@@ -99,16 +104,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ListView.separated(
               shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context,index){
-                  return NewsCardWidget(
-                      title: 'Some news title',
-                      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-                      date: '',
-                      isFavourite: false);
-                },
-              separatorBuilder: (context,index){
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return const NewsCardWidget(
+                    title: 'Some news title',
+                    description:
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+                    date: '',
+                    isFavourite: false);
+              },
+              separatorBuilder: (context, index) {
                 return const Divider(
                   thickness: 1.4,
                   indent: 20,
@@ -117,7 +123,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
             ),
-
             const FooterWidget(),
           ],
         ),

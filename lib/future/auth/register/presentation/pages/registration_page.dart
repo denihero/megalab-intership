@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 import '../../../login/presentation/page/login_page.dart';
 
@@ -22,7 +24,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         toolbarHeight: 80,
         title: SvgPicture.asset(
           'assets/icons/megalab_icon.svg',
-          color: const Color.fromRGBO(126, 91, 194, 1),
+          color: PURPLE,
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -51,9 +53,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             height: 32,
           ),
           PrimaryButton(
-            child: const Text(
+            child: Text(
               'Регистрация',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              style: UBUNTU_16_500_WHITE,
             ),
             onPressed: () {},
           ),
@@ -62,10 +64,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             padding: const EdgeInsets.only(bottom: 18),
             child: RichText(
                 text: TextSpan(children: [
-              const TextSpan(
+              TextSpan(
                 text: 'Уже есть логин ? ',
-                style: TextStyle(
-                    color: Color.fromRGBO(90, 90, 90, 1), fontSize: 13),
+                style: UBUNTU_13_400_BLACK,
               ),
               TextSpan(
                   recognizer: TapGestureRecognizer()
@@ -77,8 +78,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       );
                     },
                   style: const TextStyle(
-                      color: Color.fromRGBO(45, 78, 194, 1),
-                      decoration: TextDecoration.underline),
+                      color: BLUE, decoration: TextDecoration.underline),
                   text: 'Войти'),
             ])),
           )

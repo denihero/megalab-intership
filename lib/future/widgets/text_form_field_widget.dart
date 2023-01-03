@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mega_intern/theme/palette.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
@@ -11,7 +12,9 @@ class TextFormFieldWidget extends StatelessWidget {
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
     this.height,
-    this.borderRadius = 10, this.maxLines = 1, this.obscureText = false,
+    this.borderRadius = 10,
+    this.maxLines = 1,
+    this.obscureText = false,
   }) : super(key: key);
 
   final String title;
@@ -54,28 +57,20 @@ class TextFormFieldWidget extends StatelessWidget {
                   suffixIcon: suffixIcon,
                   contentPadding: contentPadding,
                   border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Color.fromRGBO(228, 223, 220, 1),
-                    ),
+                    borderSide: const BorderSide(color: WHITE),
                     borderRadius: BorderRadius.circular(borderRadius),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadius),
-                    borderSide: const BorderSide(
-                      color: Color.fromRGBO(126, 91, 194, 1),
-                    ),
+                    borderSide: const BorderSide(color: PURPLE),
                   ),
                   disabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadius),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                    ),
+                    borderSide: const BorderSide(color: GREY),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadius),
-                    borderSide: const BorderSide(
-                      color: Color.fromRGBO(126, 91, 194, 1),
-                    ),
+                    borderSide: const BorderSide(color: PURPLE),
                   ),
                   enabled: enabled),
             ),

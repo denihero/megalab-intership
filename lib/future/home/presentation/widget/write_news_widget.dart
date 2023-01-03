@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 import 'package:mega_intern/future/widgets/text_with_icon_widget.dart';
+import 'package:mega_intern/theme/palette.dart';
 
 import 'categories_widget.dart';
 
@@ -14,7 +15,7 @@ class WriteNewsWidget extends StatelessWidget {
       scrollable: true,
       content: Container(
         width: 350,
-        color: Colors.white,
+        color: WHITE,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -23,7 +24,10 @@ class WriteNewsWidget extends StatelessWidget {
               child: IconButton(
                 constraints: const BoxConstraints(),
                 padding: EdgeInsets.zero,
-                icon: const Icon(Icons.close,size: 30,),
+                icon: const Icon(
+                  Icons.close,
+                  size: 30,
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -35,16 +39,16 @@ class WriteNewsWidget extends StatelessWidget {
               child: ElevatedButton(
                 style: ButtonStyle(
                     elevation: MaterialStateProperty.all(0),
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(WHITE),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
-                        side: const BorderSide(color: Colors.grey)))),
+                        side: const BorderSide(color: GREY)))),
                 onPressed: () {},
                 child: TextWithIconWidget(
                   text: 'Загрузить',
                   icon: const Icon(
                     Icons.file_download_outlined,
-                    color: Colors.black,
+                    color: BLACK,
                   ),
                   onPressed: () {},
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mega_intern/theme/palette.dart';
 
 class WriteCommentFormWidget extends StatelessWidget {
   const WriteCommentFormWidget({Key? key}) : super(key: key);
@@ -29,12 +30,11 @@ class WriteCommentFormWidget extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: const Color.fromRGBO(126, 91, 194, 1)),
+                borderRadius: BorderRadius.circular(12), color: PURPLE),
             child: const Center(
               child: Icon(
                 Icons.arrow_upward_sharp,
-                color: Colors.white,
+                color: WHITE,
               ),
             ),
           ),

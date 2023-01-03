@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 class FilterSortButton extends StatefulWidget {
   const FilterSortButton({Key? key}) : super(key: key);
@@ -23,15 +25,14 @@ class _FilterSortButtonState extends State<FilterSortButton> {
       height: 35,
       width: 400,
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: GREY),
           borderRadius: BorderRadius.circular(5)),
       child: DropdownButton<String>(
-        dropdownColor: Colors.white,
+        dropdownColor: WHITE,
         elevation: 5,
         underline: const SizedBox(),
-        style: const TextStyle(
-            color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
-        iconEnabledColor: Colors.black,
+        style: UBUNTU_15_500_BLACK,
+        iconEnabledColor: BLACK,
         alignment: Alignment.center,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         icon: Transform.translate(

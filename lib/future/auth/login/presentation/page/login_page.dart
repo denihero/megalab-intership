@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/auth/register/presentation/pages/registration_page.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
-
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
         toolbarHeight: 80,
         title: SvgPicture.asset(
           'assets/icons/megalab_icon.svg',
-          color: const Color.fromRGBO(126, 91, 194, 1),
+          color: PURPLE,
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -45,9 +46,9 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 32,
           ),
           PrimaryButton(
-            child: const Text(
+            child: Text(
               'Войти',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              style: UBUNTU_16_500_WHITE,
             ),
             onPressed: () {},
           ),
@@ -56,10 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.only(bottom: 18),
             child: RichText(
                 text: TextSpan(children: [
-              const TextSpan(
+              TextSpan(
                 text: 'Нету аккаунта ? ',
-                style: TextStyle(
-                    color: Color.fromRGBO(90, 90, 90, 1), fontSize: 13),
+                style: UBUNTU_13_400_BLACK,
               ),
               TextSpan(
                   recognizer: TapGestureRecognizer()
@@ -71,8 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                   style: const TextStyle(
-                      color: Color.fromRGBO(45, 78, 194, 1),
-                      decoration: TextDecoration.underline),
+                      color: BLUE, decoration: TextDecoration.underline),
                   text: 'Регистрация'),
             ])),
           )

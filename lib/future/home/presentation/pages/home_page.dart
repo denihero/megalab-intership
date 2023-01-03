@@ -5,6 +5,8 @@ import 'package:mega_intern/future/home/presentation/widget/filter_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
+import 'package:mega_intern/theme/palette.dart';
+import 'package:mega_intern/theme/style.dart';
 
 import 'favourite_page.dart';
 import 'profile_page.dart';
@@ -29,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
           automaticallyImplyLeading: false,
           title: SvgPicture.asset(
             'assets/icons/megalab_icon.svg',
-            color: Colors.white,
+            color: WHITE,
           ),
           actions: [
             SvgIconButtonWidget(
@@ -56,13 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: AssetImage('assets/images/background_news.png'),
                   fit: BoxFit.cover),
             ),
-            child: const Align(
+            child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 17),
+                  padding: const EdgeInsets.only(bottom: 17),
                   child: Text(
                     'Новости',
-                    style: TextStyle(fontSize: 42, color: Colors.white),
+                    style: UBUNTU_42_400_WHITE,
                   ),
                 )),
           ),

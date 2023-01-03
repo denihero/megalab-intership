@@ -23,6 +23,7 @@ dependencies:
   json_serializable: ^6.5.4
   json_annotation: ^4.7.0
   dartz: ^0.10.1
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

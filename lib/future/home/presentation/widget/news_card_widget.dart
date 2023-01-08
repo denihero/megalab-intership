@@ -37,11 +37,11 @@ class NewsCardWidget extends StatelessWidget {
                 width: 359,
                 height: 272,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      'assets/images/wall.png',
-                    ),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                        'assets/images/wall.png',
+                      ),
                   ),
                 ),
               ),

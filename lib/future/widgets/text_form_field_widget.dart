@@ -3,7 +3,7 @@ import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  const TextFormFieldWidget({
+  const   TextFormFieldWidget({
     Key? key,
     required this.title,
     this.padding = const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
@@ -15,7 +15,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.height,
     this.borderRadius = 10,
     this.maxLines = 1,
-    this.obscureText = false,
+    this.obscureText = false, this.controller,
   }) : super(key: key);
 
   final String title;
@@ -28,6 +28,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final double? height;
   final double borderRadius;
   final int? maxLines;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +47,17 @@ class TextFormFieldWidget extends StatelessWidget {
           SizedBox(
             height: height,
             child: TextFormField(
-              initialValue: initialValue,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+              controller: controller,
               keyboardType: TextInputType.multiline,
               maxLines: maxLines,
               obscureText: obscureText,
+              textInputAction: TextInputAction.next,
               //readOnly: enabled,
               decoration: InputDecoration(
                   suffixIcon: suffixIcon,

@@ -1,14 +1,11 @@
-import 'package:equatable/equatable.dart';
-
-
-class UserEntity{
+class RegisterEntity{
   final int? id;
   final String? name;
   final String? username;
   final String? last_name;
   final String? profile_image;
 
-  const UserEntity(
+  const RegisterEntity(
       {this.id,
       this.name,
       this.last_name,

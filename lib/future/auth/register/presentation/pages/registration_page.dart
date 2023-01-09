@@ -10,6 +10,7 @@ import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
+import '../../../../widgets/blur_background_widget.dart';
 import '../../../login/presentation/page/login_page.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class RegistrationScreen extends StatefulWidget {
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
-
+///TODO: Make Blur loading
 class _RegistrationScreenState extends State<RegistrationScreen> {
   late final TextEditingController nameController;
   late final TextEditingController surnameController;
@@ -56,14 +57,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: SingleChildScrollView(
           reverse: true,
           child: Padding(
-            padding:
-                EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: SizedBox(
               child: Form(
                 key: _formKey,
-                child: BlocBuilder<RegisterCubit, RegisterState>(
+                child: BlocConsumer<RegisterCubit, RegisterState>(
                   builder: (context, state) {
-                    if (state is RegisterInitial) {
+                    if (state is RegisterInitial ||
+                        state is RegisterError ||
+                        state is RegisterLoading) {
                       return Stack(
                         children: [
                           Column(
@@ -105,6 +108,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
+                                    context.read<RegisterCubit>().isLoading = true;
                                     context.read<RegisterCubit>().registerCubit(
                                         name: nameController.text,
                                         surname: surnameController.text,
@@ -140,6 +144,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               )
                             ],
                           ),
+                          // context.read<RegisterCubit>().isLoading
+                          //     ? const Positioned.fill(
+                          //         top: 0,
+                          //         bottom: 0,
+                          //         left: 0,
+                          //         right: 0,
+                          //         child: Center(
+                          //             child: BlurBackgroundWidget(
+                          //                 child: CircularProgressIndicator())))
+                          //     : const SizedBox()
                         ],
                       );
                     } else if (state is RegisterSuccess) {
@@ -150,13 +164,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               builder: (context) => const HomeScreen()),
                         );
                       });
+                      context.read<RegisterCubit>().isLoading = false;
                       return const Center(
                           child: Text('Вы успешно зарегистрировались'));
-                    } else if (state is RegisterLoading) {
-                      return const Center(child: CircularProgressIndicator());
                     }
                     return const SizedBox.shrink();
                   },
+                  listener: (context,state){
+                    if(state is RegisterError){
+                      context.read<RegisterCubit>().isLoading = false;
+                    }
+                  }
                 ),
               ),
             ),

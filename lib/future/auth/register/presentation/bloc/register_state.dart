@@ -9,7 +9,14 @@ class RegisterInitial extends RegisterState {
   @override
   List<Object> get props => [];
 }
-class RegisterLoading extends RegisterState {}
+class RegisterLoading extends RegisterState {
+  final bool isLoading;
+
+  RegisterLoading(this.isLoading);
+
+  @override
+  List<Object> get props => [isLoading];
+}
 class RegisterLoaded extends RegisterState {}
 class RegisterSuccess extends RegisterState {}
 class RegisterError extends RegisterState {}

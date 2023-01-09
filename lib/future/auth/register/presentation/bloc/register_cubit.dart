@@ -1,13 +1,15 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mega_intern/future/auth/register/data/datasources/user_data_source.dart';
+import 'package:mega_intern/future/auth/register/domain/usecases/register.dart';
 
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit(this.userDataSourceImpl) : super(RegisterInitial());
+  RegisterCubit(this.register) : super(RegisterInitial());
 
-  UserDataSourceImpl userDataSourceImpl;
+  final Register register;
+
+  bool isLoading = false;
 
   void registerCubit(
       {required String name,
@@ -15,17 +17,14 @@ class RegisterCubit extends Cubit<RegisterState> {
       required String nickname,
       required String password,
       required String password2}) async {
-    emit(RegisterLoading());
-    try {
-      await userDataSourceImpl.register(
-          name: name,
-          surname: surname,
-          nickname: nickname,
-          password: password,
-          password2: password2);
-      emit(RegisterSuccess());
-    } catch (e) {
-      emit(RegisterError());
-    }
+    emit(RegisterLoading(isLoading));
+
+    final registerResult = await register.register(
+        name: name,
+        surname: surname,
+        nickname: nickname,
+        password: password,
+        password2: password2);
+    registerResult.fold((l) => emit(RegisterError()), (r) => RegisterSuccess());
   }
 }

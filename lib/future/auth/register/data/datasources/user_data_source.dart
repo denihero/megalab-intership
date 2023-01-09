@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:mega_intern/core/error/failure.dart';
 import 'package:mega_intern/future/auth/register/data/model/user_model.dart';
 
-abstract class UserDataSource {
-  Future<UserModel> register(
+abstract class RegisterDataSource {
+  Future<RegisterModel> register(
       {required String name,
       required String surname,
       required String nickname,
@@ -12,13 +13,13 @@ abstract class UserDataSource {
       required String password2});
 }
 
-class UserDataSourceImpl extends UserDataSource {
+class RegisterDataSourceImpl extends RegisterDataSource {
   final Dio client;
 
-  UserDataSourceImpl({required this.client});
+  RegisterDataSourceImpl({required this.client});
 
   @override
-  Future<UserModel> register(
+  Future<RegisterModel> register(
       {required String name,
       required String surname,
       required String nickname,
@@ -42,11 +43,10 @@ class UserDataSourceImpl extends UserDataSource {
             data: userData);
 
     if (response.statusCode! >= 400) {
-      throw Exception();
+      throw ServerFailure();
     } else if (response.statusCode! >= 200) {
-      print(UserModel.fromJson(response.data));
-      return UserModel.fromJson(response.data);
+      return RegisterModel.fromJson(response.data);
     }
-    return response.data;
+    return RegisterModel.fromJson(response.data);
   }
 }

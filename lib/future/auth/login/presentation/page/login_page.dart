@@ -1,7 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart';
 import 'package:mega_intern/future/auth/register/presentation/pages/registration_page.dart';
+import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
@@ -13,8 +16,20 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
-
+///TODO: Make Blur loading
 class _LoginScreenState extends State<LoginScreen> {
+  late final TextEditingController nicknameController;
+  late final TextEditingController passwordController;
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    nicknameController = TextEditingController();
+    passwordController = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,53 +44,79 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const TextFormFieldWidget(
-            enabled: true,
-            title: 'Никнейм',
-          ),
-          const TextFormFieldWidget(
-            enabled: true,
-            obscureText: true,
-            title: 'Пароль',
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          PrimaryButton(
-            child: Text(
-              'Войти',
-              style: UBUNTU_16_500_WHITE,
-            ),
-            onPressed: () {},
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 18),
-            child: RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                text: 'Нету аккаунта ? ',
-                style: UBUNTU_13_400_BLACK,
-              ),
-              TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegistrationScreen()),
-                      );
+      body: BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) {
+          if (state is LoginInitial || state is LoginError) {
+            return Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextFormFieldWidget(
+                    enabled: true,
+                    title: 'Никнейм',
+                    controller: nicknameController,
+                  ),
+                  TextFormFieldWidget(
+                    enabled: true,
+                    obscureText: true,
+                    title: 'Пароль',
+                    controller: passwordController,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  PrimaryButton(
+                    child: Text(
+                      'Войти',
+                      style: UBUNTU_16_500_WHITE,
+                    ),
+                    onPressed: () {
+                      context.read<LoginCubit>().loginCubit(
+                          nicknameController.text, passwordController.text);
                     },
-                  style: const TextStyle(
-                      color: BLUE, decoration: TextDecoration.underline),
-                  text: 'Регистрация'),
-            ])),
-          )
-        ],
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 18),
+                    child: RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: 'Нету аккаунта ? ',
+                        style: UBUNTU_13_400_BLACK,
+                      ),
+                      TextSpan(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegistrationScreen()),
+                              );
+                            },
+                          style: const TextStyle(
+                              color: BLUE,
+                              decoration: TextDecoration.underline),
+                          text: 'Регистрация'),
+                    ])),
+                  )
+                ],
+              ),
+            );
+          } else if (state is LoginSuccess) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()));
+            });
+          }else if(state is LoginLoading){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return const SizedBox.shrink();
+        },
       ),
     );
   }

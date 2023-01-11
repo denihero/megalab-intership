@@ -28,6 +28,8 @@ dependencies:
   dio: ^4.0.6
   flutter_bloc: ^8.1.1
   get_it: ^7.2.0
+  cached_network_image: ^3.2.3
+  like_button: ^2.0.5
 
 dev_dependencies:
   flutter_test:

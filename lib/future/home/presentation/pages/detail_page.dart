@@ -1,24 +1,46 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:like_button/like_button.dart';
+import 'package:mega_intern/core/common/string.dart';
+import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
+import 'package:mega_intern/future/widgets/internet_image.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
-import '../widget/comment_widget.dart';
+import '../bloc/like_post/like_post_cubit.dart';
+import '../widget/comment_list_widget.dart';
 import '../../../widgets/svg_icon_widget.dart';
 import '../widget/write_comment_form_widget.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  const DetailScreen({Key? key, required this.post}) : super(key: key);
+
+  final PostModel post;
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  String? topText;
+  String? bottomText;
+  String? generalText;
+
   @override
   Widget build(BuildContext context) {
+    generalText = widget.post.text!;
+    if (generalText!.length > 180 && generalText != null) {
+      topText = generalText!.substring(0, 180);
+      bottomText = generalText!.substring(180);
+    } else {
+      topText = generalText;
+      bottomText = generalText;
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(163),
@@ -89,13 +111,29 @@ class _DetailScreenState extends State<DetailScreen> {
                         '29.11.2022',
                         style: UBUNTU_16_400_GREY,
                       ),
-                      IconButton(
-                        iconSize: 30,
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.favorite_border,
-                        ),
-                      ),
+                      LikeButton(
+                          likeBuilder: (bool isLiked) {
+                            return isLiked
+                                ? const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                              size: 30,
+                            )
+                                : const Icon(
+                              Icons.favorite_border,
+                              color: Colors.black,
+                              size: 30,
+                            );
+                          },
+                          size: 35,
+                          padding: const EdgeInsets.only(top: 10, right: 10),
+                          isLiked: widget.post.is_liked,
+                          onTap: (isFav) async {
+                            await context.read<LikePostCubit>().likePost(
+                                '984c5548146dbc83ce0128b93bd590e43f88bcca',
+                                widget.post.id!);
+                            return !isFav;
+                          }),
                     ],
                   ),
                   Align(
@@ -105,18 +143,12 @@ class _DetailScreenState extends State<DetailScreen> {
                         style: UBUNTU_24_500_BLACK,
                       )),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+                    '''$topText''',
                     style: UBUNTU_16_400_GREY,
                   ),
-                  Image.network(
-                    'https://static.independent.co.uk/2022/11/12/20/poster.jpgwidth720?quality=50&width=640&auto=webp',
-                    width: 359,
-                    height: 232,
-                  ),
+                 InternetImage(imageUrl: widget.post.image ?? '', width: 400, height: 300),
                   Text(
-                    '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
-                    Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum vestibulum. Morbi a eleifend magna. Nam metus lacus, porttitor eu mauris a, blandit ultrices nibh. Mauris sit amet magna non ligula vestibulum eleifend. Nulla varius volutpat turpis sed lacinia. Nam eget mi in purus lobortis eleifend. Sed nec ante dictum sem condimentum ullamcorper quis venenatis nisi. Proin vitae facilisis nisi, ac posuere leo.
-                    Nam pulvinar blandit velit, id condimentum diam faucibus at. Aliquam lacus nisi, sollicitudin at nisi nec, fermentum congue felis. Quisque mauris dolor, fringilla sed tincidunt ac, finibus non odio. Sed vitae mauris nec ante pretium finibus. Donec nisl neque, pharetra ac elit eu, faucibus aliquam ligula. Nullam dictum, tellus tincidunt tempor laoreet, nibh elit sollicitudin felis, eget feugiat sapien diam nec nisl. Aenean gravida turpis nisi, consequat dictum risus dapibus a. Duis felis ante, varius in neque eu, tempor suscipit sem. Maecenas ullamcorper gravida sem sit amet cursus. Etiam pulvinar purus vitae justo pharetra consequat. Mauris id mi ut arcu feugiat maximus. Mauris consequat tellus id tempus aliquet.''',
+                    '''$bottomText''',
                     style: UBUNTU_16_400_GREY,
                   ),
                   SvgIconButtonWidget(
@@ -144,17 +176,16 @@ class _DetailScreenState extends State<DetailScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  SizedBox(
-                    height: 700,
-                    child: RepaintBoundary(
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 2,
-                          itemBuilder: (context, index) {
-                            return const CommentWidget();
-                          }),
-                    ),
+                  RepaintBoundary(
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: widget.post.comment!.length,
+                        itemBuilder: (context, index) {
+                          return CommentListWidget(
+                            commentModel: widget.post.comment![index]!,
+                          );
+                        }),
                   ),
                   const SizedBox(
                     height: 10,

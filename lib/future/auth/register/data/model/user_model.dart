@@ -15,5 +15,5 @@ class RegisterModel extends RegisterEntity with _$RegisterModel {
       String? username}) = _UserModel;
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+      _$RegisterModelFromJson(json);
 }

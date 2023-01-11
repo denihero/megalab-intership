@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
@@ -61,26 +63,40 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               style: UBUNTU_30_500_BLACK,
             ),
             SingleChildScrollView(
-              child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return const NewsCardWidget(
-                        title: 'Какая та хуйня',
-                        description: 'Тоже какая хуйня с описанием',
-                        date: 'я хуй знает',
-                        isFavourite: true);
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider(
-                      thickness: 1.4,
-                      indent: 20,
-                      endIndent: 20,
-                      color: Color.fromRGBO(217, 217, 217, 1),
+              child: BlocBuilder<GetFavouriteCubit, GetFavouriteState>(
+                builder: (context, state) {
+                  if (state is GetFavouriteLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }),
+                  } else if (state is GetFavouriteError) {
+                    return Center(
+                      child: Text(state.error),
+                    );
+                  } else if (state is GetFavouriteSuccess) {
+                    final fav = state.fav;
+                    return ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: state.fav.length,
+                        itemBuilder: (context, index) {
+                          return NewsCardWidget(
+                            post: fav[index],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const Divider(
+                            thickness: 1.4,
+                            indent: 20,
+                            endIndent: 20,
+                            color: Color.fromRGBO(217, 217, 217, 1),
+                          );
+                        });
+                  }
+                  return const SizedBox();
+                },
+              ),
             ),
             const FooterWidget()
           ],

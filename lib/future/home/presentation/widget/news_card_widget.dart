@@ -1,31 +1,39 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:like_button/like_button.dart';
+import 'package:mega_intern/core/common/string.dart';
+import 'package:mega_intern/future/home/data/model/home_model.dart';
+import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/detail_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
+import 'package:mega_intern/future/widgets/internet_image.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
-class NewsCardWidget extends StatelessWidget {
-  const NewsCardWidget(
-      {Key? key,
-      required this.title,
-      required this.description,
-      required this.date,
-      required this.isFavourite})
-      : super(key: key);
+class NewsCardWidget extends StatefulWidget {
+  const NewsCardWidget({Key? key, required this.post}) : super(key: key);
 
-  final String title;
-  final String description;
-  final String date;
-  final bool isFavourite;
+  final PostModel post;
 
+  @override
+  State<NewsCardWidget> createState() => _NewsCardWidgetState();
+}
+
+class _NewsCardWidgetState extends State<NewsCardWidget> {
+  ValueNotifier<bool> isFavourite = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => const DetailScreen()));
+            context,
+            MaterialPageRoute(
+                builder: (_) => DetailScreen(
+                      post: widget.post,
+                    )));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -33,17 +41,10 @@ class NewsCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Container(
+              child: InternetImage(
+                imageUrl: widget.post.image ?? '',
                 width: 359,
                 height: 272,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(
-                        'assets/images/wall.png',
-                      ),
-                  ),
-                ),
               ),
             ),
             Padding(
@@ -51,17 +52,30 @@ class NewsCardWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(date, style: UBUNTU_16_400_GREY),
-                  IconButton(
-                    iconSize: 30,
-                    onPressed: () {},
-                    icon: isFavourite
-                        ? const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
-                        : const Icon(Icons.favorite_border),
-                  ),
+                  Text('31.12.2022', style: UBUNTU_16_400_GREY),
+                  LikeButton(
+                      likeBuilder: (bool isLiked) {
+                        return isLiked
+                            ? const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                                size: 30,
+                              )
+                            : const Icon(
+                                Icons.favorite_border,
+                                color: Colors.black,
+                                size: 30,
+                              );
+                      },
+                      size: 35,
+                      padding: const EdgeInsets.only(top: 10, right: 10),
+                      isLiked: widget.post.is_liked,
+                      onTap: (isFav) async {
+                        await context.read<LikePostCubit>().likePost(
+                            '984c5548146dbc83ce0128b93bd590e43f88bcca',
+                            widget.post.id!);
+                        return !isFav;
+                      }),
                 ],
               ),
             ),
@@ -70,14 +84,16 @@ class NewsCardWidget extends StatelessWidget {
                 left: 20,
               ),
               child: Text(
-                title,
+                widget.post.title!,
                 style: UBUNTU_24_500_BLACK,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 10),
               child: Text(
-                description,
+                widget.post.shortDesc != null
+                    ? widget.post.shortDesc!
+                    : widget.post.text!,
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
                 style: UBUNTU_16_400_GREY,
@@ -90,8 +106,12 @@ class NewsCardWidget extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const DetailScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => DetailScreen(
+                                post: widget.post,
+                              )));
                 },
                 child: Text(
                   'Читать дальше>>',

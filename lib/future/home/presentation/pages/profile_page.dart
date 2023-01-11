@@ -107,12 +107,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 10,
               itemBuilder: (context, index) {
-                return const NewsCardWidget(
-                    title: 'Some news title',
-                    description:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-                    date: '',
-                    isFavourite: false);
+                return const SizedBox();
+                // return const NewsCardWidget(
+                //     title: 'Some news title',
+                //     description:
+                //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+                //     date: '',
+                //     isFavourite: false);
               },
               separatorBuilder: (context, index) {
                 return const Divider(

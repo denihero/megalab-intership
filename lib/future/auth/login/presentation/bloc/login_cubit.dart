@@ -14,14 +14,18 @@ class LoginCubit extends Cubit<LoginState> {
   final Login login;
   LoginCubit(this.login) : super(LoginInitial());
 
+  bool isLoading = false;
+
   void loginCubit(String nickname, String password) async {
     emit(LoginLoading());
+    isLoading = true;
     final token = await login.login(nickname: nickname, password: password);
 
     token.fold((l) {
       emit(LoginError(_mapFailureToMessage(l)));
     }, (r) {
       emit(LoginSuccess(r));
+      isLoading = false;
     });
   }
 

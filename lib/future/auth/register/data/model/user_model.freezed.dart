@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-RegisterModel _$UserModelFromJson(Map<String, dynamic> json) {
+RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) {
   return _UserModel.fromJson(json);
 }
 
@@ -28,14 +28,15 @@ mixin _$RegisterModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserModelCopyWith<RegisterModel> get copyWith =>
+  $RegisterModelCopyWith<RegisterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserModelCopyWith<$Res> {
-  factory $UserModelCopyWith(RegisterModel value, $Res Function(RegisterModel) then) =
-      _$UserModelCopyWithImpl<$Res, RegisterModel>;
+abstract class $RegisterModelCopyWith<$Res> {
+  factory $RegisterModelCopyWith(
+          RegisterModel value, $Res Function(RegisterModel) then) =
+      _$RegisterModelCopyWithImpl<$Res, RegisterModel>;
   @useResult
   $Res call(
       {int? id,
@@ -46,9 +47,9 @@ abstract class $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserModelCopyWithImpl<$Res, $Val extends RegisterModel>
-    implements $UserModelCopyWith<$Res> {
-  _$UserModelCopyWithImpl(this._value, this._then);
+class _$RegisterModelCopyWithImpl<$Res, $Val extends RegisterModel>
+    implements $RegisterModelCopyWith<$Res> {
+  _$RegisterModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -90,7 +91,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends RegisterModel>
 }
 
 /// @nodoc
-abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
+abstract class _$$_UserModelCopyWith<$Res>
+    implements $RegisterModelCopyWith<$Res> {
   factory _$$_UserModelCopyWith(
           _$_UserModel value, $Res Function(_$_UserModel) then) =
       __$$_UserModelCopyWithImpl<$Res>;
@@ -106,7 +108,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UserModelCopyWithImpl<$Res>
-    extends _$UserModelCopyWithImpl<$Res, _$_UserModel>
+    extends _$RegisterModelCopyWithImpl<$Res, _$_UserModel>
     implements _$$_UserModelCopyWith<$Res> {
   __$$_UserModelCopyWithImpl(
       _$_UserModel _value, $Res Function(_$_UserModel) _then)
@@ -168,7 +170,7 @@ class _$_UserModel implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, last_name: $last_name, profile_image: $profile_image, username: $username)';
+    return 'RegisterModel(id: $id, name: $name, last_name: $last_name, profile_image: $profile_image, username: $username)';
   }
 
   @override

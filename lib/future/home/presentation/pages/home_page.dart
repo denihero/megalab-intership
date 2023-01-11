@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/auth/login/presentation/page/login_page.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/filter_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
@@ -20,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(bottom: 17),
                   child: Text(
                     'Новости',
-                    style: UBUNTU_42_400_WHITE.copyWith(fontWeight: FontWeight.w500),
+                    style: UBUNTU_42_400_WHITE.copyWith(
+                        fontWeight: FontWeight.w500),
                   ),
                 )),
           ),
@@ -110,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Align(
               alignment: Alignment.topRight,
@@ -126,30 +131,47 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            ListView.separated(
-              itemCount: 10,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                return const NewsCardWidget(
-                  title: 'Заголок новости',
-                  description:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-                  date: '29.11.2022',
-                  isFavourite: true,
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const Divider(
-                  thickness: 1.4,
-                  indent: 20,
-                  endIndent: 20,
-                  color: Color.fromRGBO(217, 217, 217, 1),
-                );
-              },
+            SizedBox(
+              child: BlocBuilder<GetAllPostCubit, GetAllPostState>(
+                builder: (context, state) {
+                  if (state is GetAllPostLoading) {
+                    return const Center(
+                      child: Expanded(child: CircularProgressIndicator()),
+                    );
+                  } else if (state is GetAllPostSuccess) {
+                    final post = state.posts;
+                    return ListView.separated(
+                      itemCount: post.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return NewsCardWidget(
+                          post: post[index],
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const Divider(
+                          thickness: 1.4,
+                          indent: 20,
+                          endIndent: 20,
+                          color: Color.fromRGBO(217, 217, 217, 1),
+                        );
+                      },
+                    );
+                  } else if (state is GetAllPostError) {
+                    return Center(
+                      child: Text(state.error),
+                    );
+                  }
+
+                  return const SizedBox.shrink();
+                },
+              ),
             ),
-            const FooterWidget(),
+            const Align(
+              alignment: Alignment.bottomCenter,
+                child: FooterWidget()),
           ],
         ),
       ),

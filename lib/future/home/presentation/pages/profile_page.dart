@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
+import 'package:mega_intern/future/home/presentation/widget/burger_menu_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/general_app_bar.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/personal_info_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/write_news_widget.dart';
@@ -19,52 +21,18 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: SvgIconButtonWidget(
-          padding: EdgeInsets.zero,
-          icon: SvgPicture.asset(
-            'assets/icons/megalab_icon.svg',
-            color: PURPLE,
-          ),
-          onPressed: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (_) => const HomeScreen()));
-          },
-        ),
-        actions: [
-          SvgIconButtonWidget(
-            icon: SvgPicture.asset(
-              'assets/icons/search.svg',
-              color: PURPLE,
-            ),
-            onPressed: () {},
-          ),
-          SvgIconButtonWidget(
-            icon: SvgPicture.asset(
-              'assets/icons/profile.svg',
-              color: PURPLE,
-            ),
-            onPressed: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (_) => const ProfileScreen()));
-            },
-          ),
-          SvgIconButtonWidget(
-            icon: SvgPicture.asset(
-              'assets/icons/menu.svg',
-              color: PURPLE,
-            ),
-            onPressed: () {},
-          ),
-        ],
+      appBar: GeneralAppBar(
+        drawerKey: _scaffoldKey,
       ),
+      endDrawer: const BurgerMenuWidget(),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -11,12 +11,15 @@ class BlurBackgroundWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 200),
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaY: 2, sigmaX: 2),
-          child: Center(
-            child: RepaintBoundary(
-              child: child,
+      child: AbsorbPointer(
+        absorbing: false,
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaY: 2, sigmaX: 2),
+            child: Center(
+              child: RepaintBoundary(
+                child: child,
+              ),
             ),
           ),
         ),

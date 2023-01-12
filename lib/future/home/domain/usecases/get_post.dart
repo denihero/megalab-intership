@@ -10,16 +10,16 @@ class Post {
 
   Post(this.postRepositories);
 
-  Future<Either<Failure, List<PostModel>>> getAllPost(String token) async {
-    return await postRepositories.getAllPost(token);
+  Future<Either<Failure, List<PostModel>>> getAllPost() async {
+    return await postRepositories.getAllPost();
   }
 
-  Future<Either<Failure, void>> likePost(String token, int id) async {
-    return await postRepositories.likePost(token, id);
+  Future<Either<Failure, void>> likePost(int id) async {
+    return await postRepositories.likePost(id);
   }
 
-  Future<Either<Failure, List<PostModel>>> getFavourite(String token) async {
-    return await postRepositories.getFavourite(token);
+  Future<Either<Failure, List<PostModel>>> getFavourite() async {
+    return await postRepositories.getFavourite();
   }
 
 }

@@ -128,12 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           } else if (state is LoginSuccess) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              context
-                  .read<GetAllPostCubit>()
-                  .getAllPosts(state.loginModel.token!);
-              context
-                  .read<GetFavouriteCubit>()
-                  .getFavourite(state.loginModel.token!);
+              context.read<GetAllPostCubit>().getAllPosts();
+              context.read<GetFavouriteCubit>().getFavourite();
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()));
             });

@@ -129,9 +129,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           padding: const EdgeInsets.only(top: 10, right: 10),
                           isLiked: widget.post.is_liked,
                           onTap: (isFav) async {
-                            await context.read<LikePostCubit>().likePost(
-                                '984c5548146dbc83ce0128b93bd590e43f88bcca',
-                                widget.post.id!);
+                            await context.read<LikePostCubit>().likePost(widget.post.id!);
                             return !isFav;
                           }),
                     ],

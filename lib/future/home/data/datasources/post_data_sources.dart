@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:mega_intern/core/common/string.dart';
 import 'package:mega_intern/core/error/failure.dart';
+import 'package:mega_intern/core/storage/storage.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 
 abstract class PostDataSources {
-  Future<List<PostModel>> getAllPosts(String token);
-  Future<List<PostModel>> getFavourite(String token);
-  Future<void> likePost(String token, int id);
+  Future<List<PostModel>> getAllPosts();
+  Future<List<PostModel>> getFavourite();
+  Future<void> likePost(int id);
 
   //Future<void> deletePost(int id);
 }
@@ -22,11 +23,13 @@ class PostDataSourcesImpl extends PostDataSources {
   // }
 
   @override
-  Future<List<PostModel>> getAllPosts(String token) async {
+  Future<List<PostModel>> getAllPosts() async {
     final List<PostModel> ls = [];
     final response = await client.get(
         'https://megalab.pythonanywhere.com/post/',
-        options: Options(headers: {'Authorization': 'Token $token'}));
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
+        }));
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -41,24 +44,24 @@ class PostDataSourcesImpl extends PostDataSources {
   }
 
   @override
-  Future<void> likePost(String token, int id) async {
+  Future<void> likePost(int id) async {
     final responseLike = await client.post('$apiUrl/like/',
-        options: Options(headers: {'Authorization': 'Token $token'}),
+        options: Options(headers: {'Authorization': 'Token ${await SecureStorage.readData('mega')}'}),
         data: {'post': id});
 
-      if(responseLike.statusCode! >= 400){
-        throw ServerFailure();
-      }else if(responseLike.statusCode! >= 200){
-        return responseLike.data;
-      }
+    if (responseLike.statusCode! >= 400) {
+      throw ServerFailure();
+    } else if (responseLike.statusCode! >= 200) {
+      return responseLike.data;
+    }
   }
 
   @override
-  Future<List<PostModel>> getFavourite(String token) async{
+  Future<List<PostModel>> getFavourite() async {
     final List<PostModel> ls = [];
     final response = await client.get(
         'https://megalab.pythonanywhere.com/like/',
-        options: Options(headers: {'Authorization': 'Token $token'}));
+        options: Options(headers: {'Authorization': 'Token ${await SecureStorage.readData('mega')}'}));
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();

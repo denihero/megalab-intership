@@ -9,9 +9,9 @@ class LikePostCubit extends Cubit<LikePostState> {
 
   final Post post;
 
-  Future<void> likePost(String token, int id) async {
+  Future<void> likePost(int id) async {
     emit(LikePostLoading());
-    final responseLike = await post.likePost(token, id);
+    final responseLike = await post.likePost(id);
     responseLike.fold(
         (l) => emit(LikePostError()), (r) => emit(LikePostSuccess()));
   }

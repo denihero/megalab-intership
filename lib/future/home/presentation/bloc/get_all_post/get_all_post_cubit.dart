@@ -13,9 +13,9 @@ class GetAllPostCubit extends Cubit<GetAllPostState> {
   final Post post;
 
 
-  void getAllPosts(String token) async {
+  void getAllPosts() async {
     emit(GetAllPostLoading());
-    final postsResult = await post.getAllPost(token);
+    final postsResult = await post.getAllPost();
 
     postsResult.fold((l) => emit(GetAllPostError(l.toString())),
         (r) => emit(GetAllPostSuccess(r)));

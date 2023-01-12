@@ -11,9 +11,9 @@ class GetFavouriteCubit extends Cubit<GetFavouriteState> {
 
   final Post post;
 
-  void getFavourite(String token) async {
+  void getFavourite() async {
     emit(GetFavouriteLoading());
-    final responseGetFav = await post.getFavourite(token);
+    final responseGetFav = await post.getFavourite();
 
     responseGetFav.fold((l) => emit(GetFavouriteError(l.toString())),
         (r) => emit(GetFavouriteSuccess(r)));

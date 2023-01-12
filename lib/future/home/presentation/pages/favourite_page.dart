@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
+import 'package:mega_intern/future/home/presentation/widget/general_app_bar.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
@@ -17,41 +18,12 @@ class FavouriteScreen extends StatefulWidget {
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        title: SvgPicture.asset(
-          'assets/icons/megalab_icon.svg',
-          color: PURPLE,
-        ),
-        actions: [
-          SvgIconButtonWidget(
-            icon: SvgPicture.asset(
-              'assets/icons/search.svg',
-              color: PURPLE,
-            ),
-            onPressed: () {},
-          ),
-          SvgIconButtonWidget(
-            icon: SvgPicture.asset(
-              'assets/icons/profile.svg',
-              color: PURPLE,
-            ),
-            onPressed: () {},
-          ),
-          SvgIconButtonWidget(
-            icon: SvgPicture.asset(
-              'assets/icons/menu.svg',
-              color: PURPLE,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      key: _scaffoldKey,
+      appBar: GeneralAppBar(drawerKey: _scaffoldKey),
       body: SingleChildScrollView(
         child: Column(
           children: [

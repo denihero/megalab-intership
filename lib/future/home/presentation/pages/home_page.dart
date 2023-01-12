@@ -10,6 +10,7 @@ import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
+import '../widget/burger_menu_widget.dart';
 import 'favourite_page.dart';
 import 'profile_page.dart';
 
@@ -74,44 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      endDrawer: Drawer(
-        width: 200,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            ListTile(
-              title: const Text('Мой профиль'),
-              leading: const Icon(Icons.person_outline),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const ProfileScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.favorite_border),
-              title: const Text('Избранные новости'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const FavouriteScreen()));
-              },
-            ),
-            const Spacer(),
-            ListTile(
-              title: const Text('Выйти'),
-              leading: const Icon(Icons.exit_to_app),
-              onTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
-                  ModalRoute.withName('/'),
-                );
-              },
-            )
-          ],
-        ),
-      ),
+      endDrawer: const BurgerMenuWidget(),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

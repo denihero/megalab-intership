@@ -5,14 +5,15 @@ import 'package:mega_intern/future/auth/login/data/model/login_model.dart';
 import 'package:mega_intern/future/auth/login/domain/usecases/login.dart';
 
 import '../../../../../core/error/failure.dart';
+import '../../../../../core/storage/storage.dart';
 
 part 'login_state.dart';
 
 const SERVER_FAILURE_MESSAGE = 'Server Failure';
 
 class LoginCubit extends Cubit<LoginState> {
+  LoginCubit(this.login,) : super(LoginInitial());
   final Login login;
-  LoginCubit(this.login) : super(LoginInitial());
 
   bool isLoading = false;
 
@@ -23,8 +24,9 @@ class LoginCubit extends Cubit<LoginState> {
 
     token.fold((l) {
       emit(LoginError(_mapFailureToMessage(l)));
-    }, (r) {
+    }, (r) async {
       emit(LoginSuccess(r));
+      SecureStorage.writeData(r.token!, 'mega');
       isLoading = false;
     });
   }

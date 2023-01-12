@@ -12,9 +12,9 @@ class PostRepositoryImpl extends PostRepository {
   PostRepositoryImpl(this.postDataSourcesImpl);
 
   @override
-  Future<Either<Failure, List<PostModel>>> getAllPost(String token) async {
+  Future<Either<Failure, List<PostModel>>> getAllPost() async {
     try {
-      final getPost = await postDataSourcesImpl.getAllPosts(token);
+      final getPost = await postDataSourcesImpl.getAllPosts();
       return Right(getPost);
     } on ServerException {
       return Left(ServerFailure());
@@ -22,9 +22,9 @@ class PostRepositoryImpl extends PostRepository {
   }
 
   @override
-  Future<Either<Failure, void>> likePost(String token, int id) async {
+  Future<Either<Failure, void>> likePost(int id) async {
     try {
-      final likePost = await postDataSourcesImpl.likePost(token, id);
+      final likePost = await postDataSourcesImpl.likePost(id);
       return Right(likePost);
     } on ServerException {
       return Left(ServerFailure());
@@ -32,9 +32,9 @@ class PostRepositoryImpl extends PostRepository {
   }
 
   @override
-  Future<Either<Failure, List<PostModel>>> getFavourite(String token) async{
+  Future<Either<Failure, List<PostModel>>> getFavourite() async{
     try {
-      final getFavouritePost = await postDataSourcesImpl.getFavourite(token);
+      final getFavouritePost = await postDataSourcesImpl.getFavourite();
       return Right(getFavouritePost);
     } on ServerException {
       return Left(ServerFailure());

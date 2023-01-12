@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mega_intern/future/auth/login/presentation/page/login_page.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/filter_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
@@ -11,7 +10,6 @@ import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
 import '../widget/burger_menu_widget.dart';
-import 'favourite_page.dart';
 import 'profile_page.dart';
 
 class HomeScreen extends StatefulWidget {

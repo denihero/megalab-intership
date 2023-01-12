@@ -3,7 +3,6 @@ import 'package:mega_intern/core/error/exception.dart';
 import 'package:mega_intern/core/error/failure.dart';
 import 'package:mega_intern/future/home/data/datasources/post_data_sources.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
-import 'package:mega_intern/future/home/domain/entity/home_entity.dart';
 import 'package:mega_intern/future/home/domain/repositories/post_repositories.dart';
 
 class PostRepositoryImpl extends PostRepository {

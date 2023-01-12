@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/general_app_bar.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
-import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
-import '../../../widgets/svg_icon_widget.dart';
 import '../widget/footer_widget.dart';
 
 class FavouriteScreen extends StatefulWidget {

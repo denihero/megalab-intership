@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/burger_menu_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/general_app_bar.dart';
-import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/personal_info_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/write_news_widget.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
-import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
-import '../../../widgets/svg_icon_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);

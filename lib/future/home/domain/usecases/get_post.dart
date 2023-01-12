@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
-import 'package:mega_intern/future/home/domain/entity/home_entity.dart';
 import 'package:mega_intern/future/home/domain/repositories/post_repositories.dart';
 
 import '../../../../core/error/failure.dart';

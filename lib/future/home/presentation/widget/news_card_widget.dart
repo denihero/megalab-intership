@@ -1,16 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:like_button/like_button.dart';
-import 'package:mega_intern/core/common/string.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/detail_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
 import 'package:mega_intern/future/widgets/internet_image.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
-import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
 class NewsCardWidget extends StatefulWidget {

@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mega_intern/core/storage/storage.dart';
 import 'package:mega_intern/future/auth/login/data/datasources/login_data_sources.dart';
 import 'package:mega_intern/future/auth/login/data/repositories/login_repository_impl.dart';
 import 'package:mega_intern/future/auth/login/domain/repositories/login_reposity.dart';

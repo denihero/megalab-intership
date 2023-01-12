@@ -8,6 +8,7 @@ abstract class PostDataSources {
   Future<List<PostModel>> getAllPosts();
   Future<List<PostModel>> getFavourite();
   Future<void> likePost(int id);
+  Future<UserModel> getUser();
 
   //Future<void> deletePost(int id);
 }
@@ -25,8 +26,7 @@ class PostDataSourcesImpl extends PostDataSources {
   @override
   Future<List<PostModel>> getAllPosts() async {
     final List<PostModel> ls = [];
-    final response = await client.get(
-        'https://megalab.pythonanywhere.com/post/',
+    final response = await client.get('$apiUrl/post/',
         options: Options(headers: {
           'Authorization': 'Token ${await SecureStorage.readData('mega')}'
         }));
@@ -46,7 +46,9 @@ class PostDataSourcesImpl extends PostDataSources {
   @override
   Future<void> likePost(int id) async {
     final responseLike = await client.post('$apiUrl/like/',
-        options: Options(headers: {'Authorization': 'Token ${await SecureStorage.readData('mega')}'}),
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
+        }),
         data: {'post': id});
 
     if (responseLike.statusCode! >= 400) {
@@ -59,9 +61,10 @@ class PostDataSourcesImpl extends PostDataSources {
   @override
   Future<List<PostModel>> getFavourite() async {
     final List<PostModel> ls = [];
-    final response = await client.get(
-        'https://megalab.pythonanywhere.com/like/',
-        options: Options(headers: {'Authorization': 'Token ${await SecureStorage.readData('mega')}'}));
+    final response = await client.get('$apiUrl/like/',
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
+        }));
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -73,5 +76,21 @@ class PostDataSourcesImpl extends PostDataSources {
     }
 
     return ls;
+  }
+
+  @override
+  Future<UserModel> getUser() async {
+    final response = await client.get('$apiUrl/user/',
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
+        }));
+
+    if (response.statusCode! >= 400) {
+      throw ServerFailure();
+    } else if (response.statusCode! >= 200) {
+      return UserModel.fromJson(response.data);
+    }
+
+    return UserModel.fromJson(response.data);
   }
 }

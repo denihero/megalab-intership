@@ -39,4 +39,14 @@ class PostRepositoryImpl extends PostRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, UserModel>> getUser() async{
+    try {
+      final getUser = await postDataSourcesImpl.getUser();
+      return Right(getUser);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

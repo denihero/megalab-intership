@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/burger_menu_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/general_app_bar.dart';
@@ -6,7 +8,6 @@ import 'package:mega_intern/future/home/presentation/widget/personal_info_widget
 import 'package:mega_intern/future/home/presentation/widget/write_news_widget.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/theme/style.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -16,7 +17,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,9 +31,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 19, top: 15),
-              child: PersonalInfoWidget(),
+            Padding(
+              padding: const EdgeInsets.only(left: 19, top: 15),
+              child: BlocBuilder<GetUserCubit, GetUserState>(
+                builder: (context, state) {
+                  if (state is GetUserSuccess) {
+                    return PersonalInfoWidget(
+                      userModel: state.user,
+                    );
+                  } else if (state is GetUserError) {
+                    return Center(
+                      child: Text(state.error),
+                    );
+                  } else if (state is GetUserLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  return const SizedBox();
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 19, right: 19),
@@ -57,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return WriteNewsWidget();
+                              return const WriteNewsWidget();
                             });
                       },
                     ),

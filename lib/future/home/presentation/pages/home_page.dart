@@ -132,8 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const Align(
-              alignment: Alignment.bottomCenter,
-                child: FooterWidget()),
+                alignment: Alignment.bottomCenter, child: FooterWidget()),
           ],
         ),
       ),

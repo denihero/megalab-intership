@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mega_intern/future/home/data/model/home_model.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 import 'package:mega_intern/future/widgets/text_with_icon_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 
 class PersonalInfoWidget extends StatefulWidget {
-  const PersonalInfoWidget({Key? key}) : super(key: key);
+  const PersonalInfoWidget({Key? key, required this.userModel}) : super(key: key);
+
+  final UserModel? userModel;
 
   @override
   State<PersonalInfoWidget> createState() => _PersonalInfoWidgetState();
@@ -13,6 +18,36 @@ class PersonalInfoWidget extends StatefulWidget {
 
 class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
   final ValueNotifier<bool> isEditedProfileMode = ValueNotifier(true);
+
+  late final TextEditingController nameController;
+  late final TextEditingController lastNameController;
+  late final TextEditingController nicknameController;
+
+  @override
+  void initState() {
+    if(widget.userModel != null) {
+      nameController = TextEditingController(
+        text: widget.userModel!.name
+      );
+      nicknameController = TextEditingController(
+          text: widget.userModel!.nickname
+      );
+      lastNameController = TextEditingController(
+          text: widget.userModel!.last_name
+      );
+    }
+
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    lastNameController.dispose();
+    nicknameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +115,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                           width: 250,
                           child: TextFormFieldWidget(
                             title: 'Имя',
-                            initialValue: 'Don',
+                            controller: nameController,
                             enabled: !isEditedProfileMode.value,
                             // suffixIcon: isEditedProfileMode.value == true
                             //     ? null
@@ -94,7 +129,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                           width: 250,
                           child: TextFormFieldWidget(
                             title: 'Фамилия',
-                            initialValue: 'Donov',
+                            controller: lastNameController,
                             enabled: !isEditedProfileMode.value,
                             // suffixIcon: isEditedProfileMode.value == true
                             //     ? null
@@ -108,7 +143,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                           width: 250,
                           child: TextFormFieldWidget(
                             title: 'Никнейм',
-                            initialValue: 'DeniHero',
+                            controller: nicknameController,
                             enabled: !isEditedProfileMode.value,
                             // suffixIcon: isEditedProfileMode.value == true
                             //     ? null

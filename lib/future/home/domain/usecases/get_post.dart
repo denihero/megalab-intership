@@ -21,4 +21,7 @@ class Post {
     return await postRepositories.getFavourite();
   }
 
+  Future<Either<Failure, UserModel>> getUser() async {
+    return await postRepositories.getUser();
+  }
 }

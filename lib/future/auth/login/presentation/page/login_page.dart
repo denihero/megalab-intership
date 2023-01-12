@@ -6,6 +6,7 @@ import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart
 import 'package:mega_intern/future/auth/register/presentation/pages/registration_page.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
 import 'package:mega_intern/future/widgets/blur_background_widget.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
@@ -20,7 +21,6 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-///TODO: Make Blur loading
 class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController nicknameController;
   late final TextEditingController passwordController;
@@ -129,6 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               context.read<GetAllPostCubit>().getAllPosts();
               context.read<GetFavouriteCubit>().getFavourite();
+              context.read<GetUserCubit>().getUser();
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()));
             });

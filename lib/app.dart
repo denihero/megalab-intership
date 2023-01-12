@@ -9,6 +9,7 @@ import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favo
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
 
+import 'future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'locator_service.dart';
 
 class App extends StatelessWidget {
@@ -23,6 +24,7 @@ class App extends StatelessWidget {
         BlocProvider<GetAllPostCubit>(create: (_) => sl<GetAllPostCubit>()),
         BlocProvider<LikePostCubit>(create: (_) => sl<LikePostCubit>()),
         BlocProvider<GetFavouriteCubit>(create: (_) => sl<GetFavouriteCubit>()),
+        BlocProvider<GetUserCubit>(create: (_) => sl<GetUserCubit>()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

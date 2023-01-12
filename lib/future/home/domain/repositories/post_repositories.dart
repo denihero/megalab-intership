@@ -6,6 +6,7 @@ abstract class PostRepository {
   Future<Either<Failure, List<PostModel>>> getAllPost();
   Future<Either<Failure, void>> likePost(int id);
   Future<Either<Failure, List<PostModel>>> getFavourite();
+  Future<Either<Failure, UserModel>> getUser();
   // Future<Either<Failure, PostModel>> publicPost();
   // Future<Either<Failure, PostModel>> deletePost();
 }

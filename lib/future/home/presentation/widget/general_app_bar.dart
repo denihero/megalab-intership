@@ -62,5 +62,5 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget  {
   }
 
   @override
-  Size get preferredSize => const Size(400, 100);
+  Size get preferredSize => const Size(400, 50);
 }

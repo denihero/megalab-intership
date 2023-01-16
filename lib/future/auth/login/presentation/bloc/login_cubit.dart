@@ -28,6 +28,12 @@ class LoginCubit extends Cubit<LoginState> {
       SecureStorage.writeData(r.token!, 'mega');
       isLoading = false;
     });
+
+  }
+
+  void logoutCubit() {
+    emit(LoginLoading());
+    emit(LoginInitial());
   }
 
   String _mapFailureToMessage(DioError failure) {

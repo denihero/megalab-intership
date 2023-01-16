@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart';
 
 import '../../../auth/login/presentation/page/login_page.dart';
 import '../pages/favourite_page.dart';
@@ -38,6 +40,7 @@ class BurgerMenuWidget extends StatelessWidget {
             title: const Text('Выйти'),
             leading: const Icon(Icons.exit_to_app),
             onTap: () {
+              context.read<LoginCubit>().logoutCubit();
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (_) => const LoginScreen()),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mega_intern/future/auth/register/presentation/bloc/register_cubit.dart';
-import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
@@ -20,7 +19,6 @@ class RegistrationScreen extends StatefulWidget {
   State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
-///TODO: Make Blur loading
 class _RegistrationScreenState extends State<RegistrationScreen> {
   late final TextEditingController nameController;
   late final TextEditingController surnameController;
@@ -66,6 +64,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: BlocConsumer<RegisterCubit, RegisterState>(
                   listener: (context, state) {
                     if (state is RegisterError) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.error),
+                        ),
+                      );
                     } else if (state is RegisterSuccess) {
                       Future.delayed(const Duration(seconds: 1), () {
                         Navigator.push(
@@ -120,12 +123,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  context.read<RegisterCubit>().registerCubit(
-                                      name: nameController.text,
-                                      surname: surnameController.text,
-                                      nickname: nicknameController.text,
-                                      password: passwordController.text,
-                                      password2: password2Controller.text);
+                                  if (passwordController.text ==
+                                      password2Controller.text) {
+                                    context.read<RegisterCubit>().registerCubit(
+                                        name: nameController.text,
+                                        surname: surnameController.text,
+                                        nickname: nicknameController.text,
+                                        password: passwordController.text,
+                                        password2: password2Controller.text);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Password is not match"),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                             ),

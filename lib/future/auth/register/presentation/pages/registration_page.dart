@@ -19,6 +19,7 @@ class RegistrationScreen extends StatefulWidget {
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
+
 ///TODO: Make Blur loading
 class _RegistrationScreenState extends State<RegistrationScreen> {
   late final TextEditingController nameController;
@@ -63,118 +64,118 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: Form(
                 key: _formKey,
                 child: BlocConsumer<RegisterCubit, RegisterState>(
-                  builder: (context, state) {
-                    if (state is RegisterInitial ||
-                        state is RegisterError ||
-                        state is RegisterLoading) {
-                      return Stack(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              TextFormFieldWidget(
-                                title: 'Имя',
-                                controller: nameController,
-                                enabled: true,
-                              ),
-                              TextFormFieldWidget(
-                                title: 'Фамилия',
-                                controller: surnameController,
-                                enabled: true,
-                              ),
-                              TextFormFieldWidget(
-                                title: 'Никнейм',
-                                controller: nicknameController,
-                                enabled: true,
-                              ),
-                              TextFormFieldWidget(
-                                title: 'Пароль',
-                                controller: passwordController,
-                                enabled: true,
-                              ),
-                              TextFormFieldWidget(
-                                title: 'Подтверждение пароля',
-                                controller: password2Controller,
-                                enabled: true,
-                              ),
-                              const SizedBox(
-                                height: 32,
-                              ),
-                              PrimaryButton(
-                                child: Text(
-                                  'Регистрация',
-                                  style: UBUNTU_16_500_WHITE,
-                                ),
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    context.read<RegisterCubit>().isLoading = true;
-                                    context.read<RegisterCubit>().registerCubit(
-                                        name: nameController.text,
-                                        surname: surnameController.text,
-                                        nickname: nicknameController.text,
-                                        password: passwordController.text,
-                                        password2: password2Controller.text);
-                                  }
-                                },
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 25),
-                                child: RichText(
-                                    text: TextSpan(children: [
-                                  TextSpan(
-                                    text: 'Уже есть логин ? ',
-                                    style: UBUNTU_13_400_BLACK,
-                                  ),
-                                  TextSpan(
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const LoginScreen()),
-                                          );
-                                        },
-                                      style: const TextStyle(
-                                          color: BLUE,
-                                          decoration: TextDecoration.underline),
-                                      text: 'Войти'),
-                                ])),
-                              )
-                            ],
-                          ),
-                          // context.read<RegisterCubit>().isLoading
-                          //     ? const Positioned.fill(
-                          //         top: 0,
-                          //         bottom: 0,
-                          //         left: 0,
-                          //         right: 0,
-                          //         child: Center(
-                          //             child: BlurBackgroundWidget(
-                          //                 child: CircularProgressIndicator())))
-                          //     : const SizedBox()
-                        ],
-                      );
+                  listener: (context, state) {
+                    if (state is RegisterError) {
                     } else if (state is RegisterSuccess) {
-                      Future.delayed(const Duration(seconds: 3), () {
-                        Navigator.pushReplacement(
+                      Future.delayed(const Duration(seconds: 1), () {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomeScreen()),
+                              builder: (context) => const LoginScreen()),
                         );
                       });
-                      context.read<RegisterCubit>().isLoading = false;
-                      return const Center(
-                          child: Text('Вы успешно зарегистрировались'));
                     }
+                  },
+                  builder: (context, state) {
+                    return Stack(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TextFormFieldWidget(
+                              title: 'Имя',
+                              controller: nameController,
+                              enabled: true,
+                            ),
+                            TextFormFieldWidget(
+                              title: 'Фамилия',
+                              controller: surnameController,
+                              enabled: true,
+                            ),
+                            TextFormFieldWidget(
+                              title: 'Никнейм',
+                              controller: nicknameController,
+                              enabled: true,
+                            ),
+                            TextFormFieldWidget(
+                              title: 'Пароль',
+                              controller: passwordController,
+                              enabled: true,
+                              obscureText: true,
+                            ),
+                            TextFormFieldWidget(
+                              title: 'Подтверждение пароля',
+                              controller: password2Controller,
+                              enabled: true,
+                              obscureText: true,
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            PrimaryButton(
+                              child: Text(
+                                'Регистрация',
+                                style: UBUNTU_16_500_WHITE,
+                              ),
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<RegisterCubit>().registerCubit(
+                                      name: nameController.text,
+                                      surname: surnameController.text,
+                                      nickname: nicknameController.text,
+                                      password: passwordController.text,
+                                      password2: password2Controller.text);
+                                }
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25),
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                  text: 'Уже есть логин ? ',
+                                  style: UBUNTU_13_400_BLACK,
+                                ),
+                                TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginScreen()),
+                                        );
+                                      },
+                                    style: const TextStyle(
+                                        color: BLUE,
+                                        decoration: TextDecoration.underline),
+                                    text: 'Войти'),
+                              ])),
+                            )
+                          ],
+                        ),
+                        Positioned.fill(
+                          top: 0,
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: AbsorbPointer(
+                            absorbing: context.read<RegisterCubit>().isLoading,
+                            child: context.read<RegisterCubit>().isLoading
+                                ? const BlurBackgroundWidget(
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          ),
+                        )
+                      ],
+                    );
+
                     return const SizedBox.shrink();
                   },
-                  listener: (context,state){
-                    if(state is RegisterError){
-                      context.read<RegisterCubit>().isLoading = false;
-                    }
-                  }
                 ),
               ),
             ),

@@ -48,16 +48,29 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: BlocBuilder<LoginCubit, LoginState>(
+      body: BlocConsumer<LoginCubit, LoginState>(
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              context.read<GetAllPostCubit>().getAllPosts();
+              context.read<GetFavouriteCubit>().getFavourite();
+              context.read<GetUserCubit>().getUser();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()));
+            });
+          }
+        },
         builder: (context, state) {
-          if (state is LoginInitial ||
-              state is LoginError ||
-              state is LoginLoading) {
-            return Form(
-              key: _formKey,
-              child: Stack(
-                children: [
-                  Column(
+          return Form(
+            key: _formKey,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -81,8 +94,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: UBUNTU_16_500_WHITE,
                         ),
                         onPressed: () {
-                          context.read<LoginCubit>().loginCubit(
-                              nicknameController.text, passwordController.text);
+                          if (_formKey.currentState!.validate()) {
+                            context.read<LoginCubit>().loginCubit(
+                                nicknameController.text,
+                                passwordController.text);
+                          }
                         },
                       ),
                       const Spacer(),
@@ -112,29 +128,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   ),
-                  context.read<LoginCubit>().isLoading
-                      ? const Positioned.fill(
-                          top: 0,
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Center(
-                              child: BlurBackgroundWidget(
-                                  child: CircularProgressIndicator())))
-                      : const SizedBox()
-                ],
-              ),
-            );
-          } else if (state is LoginSuccess) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              context.read<GetAllPostCubit>().getAllPosts();
-              context.read<GetFavouriteCubit>().getFavourite();
-              context.read<GetUserCubit>().getUser();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (_) => const HomeScreen()));
-            });
-          }
-          return const SizedBox.shrink();
+                ),
+                Positioned.fill(
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: AbsorbPointer(
+                    absorbing: context.read<LoginCubit>().isLoading,
+                    child: context.read<LoginCubit>().isLoading
+                        ? const BlurBackgroundWidget(
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : const SizedBox(),
+                  ),
+                )
+              ],
+            ),
+          );
         },
       ),
     );

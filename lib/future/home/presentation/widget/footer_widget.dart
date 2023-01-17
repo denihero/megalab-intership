@@ -11,7 +11,7 @@ class FooterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
+      width: double.infinity,
       height: 150,
       color: SOFT_BLACK,
       child: Column(

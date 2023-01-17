@@ -18,6 +18,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       required String password,
       required String password2}) async {
     emit(RegisterLoading(isLoading));
+    isLoading = true;
 
     final registerResult = await register.register(
         name: name,
@@ -25,6 +26,12 @@ class RegisterCubit extends Cubit<RegisterState> {
         nickname: nickname,
         password: password,
         password2: password2);
-    registerResult.fold((l) => emit(RegisterError()), (r) => RegisterSuccess());
+    registerResult.fold((l) {
+      emit(RegisterError());
+      isLoading = false;
+    }, (r) {
+      emit(RegisterSuccess());
+      isLoading = false;
+    });
   }
 }

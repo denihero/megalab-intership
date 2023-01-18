@@ -14,6 +14,7 @@ import 'package:mega_intern/theme/style.dart';
 import '../bloc/like_post/like_post_cubit.dart';
 import '../widget/comment_list_widget.dart';
 import '../../../widgets/svg_icon_widget.dart';
+import '../widget/filter_widget.dart';
 import '../widget/write_comment_form_widget.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -59,7 +60,13 @@ class _DetailScreenState extends State<DetailScreen> {
             actions: [
               SvgIconButtonWidget(
                 icon: SvgPicture.asset('assets/icons/search.svg'),
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const FilterWidget();
+                      });
+                },
               ),
               SvgIconButtonWidget(
                 icon: SvgPicture.asset('assets/icons/profile.svg'),

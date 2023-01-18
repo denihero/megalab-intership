@@ -92,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 icon: SvgPicture.asset('assets/icons/sliders.svg'),
                 onPressed: () {
-
                   showDialog(
                       context: context,
                       builder: (context) {

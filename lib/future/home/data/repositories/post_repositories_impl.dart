@@ -17,7 +17,7 @@ class PostRepositoryImpl extends PostRepository {
       return Right(getPost);
     } on ServerException {
       return Left(ServerFailure());
-    } 
+    }
   }
 
   @override
@@ -31,7 +31,7 @@ class PostRepositoryImpl extends PostRepository {
   }
 
   @override
-  Future<Either<Failure, List<PostModel>>> getFavourite() async{
+  Future<Either<Failure, List<PostModel>>> getFavourite() async {
     try {
       final getFavouritePost = await postDataSourcesImpl.getFavourite();
       return Right(getFavouritePost);
@@ -41,10 +41,40 @@ class PostRepositoryImpl extends PostRepository {
   }
 
   @override
-  Future<Either<Failure, UserModel>> getUser() async{
+  Future<Either<Failure, UserModel>> getUser() async {
     try {
       final getUser = await postDataSourcesImpl.getUser();
       return Right(getUser);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PostModel>>> getOwnPost(String author) async {
+    try {
+      final getUser = await postDataSourcesImpl.getOwnPost(author);
+      return Right(getUser);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TagModel>>> getAllTag() async {
+    try {
+      final getTag = await postDataSourcesImpl.getAllTag();
+      return Right(getTag);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PostModel>>> searchPost(String query) async {
+    try {
+      final searchPost = await postDataSourcesImpl.searchPost(query);
+      return Right(searchPost);
     } on ServerException {
       return Left(ServerFailure());
     }

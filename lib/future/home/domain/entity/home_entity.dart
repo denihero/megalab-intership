@@ -50,5 +50,11 @@ class UserEntity {
   final String? name;
   final String? last_name;
   final String? profile_image;
+}
 
+class TagEntity {
+  TagEntity(this.id, this.name);
+
+  final int? id;
+  final String? name;
 }

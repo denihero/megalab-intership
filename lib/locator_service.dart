@@ -14,9 +14,12 @@ import 'package:mega_intern/future/home/data/repositories/post_repositories_impl
 import 'package:mega_intern/future/home/domain/repositories/post_repositories.dart';
 import 'package:mega_intern/future/home/domain/usecases/get_post.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_all_tag/get_all_tag_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_own_post/get_own_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/search_post/search_post_cubit.dart';
 
 import 'future/home/data/datasources/post_data_sources.dart';
 
@@ -30,6 +33,9 @@ init() {
   sl.registerFactory(() => LikePostCubit(sl()));
   sl.registerFactory(() => GetFavouriteCubit(sl()));
   sl.registerFactory(() => GetUserCubit(sl()));
+  sl.registerFactory(() => GetOwnPostCubit(sl()));
+  sl.registerFactory(() => GetAllTagCubit(sl()));
+  sl.registerFactory(() => SearchPostCubit(sl()));
 
   //UseCases
   sl.registerLazySingleton(() => Register(sl()));

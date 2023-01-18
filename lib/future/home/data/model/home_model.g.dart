@@ -73,3 +73,14 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'last_name': instance.last_name,
       'profile_image': instance.profile_image,
     };
+
+_$_TagModel _$$_TagModelFromJson(Map<String, dynamic> json) => _$_TagModel(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$$_TagModelToJson(_$_TagModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };

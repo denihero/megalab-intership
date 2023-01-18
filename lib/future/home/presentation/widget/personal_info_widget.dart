@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_profile_picture/flutter_profile_picture.dart';
+import 'package:mega_intern/core/common/string.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
@@ -8,7 +10,8 @@ import 'package:mega_intern/future/widgets/text_with_icon_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 
 class PersonalInfoWidget extends StatefulWidget {
-  const PersonalInfoWidget({Key? key, required this.userModel}) : super(key: key);
+  const PersonalInfoWidget({Key? key, required this.userModel})
+      : super(key: key);
 
   final UserModel? userModel;
 
@@ -25,18 +28,13 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
 
   @override
   void initState() {
-    if(widget.userModel != null) {
-      nameController = TextEditingController(
-        text: widget.userModel!.name
-      );
-      nicknameController = TextEditingController(
-          text: widget.userModel!.nickname
-      );
-      lastNameController = TextEditingController(
-          text: widget.userModel!.last_name
-      );
+    if (widget.userModel != null) {
+      nameController = TextEditingController(text: widget.userModel!.name);
+      nicknameController =
+          TextEditingController(text: widget.userModel!.nickname);
+      lastNameController =
+          TextEditingController(text: widget.userModel!.last_name);
     }
-
 
     super.initState();
   }
@@ -64,12 +62,18 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleAvatar(
-                        radius: 65,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(
-                            'https://i.pinimg.com/474x/55/1f/ff/551fff636303fb8a696c213736ddc09e.jpg'),
-                      ),
+                      widget.userModel?.profile_image != null
+                          ? CircleAvatar(
+                              radius: 65,
+                              backgroundColor: Colors.transparent,
+                              backgroundImage: NetworkImage(
+                                  '$apiUrl${widget.userModel!.profile_image!}'),
+                            )
+                          : ProfilePicture(
+                              name:
+                                  '${widget.userModel!.name} ${widget.userModel!.last_name}',
+                              radius: 65,
+                              fontsize: 40),
                       const SizedBox(
                         height: 15,
                       ),
@@ -92,17 +96,17 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                           onPressed: () {},
                         ),
                       ),
-                      TextButton(
-                          style: ButtonStyle(
-                              padding:
-                                  MaterialStateProperty.all(EdgeInsets.zero),
-                              foregroundColor:
-                                  MaterialStateProperty.all(BLACK)),
-                          onPressed: () {
-                            isEditedProfileMode.value =
-                                !isEditedProfileMode.value;
-                          },
-                          child: const Text('Edit Profile')),
+                      // TextButton(
+                      //     style: ButtonStyle(
+                      //         padding:
+                      //             MaterialStateProperty.all(EdgeInsets.zero),
+                      //         foregroundColor:
+                      //             MaterialStateProperty.all(BLACK)),
+                      //     onPressed: () {
+                      //       isEditedProfileMode.value =
+                      //           !isEditedProfileMode.value;
+                      //     },
+                      //     child: const Text('Edit Profile')),
                     ],
                   ),
                   const SizedBox(

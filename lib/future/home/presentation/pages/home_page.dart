@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
+import 'package:mega_intern/future/home/presentation/pages/search_delegate_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/filter_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
@@ -9,6 +10,7 @@ import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
+import '../bloc/get_all_tag/get_all_tag_cubit.dart';
 import '../widget/burger_menu_widget.dart';
 import 'profile_page.dart';
 
@@ -38,7 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             SvgIconButtonWidget(
               icon: SvgPicture.asset('assets/icons/search.svg'),
-              onPressed: () {},
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchDelegatePage(),
+                );
+              },
             ),
             SvgIconButtonWidget(
               icon: SvgPicture.asset('assets/icons/profile.svg'),
@@ -85,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 icon: SvgPicture.asset('assets/icons/sliders.svg'),
                 onPressed: () {
+
                   showDialog(
                       context: context,
                       builder: (context) {

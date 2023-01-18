@@ -9,6 +9,9 @@ import 'package:mega_intern/future/home/presentation/widget/write_news_widget.da
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/theme/style.dart';
 
+import '../bloc/get_own_post/get_own_post_cubit.dart';
+import '../widget/news_card_widget.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -30,12 +33,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       endDrawer: const BurgerMenuWidget(),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end  ,
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 19, top: 15),
               child: BlocBuilder<GetUserCubit, GetUserState>(
                 builder: (context, state) {
                   if (state is GetUserSuccess) {
+                    context
+                        .read<GetOwnPostCubit>()
+                        .getOwnPostCubit(state.user.nickname!);
                     return PersonalInfoWidget(
                       userModel: state.user,
                     );
@@ -83,29 +90,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (context, index) {
+            BlocBuilder<GetOwnPostCubit, GetOwnPostState>(
+              builder: (context, state) {
+                if (state is GetOwnPostSuccess) {
+                  final ownPost = state.ownPost;
+
+                  return ownPost.isNotEmpty
+                      ? ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: ownPost.length,
+                          itemBuilder: (context, index) {
+                            return NewsCardWidget(
+                              post: ownPost[index],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider(
+                              thickness: 1.4,
+                              indent: 20,
+                              endIndent: 20,
+                              color: Color.fromRGBO(217, 217, 217, 1),
+                            );
+                          },
+                        )
+                      : Center(
+                          child: Text(
+                            'У вас нету своих статей',
+                            style: UBUNTU_16_400_BLACK,
+                          ),
+                        );
+                } else if (state is GetOwnPostLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is GetOwnPostError) {
+                  return const Center(
+                    child: Text('Something get wrong'),
+                  );
+                }
+
                 return const SizedBox();
-                // return const NewsCardWidget(
-                //     title: 'Some news title',
-                //     description:
-                //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-                //     date: '',
-                //     isFavourite: false);
-              },
-              separatorBuilder: (context, index) {
-                return const Divider(
-                  thickness: 1.4,
-                  indent: 20,
-                  endIndent: 20,
-                  color: Color.fromRGBO(217, 217, 217, 1),
-                );
               },
             ),
-            const FooterWidget(),
+            const Align(
+              alignment: FractionalOffset.bottomCenter,
+                child: FooterWidget()),
           ],
         ),
       ),

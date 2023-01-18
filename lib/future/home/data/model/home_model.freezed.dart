@@ -767,3 +767,152 @@ abstract class _UserModel implements UserModel {
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+TagModel _$TagModelFromJson(Map<String, dynamic> json) {
+  return _TagModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TagModel {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TagModelCopyWith<TagModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TagModelCopyWith<$Res> {
+  factory $TagModelCopyWith(TagModel value, $Res Function(TagModel) then) =
+      _$TagModelCopyWithImpl<$Res, TagModel>;
+  @useResult
+  $Res call({int? id, String? name});
+}
+
+/// @nodoc
+class _$TagModelCopyWithImpl<$Res, $Val extends TagModel>
+    implements $TagModelCopyWith<$Res> {
+  _$TagModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TagModelCopyWith<$Res> implements $TagModelCopyWith<$Res> {
+  factory _$$_TagModelCopyWith(
+          _$_TagModel value, $Res Function(_$_TagModel) then) =
+      __$$_TagModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, String? name});
+}
+
+/// @nodoc
+class __$$_TagModelCopyWithImpl<$Res>
+    extends _$TagModelCopyWithImpl<$Res, _$_TagModel>
+    implements _$$_TagModelCopyWith<$Res> {
+  __$$_TagModelCopyWithImpl(
+      _$_TagModel _value, $Res Function(_$_TagModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_$_TagModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TagModel implements _TagModel {
+  const _$_TagModel({this.id, this.name});
+
+  factory _$_TagModel.fromJson(Map<String, dynamic> json) =>
+      _$$_TagModelFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+
+  @override
+  String toString() {
+    return 'TagModel(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TagModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TagModelCopyWith<_$_TagModel> get copyWith =>
+      __$$_TagModelCopyWithImpl<_$_TagModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TagModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TagModel implements TagModel {
+  const factory _TagModel({final int? id, final String? name}) = _$_TagModel;
+
+  factory _TagModel.fromJson(Map<String, dynamic> json) = _$_TagModel.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TagModelCopyWith<_$_TagModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}

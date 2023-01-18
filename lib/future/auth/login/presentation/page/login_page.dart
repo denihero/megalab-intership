@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart';
 import 'package:mega_intern/future/auth/register/presentation/pages/registration_page.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_all_tag/get_all_tag_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_own_post/get_own_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
 import 'package:mega_intern/future/widgets/blur_background_widget.dart';
@@ -55,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
               context.read<GetAllPostCubit>().getAllPosts();
               context.read<GetFavouriteCubit>().getFavourite();
               context.read<GetUserCubit>().getUser();
+              context.read<GetAllTagCubit>().getAllTag();
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()));
             });
@@ -95,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            FocusManager.instance.primaryFocus?.unfocus();
                             context.read<LoginCubit>().loginCubit(
                                 nicknameController.text,
                                 passwordController.text);

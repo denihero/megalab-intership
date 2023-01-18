@@ -5,7 +5,7 @@ part 'home_model.freezed.dart';
 part 'home_model.g.dart';
 
 @freezed
-class PostModel extends PostEntity with _$PostModel{
+class PostModel extends PostEntity with _$PostModel {
   const factory PostModel({
     int? id,
     String? tag,
@@ -18,7 +18,8 @@ class PostModel extends PostEntity with _$PostModel{
     String? author,
   }) = _HomeModel;
 
-  factory PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
+  factory PostModel.fromJson(Map<String, dynamic> json) =>
+      _$PostModelFromJson(json);
 }
 
 @freezed
@@ -30,7 +31,8 @@ class CommentModel extends CommentEntity with _$CommentModel {
     List<CommentModel?>? child,
   }) = _CommentModel;
 
-  factory CommentModel.fromJson(Map<String, dynamic> json) => _$CommentModelFromJson(json);
+  factory CommentModel.fromJson(Map<String, dynamic> json) =>
+      _$CommentModelFromJson(json);
 }
 
 @freezed
@@ -43,5 +45,14 @@ class UserModel extends UserEntity with _$UserModel {
     String? profile_image,
   }) = _UserModel;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+}
+
+@freezed
+class TagModel extends TagEntity with _$TagModel {
+  const factory TagModel({int? id, String? name}) = _TagModel;
+
+  factory TagModel.fromJson(Map<String, dynamic> json) =>
+      _$TagModelFromJson(json);
 }

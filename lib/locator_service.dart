@@ -19,6 +19,7 @@ import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favo
 import 'package:mega_intern/future/home/presentation/bloc/get_own_post/get_own_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/publish_post/publish_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/search_post/search_post_cubit.dart';
 
 import 'future/home/data/datasources/post_data_sources.dart';
@@ -36,6 +37,7 @@ init() {
   sl.registerFactory(() => GetOwnPostCubit(sl()));
   sl.registerFactory(() => GetAllTagCubit(sl()));
   sl.registerFactory(() => SearchPostCubit(sl()));
+  sl.registerFactory(() => PublishPostCubit(sl()));
 
   //UseCases
   sl.registerLazySingleton(() => Register(sl()));

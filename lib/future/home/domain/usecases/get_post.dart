@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/domain/repositories/post_repositories.dart';
@@ -19,6 +21,11 @@ class Post {
 
   Future<Either<Failure, void>> likePost(int id) async {
     return await postRepositories.likePost(id);
+  }
+
+  Future<Either<Failure, void>> publishPost(
+      String title, String text, File? image, String tag) async {
+    return await postRepositories.publishPost(text, title, image, tag);
   }
 
   Future<Either<Failure, List<PostModel>>> getFavourite() async {

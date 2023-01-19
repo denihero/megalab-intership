@@ -13,6 +13,7 @@ import 'package:mega_intern/future/home/presentation/bloc/search_post/search_pos
 import 'package:mega_intern/future/home/presentation/pages/home_page.dart';
 
 import 'future/home/presentation/bloc/get_user/get_user_cubit.dart';
+import 'future/home/presentation/bloc/publish_post/publish_post_cubit.dart';
 import 'locator_service.dart';
 
 class App extends StatelessWidget {
@@ -31,6 +32,7 @@ class App extends StatelessWidget {
         BlocProvider<GetOwnPostCubit>(create: (_) => sl<GetOwnPostCubit>()),
         BlocProvider<GetAllTagCubit>(create: (_) => sl<GetAllTagCubit>()),
         BlocProvider<SearchPostCubit>(create: (_) => sl<SearchPostCubit>()),
+        BlocProvider<PublishPostCubit>(create: (_) => sl<PublishPostCubit>()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

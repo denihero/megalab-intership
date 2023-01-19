@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:mega_intern/core/common/string.dart';
 import 'package:mega_intern/core/error/failure.dart';
@@ -8,6 +10,7 @@ abstract class PostDataSources {
   Future<List<PostModel>> getAllPosts();
   Future<List<PostModel>> searchPost(String query);
   Future<List<PostModel>> getFavourite();
+  Future<void> publishPost(String title, String text, File? image, String tag);
   Future<List<PostModel>> getOwnPost(String author);
   Future<List<TagModel>> getAllTag();
   Future<void> likePost(int id);
@@ -118,11 +121,11 @@ class PostDataSourcesImpl extends PostDataSources {
   }
 
   @override
-  Future<List<TagModel>> getAllTag() async{
+  Future<List<TagModel>> getAllTag() async {
     final List<TagModel> ls = [];
     final response = await client.get('$apiUrl/tag/',
         options: Options(headers: {
-        'Authorization': 'Token ${await SecureStorage.readData('mega')}'
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
         }));
 
     if (response.statusCode! >= 400) {
@@ -138,11 +141,11 @@ class PostDataSourcesImpl extends PostDataSources {
   }
 
   @override
-  Future<List<PostModel>> searchPost(String query) async{
+  Future<List<PostModel>> searchPost(String query) async {
     final List<PostModel> ls = [];
     final response = await client.get('$apiUrl/post/?search=$query',
         options: Options(headers: {
-        'Authorization': 'Token ${await SecureStorage.readData('mega')}'
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
         }));
 
     if (response.statusCode! >= 400) {
@@ -155,5 +158,29 @@ class PostDataSourcesImpl extends PostDataSources {
     }
 
     return ls;
+  }
+
+  @override
+  Future<void> publishPost(
+      String title, String text, File? image, String tag) async {
+    final postData = FormData.fromMap({
+      'title': title,
+      'text': text,
+      if (image != null) "image": await MultipartFile.fromFile(image.path),
+      'tag': tag,
+    });
+
+    final response = await client.post('$apiUrl/post/',
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}',
+          'Content-Type': 'multipart/form-data',
+        }),
+        data: postData);
+
+    if (response.statusCode! >= 400) {
+      throw ServerFailure();
+    } else if (response.statusCode! >= 200) {
+      return response.data;
+    }
   }
 }

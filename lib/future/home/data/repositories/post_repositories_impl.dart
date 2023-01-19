@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:mega_intern/core/error/exception.dart';
 import 'package:mega_intern/core/error/failure.dart';
@@ -74,6 +76,17 @@ class PostRepositoryImpl extends PostRepository {
   Future<Either<Failure, List<PostModel>>> searchPost(String query) async {
     try {
       final searchPost = await postDataSourcesImpl.searchPost(query);
+      return Right(searchPost);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+
+  @override
+  Future<Either<Failure, void>> publishPost(String text, String title, File? image, String tag) async{
+    try {
+      final searchPost = await postDataSourcesImpl.publishPost(title,text,image,tag);
       return Right(searchPost);
     } on ServerException {
       return Left(ServerFailure());

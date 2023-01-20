@@ -24,54 +24,59 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         key: _scaffoldKey,
         appBar: GeneralAppBar(drawerKey: _scaffoldKey),
         endDrawer: const BurgerMenuWidget(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Избранные новости',
-                style: UBUNTU_30_500_BLACK,
-              ),
-              SingleChildScrollView(
-                child: BlocBuilder<GetFavouriteCubit, GetFavouriteState>(
-                  builder: (context, state) {
-                    if (state is GetFavouriteLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (state is GetFavouriteError) {
-                      return Center(
-                        child: Text(state.error),
-                      );
-                    } else if (state is GetFavouriteSuccess) {
-                      final fav = state.fav;
-                      return ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: state.fav.length,
-                          itemBuilder: (context, index) {
-                            return NewsCardWidget(
-                              post: fav[index],
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Divider(
-                              thickness: 1.4,
-                              indent: 20,
-                              endIndent: 20,
-                              color: Color.fromRGBO(217, 217, 217, 1),
-                            );
-                          });
-                    }
-                    return const SizedBox();
-                  },
+        body: RefreshIndicator(
+          onRefresh: () async {
+            context.read<GetFavouriteCubit>().getFavourite();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const FooterWidget()
-            ],
+                Text(
+                  'Избранные новости',
+                  style: UBUNTU_30_500_BLACK,
+                ),
+                SingleChildScrollView(
+                  child: BlocBuilder<GetFavouriteCubit, GetFavouriteState>(
+                    builder: (context, state) {
+                      if (state is GetFavouriteLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (state is GetFavouriteError) {
+                        return Center(
+                          child: Text(state.error),
+                        );
+                      } else if (state is GetFavouriteSuccess) {
+                        final fav = state.fav;
+                        return ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: state.fav.length,
+                            itemBuilder: (context, index) {
+                              return NewsCardWidget(
+                                post: fav[index],
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Divider(
+                                thickness: 1.4,
+                                indent: 20,
+                                endIndent: 20,
+                                color: Color.fromRGBO(217, 217, 217, 1),
+                              );
+                            });
+                      }
+                      return const SizedBox();
+                    },
+                  ),
+                ),
+                const FooterWidget()
+              ],
+            ),
           ),
         ),
       ),

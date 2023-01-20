@@ -82,12 +82,45 @@ class PostRepositoryImpl extends PostRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, void>> publishPost(
+      String text, String title, File? image, String tag) async {
+    try {
+      final searchPost =
+          await postDataSourcesImpl.publishPost(title, text, image, tag);
+      return Right(searchPost);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
   @override
-  Future<Either<Failure, void>> publishPost(String text, String title, File? image, String tag) async{
+  Future<Either<Failure, void>> commentPost(int id, String text) async {
     try {
-      final searchPost = await postDataSourcesImpl.publishPost(title,text,image,tag);
-      return Right(searchPost);
+      final commentPost = await postDataSourcesImpl.commentPost(id, text);
+      return Right(commentPost);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> commentReplyPost(
+      int id, String text, int parentId) async {
+    try {
+      final commentReplyPost =
+          await postDataSourcesImpl.commentReplyPost(id, text, parentId);
+      return Right(commentReplyPost);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, PostModel>> getDetailPost(int id) async {
+    try {
+      final detailPost = await postDataSourcesImpl.getDetailPost(id);
+      return Right(detailPost);
     } on ServerException {
       return Left(ServerFailure());
     }

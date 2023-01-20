@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mega_intern/future/home/data/model/home_model.dart';
+import 'package:mega_intern/future/home/presentation/bloc/comment_post/comment_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/write_comment_form_widget.dart';
 
 import '../../../../theme/palette.dart';
@@ -6,15 +9,11 @@ import '../../../../theme/style.dart';
 
 class CommentWidget extends StatefulWidget {
   const CommentWidget(
-      {Key? key,
-      required this.name,
-      required this.lastName,
-      required this.text})
+      {Key? key, required this.commentModel, required this.postId})
       : super(key: key);
 
-  final String name;
-  final String lastName;
-  final String text;
+  final CommentModel commentModel;
+  final int postId;
 
   @override
   State<CommentWidget> createState() => _CommentWidgetState();
@@ -22,6 +21,14 @@ class CommentWidget extends StatefulWidget {
 
 class _CommentWidgetState extends State<CommentWidget> {
   ValueNotifier<bool> isOpen = ValueNotifier(false);
+  late final TextEditingController commentController;
+
+  @override
+  void initState() {
+    commentController = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -31,14 +38,19 @@ class _CommentWidgetState extends State<CommentWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '${widget.name} ${widget.lastName}',
+            '${widget.commentModel.user!.name} ${widget.commentModel.user!.name}',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           const SizedBox(
             height: 2,
           ),
           SizedBox(
-              width: 395, child: Text(widget.text, style: UBUNTU_16_400_GREY)),
+              width: 395,
+              child:
+                  Text(widget.commentModel.text!, style: UBUNTU_16_400_GREY)),
+          const SizedBox(
+            height: 2,
+          ),
           SizedBox(
             width: 200,
             child: Row(
@@ -48,15 +60,18 @@ class _CommentWidgetState extends State<CommentWidget> {
                   '30.11.2022',
                   style: UBUNTU_16_400_GREY,
                 ),
-                TextButton(
-                    onPressed: () {
-                      isOpen.value = !isOpen.value;
-                    },
-                    child: Text(
-                      'Ответить',
-                      style: UBUNTU_16_400_PURPLE.copyWith(
-                          decoration: TextDecoration.underline),
-                    ))
+                widget.commentModel.child != null
+                    ? TextButton(
+                        onPressed: () {
+                          isOpen.value = !isOpen.value;
+                        },
+                        child: Text(
+                          'Ответить',
+                          style: UBUNTU_16_400_PURPLE.copyWith(
+                              decoration: TextDecoration.underline),
+                        ),
+                      )
+                    : TextButton(onPressed: () {}, child: const Text('  '))
               ],
             ),
           ),
@@ -77,6 +92,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         width: 200,
                         height: 30,
                         child: TextFormField(
+                          controller: commentController,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 10),
@@ -89,7 +105,19 @@ class _CommentWidgetState extends State<CommentWidget> {
                         width: 10,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          if(commentController.text.isNotEmpty){
+                            context.read<CommentPostCubit>().commentReplyPost(
+                                widget.postId,
+                                commentController.text,
+                                widget.commentModel.id!);
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            isOpen.value = !isOpen.value;
+                          }else{
+                            return;
+                          }
+
+                        },
                         child: Container(
                           width: 40,
                           height: 30,

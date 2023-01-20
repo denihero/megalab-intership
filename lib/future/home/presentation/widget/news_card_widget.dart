@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:like_button/like_button.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_detail_post/get_detail_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/detail_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
@@ -24,9 +25,11 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
+        context.read<GetDetailPostCubit>().getDetailPost(widget.post.id!);
+        if (!mounted) return;
         Navigator.push(
-            context,
+              context,
             MaterialPageRoute(
                 builder: (_) => DetailScreen(
                       post: widget.post,
@@ -68,7 +71,9 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
                       padding: const EdgeInsets.only(top: 10, right: 10),
                       isLiked: widget.post.is_liked,
                       onTap: (isFav) async {
-                        await context.read<LikePostCubit>().likePost(widget.post.id!);
+                        await context
+                            .read<LikePostCubit>()
+                            .likePost(widget.post.id!);
                         return !isFav;
                       }),
                 ],

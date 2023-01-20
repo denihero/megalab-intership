@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/search_delegate_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/filter_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
@@ -81,66 +83,74 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       endDrawer: const BurgerMenuWidget(),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: SvgIconButtonWidget(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                icon: SvgPicture.asset('assets/icons/sliders.svg'),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const FilterWidget();
-                      });
-                },
+      body: RefreshIndicator(
+        onRefresh: () async{
+          context.read<GetAllPostCubit>().getAllPosts();
+          context.read<GetFavouriteCubit>().getFavourite();
+          context.read<GetUserCubit>().getUser();
+          context.read<GetAllTagCubit>().getAllTag();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: SvgIconButtonWidget(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                  icon: SvgPicture.asset('assets/icons/sliders.svg'),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const FilterWidget();
+                        });
+                  },
+                ),
               ),
-            ),
-            SizedBox(
-              child: BlocBuilder<GetAllPostCubit, GetAllPostState>(
-                builder: (context, state) {
-                  if (state is GetAllPostLoading) {
-                    return const Center(
-                      child: Expanded(child: CircularProgressIndicator()),
-                    );
-                  } else if (state is GetAllPostSuccess) {
-                    final post = state.posts;
-                    return ListView.separated(
-                      itemCount: post.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        return NewsCardWidget(
-                          post: post[index],
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Divider(
-                          thickness: 1.4,
-                          indent: 20,
-                          endIndent: 20,
-                          color: Color.fromRGBO(217, 217, 217, 1),
-                        );
-                      },
-                    );
-                  } else if (state is GetAllPostError) {
-                    return Center(
-                      child: Text(state.error),
-                    );
-                  }
+              SizedBox(
+                child: BlocBuilder<GetAllPostCubit, GetAllPostState>(
+                  builder: (context, state) {
+                    if (state is GetAllPostLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is GetAllPostSuccess) {
+                      final post = state.posts;
+                      return ListView.separated(
+                        itemCount: post.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return NewsCardWidget(
+                            post: post[index],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const Divider(
+                            thickness: 1.4,
+                            indent: 20,
+                            endIndent: 20,
+                            color: Color.fromRGBO(217, 217, 217, 1),
+                          );
+                        },
+                      );
+                    } else if (state is GetAllPostError) {
+                      return Center(
+                        child: Text(state.error),
+                      );
+                    }
 
-                  return const SizedBox.shrink();
-                },
+                    return const SizedBox.shrink();
+                  },
+                ),
               ),
-            ),
-            const Align(
-                alignment: Alignment.bottomCenter, child: FooterWidget()),
-          ],
+              const Align(
+                  alignment: Alignment.bottomCenter, child: FooterWidget()),
+            ],
+          ),
         ),
       ),
     );

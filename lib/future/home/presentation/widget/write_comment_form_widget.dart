@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_intern/theme/palette.dart';
 
-class WriteCommentFormWidget extends StatelessWidget {
-  const WriteCommentFormWidget({Key? key}) : super(key: key);
+import '../bloc/comment_post/comment_post_cubit.dart';
+
+class WriteCommentFormWidget extends StatefulWidget {
+  const WriteCommentFormWidget({Key? key, required this.postId, required this.commentController})
+      : super(key: key);
+
+  final int postId;
+  final TextEditingController commentController;
+
+  @override
+  State<WriteCommentFormWidget> createState() => _WriteCommentFormWidgetState();
+}
+
+class _WriteCommentFormWidgetState extends State<WriteCommentFormWidget> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +28,10 @@ class WriteCommentFormWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 20),
               child: TextFormField(
+                controller: widget.commentController,
                 decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12)),
                     hintText: 'Напишите комментарий'),
@@ -25,7 +40,19 @@ class WriteCommentFormWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            if(widget.commentController.text.isNotEmpty){
+              context
+                  .read<CommentPostCubit>()
+                  .commentPost(widget.postId, widget.commentController.text);
+              FocusManager.instance.primaryFocus?.unfocus();
+              widget.commentController.clear();
+
+            }else{
+              return;
+            }
+
+          },
           child: Container(
             width: 40,
             height: 40,

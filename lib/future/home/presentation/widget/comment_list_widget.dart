@@ -5,10 +5,12 @@ import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
 class CommentListWidget extends StatelessWidget {
-  const CommentListWidget({Key? key, required this.commentModel})
+  const CommentListWidget(
+      {Key? key, required this.commentModel, required this.postId})
       : super(key: key);
 
   final CommentModel commentModel;
+  final int postId;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,9 @@ class CommentListWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CommentWidget(
-            name: commentModel.user!.name!,
-            lastName: commentModel.user!.last_name!,
-            text: commentModel.text!),
+          commentModel: commentModel,
+          postId: postId,
+        ),
         ListView.builder(
             itemCount: commentModel.child!.length,
             shrinkWrap: true,
@@ -26,16 +28,15 @@ class CommentListWidget extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
               return Column(
-                crossAxisAlignment:CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Transform.translate(
                     offset: const Offset(40, 0),
                     child: SizedBox(
                       width: 300,
                       child: CommentWidget(
-                        name: commentModel.child![index]!.user!.name!,
-                        lastName: commentModel.child![index]!.user!.last_name!,
-                        text: commentModel.child![index]!.text!,
+                        commentModel: commentModel.child![index]!,
+                        postId: postId,
                       ),
                     ),
                   ),

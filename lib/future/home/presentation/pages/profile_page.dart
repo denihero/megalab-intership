@@ -40,9 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: BlocBuilder<GetUserCubit, GetUserState>(
                 builder: (context, state) {
                   if (state is GetUserSuccess) {
-                    context
-                        .read<GetOwnPostCubit>()
-                        .getOwnPostCubit(state.user.nickname!);
+
                     return PersonalInfoWidget(
                       userModel: state.user,
                     );

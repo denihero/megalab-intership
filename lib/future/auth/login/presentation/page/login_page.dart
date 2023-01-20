@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/core/storage/storage.dart';
 import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart';
 import 'package:mega_intern/future/auth/register/presentation/pages/registration_page.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
@@ -28,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController passwordController;
 
   final _formKey = GlobalKey<FormState>();
+  String? nickname;
 
   @override
   void initState() {
@@ -53,11 +55,14 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
               context.read<GetAllPostCubit>().getAllPosts();
               context.read<GetFavouriteCubit>().getFavourite();
               context.read<GetUserCubit>().getUser();
               context.read<GetAllTagCubit>().getAllTag();
+              nickname = (await SecureStorage.readData('user'));
+              if (!mounted) return;
+              context.read<GetOwnPostCubit>().getOwnPostCubit(nickname!);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()));
             });

@@ -131,6 +131,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         nickname: nicknameController.text,
                                         password: passwordController.text,
                                         password2: password2Controller.text);
+                                    FocusManager.instance.primaryFocus?.unfocus();
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(

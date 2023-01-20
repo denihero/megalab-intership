@@ -11,7 +11,7 @@ class GetOwnPostCubit extends Cubit<GetOwnPostState> {
 
   final Post post;
 
-  void getOwnPostCubit(String author) async {
+  Future<void> getOwnPostCubit(String author) async {
     emit(GetOwnPostLoading());
     final getOwnResult = await post.getOwnPost(author);
     getOwnResult.fold(

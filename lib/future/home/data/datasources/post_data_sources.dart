@@ -8,12 +8,15 @@ import 'package:mega_intern/future/home/data/model/home_model.dart';
 
 abstract class PostDataSources {
   Future<List<PostModel>> getAllPosts();
+  Future<PostModel> getDetailPost(int id);
   Future<List<PostModel>> searchPost(String query);
   Future<List<PostModel>> getFavourite();
   Future<void> publishPost(String title, String text, File? image, String tag);
   Future<List<PostModel>> getOwnPost(String author);
   Future<List<TagModel>> getAllTag();
   Future<void> likePost(int id);
+  Future<void> commentPost(int id, String text);
+  Future<void> commentReplyPost(int id, String text, int parentId);
   Future<UserModel> getUser();
 
   //Future<void> deletePost(int id);
@@ -182,5 +185,52 @@ class PostDataSourcesImpl extends PostDataSources {
     } else if (response.statusCode! >= 200) {
       return response.data;
     }
+  }
+
+  @override
+  Future<void> commentPost(int id, String text) async {
+    final responseLike = await client.post('$apiUrl/comment/',
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}',
+          'Content-Type': 'application/json',
+        }),
+        data: {'post': id, 'text': text});
+
+    if (responseLike.statusCode! >= 400) {
+      throw ServerFailure();
+    } else if (responseLike.statusCode! >= 200) {
+      return responseLike.data;
+    }
+  }
+
+  @override
+  Future<void> commentReplyPost(int id, String text, int parentId) async {
+    final responseLike = await client.post('$apiUrl/comment/',
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}',
+        }),
+        data: {'post': id, 'text': text, 'parent': parentId});
+
+    if (responseLike.statusCode! >= 400) {
+      throw ServerFailure();
+    } else if (responseLike.statusCode! >= 200) {
+      return responseLike.data;
+    }
+  }
+
+  @override
+  Future<PostModel> getDetailPost(int id) async {
+    final response = await client.get('$apiUrl/post/$id/',
+        options: Options(headers: {
+          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
+        }));
+
+    if (response.statusCode! >= 400) {
+      throw ServerFailure();
+    } else if (response.statusCode! >= 200) {
+      return PostModel.fromJson(response.data);
+    }
+
+    return PostModel.fromJson(response.data);
   }
 }

@@ -4,8 +4,10 @@ import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart
 import 'package:mega_intern/future/auth/login/presentation/page/login_page.dart';
 import 'package:mega_intern/future/auth/register/presentation/bloc/register_cubit.dart';
 import 'package:mega_intern/future/auth/register/presentation/pages/registration_page.dart';
+import 'package:mega_intern/future/home/presentation/bloc/comment_post/comment_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_tag/get_all_tag_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_detail_post/get_detail_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_own_post/get_own_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
@@ -33,6 +35,8 @@ class App extends StatelessWidget {
         BlocProvider<GetAllTagCubit>(create: (_) => sl<GetAllTagCubit>()),
         BlocProvider<SearchPostCubit>(create: (_) => sl<SearchPostCubit>()),
         BlocProvider<PublishPostCubit>(create: (_) => sl<PublishPostCubit>()),
+        BlocProvider<CommentPostCubit>(create: (_) => sl<CommentPostCubit>()),
+        BlocProvider<GetDetailPostCubit>(create: (_) => sl<GetDetailPostCubit>()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

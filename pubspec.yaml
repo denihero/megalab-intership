@@ -33,6 +33,7 @@ dependencies:
   flutter_secure_storage: ^4.2.1
   flutter_profile_picture: ^2.0.0
   image_picker: ^0.7.2+1
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

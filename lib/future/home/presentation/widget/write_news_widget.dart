@@ -23,6 +23,8 @@ class _WriteNewsWidgetState extends State<WriteNewsWidget> {
   late final TextEditingController textController;
   late final TextEditingController titleController;
 
+  String dropDownValue = 'Не выбрано';
+
   final ImagePicker picker = ImagePicker();
   File? imageFile;
 
@@ -60,14 +62,14 @@ class _WriteNewsWidgetState extends State<WriteNewsWidget> {
         color: WHITE,
         child: BlocConsumer<PublishPostCubit, PublishPostState>(
           listener: (context, state) {
-           if(state is PublishPostSuccess){
-             Navigator.pop(context);
-             ScaffoldMessenger.of(context).showSnackBar(
-               const SnackBar(
-                 content: Text("Публикация успешна создана"),
-               ),
-             );
-           }
+            if (state is PublishPostSuccess) {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Публикация успешна создана"),
+                ),
+              );
+            }
           },
           builder: (context, state) {
             return Stack(
@@ -147,7 +149,14 @@ class _WriteNewsWidgetState extends State<WriteNewsWidget> {
                       const SizedBox(
                         height: 5,
                       ),
-                      const FilterSortButton(),
+                      FilterSortButton(
+                        tagName: dropDownValue,
+                        onChange: (String? newVal) {
+                          setState(() {
+                            dropDownValue = newVal!;
+                          });
+                        },
+                      ),
                       const SizedBox(
                         height: 30,
                       ),
@@ -158,7 +167,7 @@ class _WriteNewsWidgetState extends State<WriteNewsWidget> {
                               titleController.text,
                               textController.text,
                               imageFile,
-                              'name');
+                              dropDownValue);
                         },
                       )
                     ],

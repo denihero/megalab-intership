@@ -11,16 +11,16 @@ import 'package:mega_intern/future/widgets/internet_image.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 import 'package:mega_intern/theme/style.dart';
 
-class NewsCardWidget extends StatefulWidget {
-  const NewsCardWidget({Key? key, required this.post}) : super(key: key);
+class PostCardWidget extends StatefulWidget {
+  const PostCardWidget({Key? key, required this.post}) : super(key: key);
 
   final PostModel post;
 
   @override
-  State<NewsCardWidget> createState() => _NewsCardWidgetState();
+  State<PostCardWidget> createState() => _PostCardWidgetState();
 }
 
-class _NewsCardWidgetState extends State<NewsCardWidget> {
+class _PostCardWidgetState extends State<PostCardWidget> {
   ValueNotifier<bool> isFavourite = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {

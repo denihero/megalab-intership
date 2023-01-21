@@ -127,6 +127,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
                     onPressed: () {
                       Navigator.pop(context);
+                      context.read<GetFavouriteCubit>().getFavourite();
                     },
                   ),
                 ),

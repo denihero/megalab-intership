@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/general_app_bar.dart';
-import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/post_card_widget.dart';
 import 'package:mega_intern/theme/style.dart';
 
 import '../widget/burger_menu_widget.dart';
 import '../widget/footer_widget.dart';
+import '../widget/post_card_shimmer_loading.dart';
 
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
@@ -42,8 +43,22 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   child: BlocBuilder<GetFavouriteCubit, GetFavouriteState>(
                     builder: (context, state) {
                       if (state is GetFavouriteLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return ListView.separated(
+                          itemCount: 4,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context,index){
+                            return const PostCardShimmerLoading();
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider(
+                              thickness: 1.4,
+                              indent: 20,
+                              endIndent: 20,
+                              color: Color.fromRGBO(217, 217, 217, 1),
+                            );
+                          },
                         );
                       } else if (state is GetFavouriteError) {
                         return Center(
@@ -57,7 +72,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             scrollDirection: Axis.vertical,
                             itemCount: state.fav.length,
                             itemBuilder: (context, index) {
-                              return NewsCardWidget(
+                              return PostCardWidget(
                                 post: fav[index],
                               );
                             },

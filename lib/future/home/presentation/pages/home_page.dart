@@ -7,7 +7,8 @@ import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubi
 import 'package:mega_intern/future/home/presentation/pages/search_delegate_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/filter_widget.dart';
 import 'package:mega_intern/future/home/presentation/widget/footer_widget.dart';
-import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/post_card_shimmer_loading.dart';
+import 'package:mega_intern/future/home/presentation/widget/post_card_widget.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Align(
                 alignment: Alignment.topRight,
@@ -113,8 +114,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: BlocBuilder<GetAllPostCubit, GetAllPostState>(
                   builder: (context, state) {
                     if (state is GetAllPostLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return ListView.separated(
+                        itemCount: 4,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context,index){
+                          return const PostCardShimmerLoading();
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(
+                            thickness: 1.4,
+                            indent: 20,
+                            endIndent: 20,
+                            color: Color.fromRGBO(217, 217, 217, 1),
+                          );
+                        },
                       );
                     } else if (state is GetAllPostSuccess) {
                       final post = state.posts;
@@ -124,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
-                          return NewsCardWidget(
+                          return PostCardWidget(
                             post: post[index],
                           );
                         },
@@ -147,8 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              const Align(
-                  alignment: Alignment.bottomCenter, child: FooterWidget()),
+              FooterWidget(),
             ],
           ),
         ),

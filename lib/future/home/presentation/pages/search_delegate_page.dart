@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_intern/future/home/presentation/bloc/search_post/search_post_cubit.dart';
-import 'package:mega_intern/future/home/presentation/widget/news_card_widget.dart';
+import 'package:mega_intern/future/home/presentation/widget/post_card_widget.dart';
 
 class SearchDelegatePage extends SearchDelegate {
   @override
@@ -44,7 +44,7 @@ class SearchDelegatePage extends SearchDelegate {
               itemCount: post.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                return NewsCardWidget(
+                return PostCardWidget(
                   post: post[index],
                 );
               },

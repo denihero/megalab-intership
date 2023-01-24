@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:like_button/like_button.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_detail_post/get_detail_post_cubit.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/pages/detail_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
@@ -74,6 +75,10 @@ class _PostCardWidgetState extends State<PostCardWidget> {
                         await context
                             .read<LikePostCubit>()
                             .likePost(widget.post.id!);
+                        if(!mounted){
+                          return !isFav;
+                        }
+                        context.read<GetFavouriteCubit>().getFavourite();
                         return !isFav;
                       }),
                 ],

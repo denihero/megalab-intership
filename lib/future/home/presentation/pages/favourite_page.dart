@@ -48,7 +48,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
-                          itemBuilder: (context,index){
+                          itemBuilder: (context, index) {
                             return const PostCardShimmerLoading();
                           },
                           separatorBuilder: (BuildContext context, int index) {
@@ -66,24 +66,39 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                         );
                       } else if (state is GetFavouriteSuccess) {
                         final fav = state.fav;
-                        return ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: state.fav.length,
-                            itemBuilder: (context, index) {
-                              return PostCardWidget(
-                                post: fav[index],
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return const Divider(
-                                thickness: 1.4,
-                                indent: 20,
-                                endIndent: 20,
-                                color: Color.fromRGBO(217, 217, 217, 1),
-                              );
-                            });
+                        return fav.isNotEmpty
+                            ? ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: state.fav.length,
+                                itemBuilder: (context, index) {
+                                  return PostCardWidget(
+                                    post: fav[index],
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    thickness: 1.4,
+                                    indent: 20,
+                                    endIndent: 20,
+                                    color: Color.fromRGBO(217, 217, 217, 1),
+                                  );
+                                })
+                            : Center(
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'У вас нету любимых постов',
+                                      style: UBUNTU_16_400_BLACK,
+                                    ),
+                                    const SizedBox(
+                                      height: 400,
+                                    ),
+                                  ],
+                                ),
+                            );
                       }
                       return const SizedBox();
                     },

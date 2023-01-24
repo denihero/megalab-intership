@@ -31,7 +31,7 @@ class DetailScreen extends StatefulWidget {
   State<DetailScreen> createState() => _DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClientMixin{
   String? topText;
   String? bottomText;
   String? generalText;
@@ -48,6 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     generalText = widget.post.text!;
     if (generalText!.length > 180 && generalText != null) {
       topText = generalText!.substring(0, 180);
@@ -300,4 +301,7 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

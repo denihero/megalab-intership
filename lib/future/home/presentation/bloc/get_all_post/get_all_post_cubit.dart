@@ -20,4 +20,18 @@ class GetAllPostCubit extends Cubit<GetAllPostState> {
     postsResult.fold((l) => emit(GetAllPostError(l.toString())),
         (r) => emit(GetAllPostSuccess(r)));
   }
+
+  void filterAllPosts(String tag) async {
+    emit(GetAllPostLoading());
+    final postsResult = await post.getAllPost();
+
+    postsResult.fold((l) => emit(GetAllPostError(l.toString())), (r) {
+      final filteredText = r
+          .where((element) =>
+          element.tag!.toLowerCase().contains(tag.toLowerCase()))
+          .toList();
+      emit(GetAllPostSuccess(filteredText));
+    });
+
+  }
 }

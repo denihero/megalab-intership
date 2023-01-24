@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_tag/get_all_tag_cubit.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/theme/style.dart';
 
-class FilterWidget extends StatelessWidget {
+import '../../data/model/home_model.dart';
+
+class FilterWidget extends StatefulWidget {
   const FilterWidget({Key? key}) : super(key: key);
 
+  @override
+  State<FilterWidget> createState() => _FilterWidgetState();
+}
+
+class _FilterWidgetState extends State<FilterWidget> {
+  String? tagName;
+  int? choiceIndex;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,15 +39,9 @@ class FilterWidget extends StatelessWidget {
                           itemCount: tag.length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            return CheckboxListTile(
-                              contentPadding: EdgeInsets.zero,
-                              controlAffinity: ListTileControlAffinity.leading,
-                              title: Text(tag[index].name!),
-                              value: true,
-                              tristate: true,
-                              checkboxShape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              onChanged: (va) {},
+                            return Wrap(
+                              spacing: 10,
+                              children: techChips(index, tag),
                             );
                           }),
                     ),
@@ -60,10 +64,40 @@ class FilterWidget extends StatelessWidget {
                   'Применить',
                   style: UBUNTU_16_500_WHITE,
                 ),
-                onPressed: () {})
+                onPressed: () {
+                  context.read<GetAllPostCubit>().filterAllPosts(tagName ?? '');
+                  Navigator.pop(context);
+                })
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> techChips(int index, List<TagModel> tag) {
+    List<Widget> chips = [];
+    for (int i = 0; i < tag.length; i++) {
+      Widget item = CheckboxListTile(
+        contentPadding: EdgeInsets.zero,
+        controlAffinity: ListTileControlAffinity.leading,
+        checkboxShape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        selected: choiceIndex == i,
+        title: Text(tag[i].name!),
+        onChanged: (isSelected) {
+          setState(() {
+              if (isSelected!) {
+                choiceIndex = i;
+                tagName = tag[i].name!;
+              } else {
+              }
+            },
+          );
+        },
+        value: choiceIndex == i,
+      );
+      chips.add(item);
+    }
+    return chips;
   }
 }

@@ -39,6 +39,6 @@ class LoginCubit extends Cubit<LoginState> {
 
   String _mapFailureToMessage(DioError failure) {
     print(failure);
-    return failure.error;
+    return failure.error.toString();
   }
 }

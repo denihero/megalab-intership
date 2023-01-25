@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart';
@@ -36,11 +37,15 @@ class App extends StatelessWidget {
         BlocProvider<SearchPostCubit>(create: (_) => sl<SearchPostCubit>()),
         BlocProvider<PublishPostCubit>(create: (_) => sl<PublishPostCubit>()),
         BlocProvider<CommentPostCubit>(create: (_) => sl<CommentPostCubit>()),
-        BlocProvider<GetDetailPostCubit>(create: (_) => sl<GetDetailPostCubit>()),
+        BlocProvider<GetDetailPostCubit>(
+            create: (_) => sl<GetDetailPostCubit>()),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: RegistrationScreen(),
+        home: const RegistrationScreen(),
       ),
     );
   }

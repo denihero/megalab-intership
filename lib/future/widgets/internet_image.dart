@@ -4,7 +4,7 @@ import 'package:mega_intern/core/common/string.dart';
 import 'package:mega_intern/core/storage/storage.dart';
 import 'package:mega_intern/future/home/presentation/widget/bounce_loading.dart';
 
-class InternetImage extends StatelessWidget {
+class InternetImage extends StatefulWidget {
   const InternetImage({Key? key, required this.imageUrl, required this.width, required this.height}) : super(key: key);
 
   final String imageUrl;
@@ -12,11 +12,16 @@ class InternetImage extends StatelessWidget {
   final double height;
 
   @override
+  State<InternetImage> createState() => _InternetImageState();
+}
+
+class _InternetImageState extends State<InternetImage> {
+  @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: '$apiUrl$imageUrl',
-      width: width,
-      height: height,
+      imageUrl: '$apiUrl${widget.imageUrl}',
+      width: widget.width,
+      height: widget.height,
       fit: BoxFit.cover,
       httpHeaders: {
         'Token': '${SecureStorage.readData('mega')}'

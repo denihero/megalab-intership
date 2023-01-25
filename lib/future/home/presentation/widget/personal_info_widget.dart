@@ -49,6 +49,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
     return RepaintBoundary(
       child: ValueListenableBuilder(
         valueListenable: isEditedProfileMode,
@@ -116,7 +117,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                          width: 250,
+                          width: width / 1.7,
                           child: TextFormFieldWidget(
                             title: 'Имя',
                             controller: nameController,
@@ -130,7 +131,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                           )),
                       SizedBox(
-                          width: 250,
+                          width: width / 1.7,
                           child: TextFormFieldWidget(
                             title: 'Фамилия',
                             controller: lastNameController,
@@ -144,7 +145,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                           )),
                       SizedBox(
-                          width: 250,
+                          width: width / 1.7,
                           child: TextFormFieldWidget(
                             title: 'Никнейм',
                             controller: nicknameController,

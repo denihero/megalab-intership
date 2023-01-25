@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:mega_intern/core/error/failure.dart';
 import 'package:mega_intern/future/auth/login/data/model/login_model.dart';
 
 abstract class LoginDataSource {

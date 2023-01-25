@@ -1,7 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:mega_intern/core/error/exception.dart';
-import 'package:mega_intern/core/error/failure.dart';
 import 'package:mega_intern/future/auth/login/data/datasources/login_data_sources.dart';
 import 'package:mega_intern/future/auth/login/data/model/login_model.dart';
 import 'package:mega_intern/future/auth/login/domain/repositories/login_reposity.dart';

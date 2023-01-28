@@ -37,7 +37,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 ),
                 Text(
                   'Избранные новости',
-                  style: UBUNTU_30_500_BLACK,
+                  style: Style.UBUNTU_30_500_BLACK,
                 ),
                 SingleChildScrollView(
                   child: BlocBuilder<GetFavouriteCubit, GetFavouriteState>(
@@ -91,7 +91,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                   children: [
                                     Text(
                                       'У вас нету любимых постов',
-                                      style: UBUNTU_16_400_BLACK,
+                                      style: Style.UBUNTU_16_400_BLACK,
                                     ),
                                     const SizedBox(
                                       height: 400,

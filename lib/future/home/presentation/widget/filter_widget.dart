@@ -26,7 +26,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Фильтрация',
-                style: UBUNTU_24_500_BLACK.copyWith(fontSize: 18)),
+                style: Style.UBUNTU_24_500_BLACK.copyWith(fontSize: 18)),
             BlocBuilder<GetAllTagCubit, GetAllTagState>(
               builder: (context, state) {
                 if (state is GetAllTagSuccess) {
@@ -62,7 +62,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                   'Применить',
-                  style: UBUNTU_16_500_WHITE,
+                  style: Style.UBUNTU_16_500_WHITE,
                 ),
                 onPressed: () {
                   context.read<GetAllPostCubit>().filterAllPosts(tagName ?? '');

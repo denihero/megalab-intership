@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mega_intern/core/common/string.dart';
 import 'package:mega_intern/core/error/failure.dart';
-import 'package:mega_intern/core/storage/storage.dart';
+import 'package:mega_intern/core/network/api/dio_client.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 
 abstract class PostDataSources {
@@ -23,22 +23,14 @@ abstract class PostDataSources {
 }
 
 class PostDataSourcesImpl extends PostDataSources {
-  final Dio client;
+  final DioClient client;
 
   PostDataSourcesImpl({required this.client});
-
-  // @override
-  // Future<void> deletePost(int id) async {
-  //   print('121');
-  // }
 
   @override
   Future<List<PostModel>> getAllPosts() async {
     final List<PostModel> ls = [];
-    final response = await client.get('$apiUrl/post/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }));
+    final response = await client.getFixed('/post/');
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -54,11 +46,7 @@ class PostDataSourcesImpl extends PostDataSources {
 
   @override
   Future<void> likePost(int id) async {
-    final responseLike = await client.post('$apiUrl/like/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }),
-        data: {'post': id});
+    final responseLike = await client.postFixed('/like/', data: {'post': id});
 
     if (responseLike.statusCode! >= 400) {
       throw ServerFailure();
@@ -70,10 +58,7 @@ class PostDataSourcesImpl extends PostDataSources {
   @override
   Future<List<PostModel>> getFavourite() async {
     final List<PostModel> ls = [];
-    final response = await client.get('$apiUrl/like/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }));
+    final response = await client.getFixed('/like/');
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -89,10 +74,7 @@ class PostDataSourcesImpl extends PostDataSources {
 
   @override
   Future<UserModel> getUser() async {
-    final response = await client.get('$apiUrl/user/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }));
+    final response = await client.getFixed('/user/');
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -106,10 +88,7 @@ class PostDataSourcesImpl extends PostDataSources {
   @override
   Future<List<PostModel>> getOwnPost(String author) async {
     final List<PostModel> ls = [];
-    final response = await client.get('$apiUrl/post/?author=$author',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }));
+    final response = await client.getFixed('/post/?author=$author');
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -126,10 +105,7 @@ class PostDataSourcesImpl extends PostDataSources {
   @override
   Future<List<TagModel>> getAllTag() async {
     final List<TagModel> ls = [];
-    final response = await client.get('$apiUrl/tag/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }));
+    final response = await client.getFixed('/tag/');
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -146,10 +122,7 @@ class PostDataSourcesImpl extends PostDataSources {
   @override
   Future<List<PostModel>> searchPost(String query) async {
     final List<PostModel> ls = [];
-    final response = await client.get('$apiUrl/post/?search=$query',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }));
+    final response = await client.getFixed('/post/?search=$query');
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -173,12 +146,8 @@ class PostDataSourcesImpl extends PostDataSources {
       'tag': tag,
     });
 
-    final response = await client.post('$apiUrl/post/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}',
-          'Content-Type': 'multipart/form-data',
-        }),
-        data: postData);
+    final response = await client.postFixed('$apiUrl/post/',
+        data: postData, isFormData: true);
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();
@@ -189,12 +158,8 @@ class PostDataSourcesImpl extends PostDataSources {
 
   @override
   Future<void> commentPost(int id, String text) async {
-    final responseLike = await client.post('$apiUrl/comment/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}',
-          'Content-Type': 'application/json',
-        }),
-        data: {'post': id, 'text': text});
+    final responseLike = await client
+        .postFixed('$apiUrl/comment/', data: {'post': id, 'text': text});
 
     if (responseLike.statusCode! >= 400) {
       throw ServerFailure();
@@ -205,10 +170,7 @@ class PostDataSourcesImpl extends PostDataSources {
 
   @override
   Future<void> commentReplyPost(int id, String text, int parentId) async {
-    final responseLike = await client.post('$apiUrl/comment/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}',
-        }),
+    final responseLike = await client.postFixed('/comment/',
         data: {'post': id, 'text': text, 'parent': parentId});
 
     if (responseLike.statusCode! >= 400) {
@@ -220,10 +182,7 @@ class PostDataSourcesImpl extends PostDataSources {
 
   @override
   Future<PostModel> getDetailPost(int id) async {
-    final response = await client.get('$apiUrl/post/$id/',
-        options: Options(headers: {
-          'Authorization': 'Token ${await SecureStorage.readData('mega')}'
-        }));
+    final response = await client.getFixed('/post/$id/');
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:like_button/like_button.dart';
+import 'package:mega_intern/core/common/image.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_detail_post/get_detail_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
@@ -53,7 +54,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('31.12.2022', style: UBUNTU_16_400_GREY),
+                  Text('31.12.2022', style: Style.UBUNTU_16_400_GREY),
                   LikeButton(
                       likeBuilder: (bool isLiked) {
                         return isLiked
@@ -90,7 +91,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
               ),
               child: Text(
                 widget.post.title!,
-                style: UBUNTU_24_500_BLACK,
+                style: Style.UBUNTU_24_500_BLACK,
               ),
             ),
             Padding(
@@ -101,7 +102,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
                     : widget.post.text!,
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
-                style: UBUNTU_16_400_GREY,
+                style: Style.UBUNTU_16_400_GREY,
               ),
             ),
             Padding(
@@ -120,7 +121,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
                 },
                 child: Text(
                   'Читать дальше>>',
-                  style: UBUNTU_16_400_PURPLE.copyWith(
+                  style: Style.UBUNTU_16_400_PURPLE.copyWith(
                       decoration: TextDecoration.underline),
                 ),
               ),
@@ -128,7 +129,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: SvgIconButtonWidget(
-                icon: SvgPicture.asset('assets/icons/share.svg'),
+                icon: SvgPicture.asset(AssetsIcon.share,),
                 onPressed: () {
                   showModalBottomSheet(
                       context: context,

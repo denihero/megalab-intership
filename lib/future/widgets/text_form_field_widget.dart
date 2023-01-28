@@ -41,7 +41,7 @@ class TextFormFieldWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
             child: Text(
               title,
-              style: UBUNTU_16_400_BLACK,
+              style: Style.UBUNTU_16_400_BLACK,
             ),
           ),
           SizedBox(
@@ -64,20 +64,20 @@ class TextFormFieldWidget extends StatelessWidget {
                   suffixIcon: suffixIcon,
                   contentPadding: contentPadding,
                   border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: WHITE),
+                    borderSide: const BorderSide(color: Palette.WHITE),
                     borderRadius: BorderRadius.circular(borderRadius),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadius),
-                    borderSide: const BorderSide(color: PURPLE),
+                    borderSide: const BorderSide(color: Palette.PURPLE),
                   ),
                   disabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadius),
-                    borderSide: const BorderSide(color: GREY),
+                    borderSide: const BorderSide(color: Palette.GREY),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadius),
-                    borderSide: const BorderSide(color: PURPLE),
+                    borderSide: const BorderSide(color: Palette.PURPLE),
                   ),
                   enabled: enabled),
             ),

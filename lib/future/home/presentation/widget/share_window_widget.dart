@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mega_intern/core/common/image.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
@@ -11,7 +12,7 @@ class ShareWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 250,
-      color: WHITE,
+      color: Palette.WHITE,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,7 +23,7 @@ class ShareWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 13, bottom: 16),
                 child: Text(
                   'Поделиться',
-                  style: UBUNTU_16_400_BLACK.copyWith(
+                  style: Style.UBUNTU_16_400_BLACK.copyWith(
                       fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -40,37 +41,37 @@ class ShareWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               CircleAvatar(
-                backgroundColor: WHITE,
+                backgroundColor: Palette.WHITE,
                 radius: 30,
                 child: SvgPicture.asset(
-                  'assets/icons/telegram.svg',
+                  AssetsIcon.telegram,
                   width: 20,
                   height: 20,
                 ),
               ),
               CircleAvatar(
-                backgroundColor: BONE,
+                backgroundColor: Palette.BONE,
                 radius: 30,
                 child: SvgPicture.asset(
-                  'assets/icons/twitter.svg',
+                  AssetsIcon.twitter,
                   width: 20,
                   height: 20,
                 ),
               ),
               CircleAvatar(
-                backgroundColor: BONE,
+                backgroundColor: Palette.BONE,
                 radius: 30,
                 child: SvgPicture.asset(
-                  'assets/icons/facebook.svg',
+                  AssetsIcon.facebook,
                   width: 25,
                   height: 25,
                 ),
               ),
               CircleAvatar(
-                backgroundColor: BONE,
+                backgroundColor: Palette.BONE,
                 radius: 30,
                 child: SvgPicture.asset(
-                  'assets/icons/whats.svg',
+                  AssetsIcon.whatsapp,
                   width: 25,
                   height: 25,
                 ),
@@ -81,7 +82,7 @@ class ShareWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 13, top: 17),
             child: Text(
               'Короткая ссылка',
-              style: UBUNTU_16_400_BLACK.copyWith(
+              style: Style.UBUNTU_16_400_BLACK.copyWith(
                   fontSize: 18, fontWeight: FontWeight.w500),
             ),
           ),
@@ -107,15 +108,15 @@ class ShareWidget extends StatelessWidget {
                           color: Colors.black,
                         )),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                    fillColor: BONE,
+                    fillColor: Palette.BONE,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(
-                        color: WHITE,
+                        color: Palette.WHITE,
                       ),
                     ),
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: WHITE))),
+                        borderSide: BorderSide(color: Palette.WHITE))),
               ),
             ),
           ),

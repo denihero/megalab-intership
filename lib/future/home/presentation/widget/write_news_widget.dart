@@ -59,7 +59,7 @@ class _WriteNewsWidgetState extends State<WriteNewsWidget> {
       scrollable: true,
       content: Container(
         width: 350,
-        color: WHITE,
+        color: Palette.WHITE,
         child: BlocConsumer<PublishPostCubit, PublishPostState>(
           listener: (context, state) {
             if (state is PublishPostSuccess) {
@@ -98,17 +98,17 @@ class _WriteNewsWidgetState extends State<WriteNewsWidget> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                               elevation: MaterialStateProperty.all(0),
-                              backgroundColor: MaterialStateProperty.all(WHITE),
+                              backgroundColor: MaterialStateProperty.all(Palette.WHITE),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5),
-                                      side: const BorderSide(color: GREY)))),
+                                      side: const BorderSide(color: Palette.GREY)))),
                           onPressed: () {},
                           child: TextWithIconWidget(
                             text: 'Загрузить',
                             icon: const Icon(
                               Icons.file_download_outlined,
-                              color: BLACK,
+                              color: Palette.BLACK,
                             ),
                             onPressed: () async {
                               await pickImage();

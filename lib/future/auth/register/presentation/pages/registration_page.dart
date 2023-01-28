@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mega_intern/core/common/image.dart';
 import 'package:mega_intern/future/auth/register/presentation/bloc/register_cubit.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
@@ -45,8 +46,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         toolbarHeight: 80,
         title: SvgPicture.asset(
-          'assets/icons/megalab_icon.svg',
-          color: PURPLE,
+          AssetsIcon.megaLab,
+          color: Palette.PURPLE,
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -119,7 +120,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             PrimaryButton(
                               child: Text(
                                 'Регистрация',
-                                style: UBUNTU_16_500_WHITE,
+                                style: Style.UBUNTU_16_500_WHITE,
                               ),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
@@ -148,7 +149,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   text: TextSpan(children: [
                                 TextSpan(
                                   text: 'Уже есть логин ? ',
-                                  style: UBUNTU_13_400_BLACK,
+                                  style: Style.UBUNTU_13_400_BLACK,
                                 ),
                                 TextSpan(
                                     recognizer: TapGestureRecognizer()
@@ -161,7 +162,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         );
                                       },
                                     style: const TextStyle(
-                                        color: BLUE,
+                                        color: Palette.BLUE,
                                         decoration: TextDecoration.underline),
                                     text: 'Войти'),
                               ])),
@@ -187,7 +188,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ],
                     );
 
-                    return const SizedBox.shrink();
                   },
                 ),
               ),

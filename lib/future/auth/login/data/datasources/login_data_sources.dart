@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:mega_intern/core/network/api/dio_client.dart';
 import 'package:mega_intern/future/auth/login/data/model/login_model.dart';
 
 abstract class LoginDataSource {
@@ -7,22 +7,17 @@ abstract class LoginDataSource {
 }
 
 class LoginDataSourceImpl extends LoginDataSource {
-  final Dio client;
+  final DioClient client;
 
   LoginDataSourceImpl({required this.client});
 
   @override
   Future<LoginModel> login(
       {required String nickname, required String password}) async {
-    final response =
-        await client.post('https://megalab.pythonanywhere.com/login/',
-            options: Options(headers: {
-              'Content-Type': 'application/json',
-            }),
-            data: {
-          'nickname': nickname,
-          'password': password,
-        });
+    final response = await client.postFixed('/login/', data: {
+      'nickname': nickname,
+      'password': password,
+    });
 
     if (response.statusCode! == 400) {
       print(response.data);

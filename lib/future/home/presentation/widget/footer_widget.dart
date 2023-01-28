@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mega_intern/core/common/image.dart';
 import 'package:mega_intern/future/home/presentation/pages/favourite_page.dart';
 import 'package:mega_intern/future/home/presentation/pages/profile_page.dart';
 import 'package:mega_intern/theme/palette.dart';
@@ -13,14 +14,14 @@ class FooterWidget extends StatelessWidget {
     return Container(
       width: 500,
       height: 150,
-      color: SOFT_BLACK,
+      color: Palette.SOFT_BLACK,
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 35),
             child: SvgPicture.asset(
-              'assets/icons/megalab_icon.svg',
-              color: WHITE,
+              AssetsIcon.megaLab,
+              color: Palette.WHITE,
             ),
           ),
           const SizedBox(
@@ -32,7 +33,7 @@ class FooterWidget extends StatelessWidget {
             children: [
               TextButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(WHITE),
+                  foregroundColor: MaterialStateProperty.all(Palette.WHITE),
                 ),
                 onPressed: () {
                   Navigator.push(context,
@@ -40,12 +41,12 @@ class FooterWidget extends StatelessWidget {
                 },
                 child: Text(
                   'Мой профиль',
-                  style: UBUNTU_16_400_BLACK.copyWith(color: WHITE),
+                  style: Style.UBUNTU_16_400_BLACK.copyWith(color: Palette.WHITE),
                 ),
               ),
               TextButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(WHITE),
+                  foregroundColor: MaterialStateProperty.all(Palette.WHITE),
                 ),
                 onPressed: () {
                   Navigator.pushReplacement(
@@ -55,7 +56,7 @@ class FooterWidget extends StatelessWidget {
                 },
                 child: Text(
                   'Избранные новости',
-                  style: UBUNTU_16_400_BLACK.copyWith(color: WHITE),
+                  style: Style.UBUNTU_16_400_BLACK.copyWith(color: Palette.WHITE),
                 ),
               ),
             ],

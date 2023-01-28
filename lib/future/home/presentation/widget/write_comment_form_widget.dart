@@ -57,11 +57,11 @@ class _WriteCommentFormWidgetState extends State<WriteCommentFormWidget> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12), color: PURPLE),
+                borderRadius: BorderRadius.circular(12), color: Palette.PURPLE),
             child: const Center(
               child: Icon(
                 Icons.arrow_upward_sharp,
-                color: WHITE,
+                color: Palette.WHITE,
               ),
             ),
           ),

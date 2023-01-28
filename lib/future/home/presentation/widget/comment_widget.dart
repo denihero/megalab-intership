@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/presentation/bloc/comment_post/comment_post_cubit.dart';
-import 'package:mega_intern/future/home/presentation/widget/write_comment_form_widget.dart';
 
 import '../../../../theme/palette.dart';
 import '../../../../theme/style.dart';
@@ -47,7 +46,7 @@ class _CommentWidgetState extends State<CommentWidget> {
           SizedBox(
               width: 395,
               child:
-                  Text(widget.commentModel.text!, style: UBUNTU_16_400_GREY)),
+                  Text(widget.commentModel.text!, style: Style.UBUNTU_16_400_GREY)),
           const SizedBox(
             height: 2,
           ),
@@ -58,7 +57,7 @@ class _CommentWidgetState extends State<CommentWidget> {
               children: [
                 Text(
                   '30.11.2022',
-                  style: UBUNTU_16_400_GREY,
+                  style: Style.UBUNTU_16_400_GREY,
                 ),
                 widget.commentModel.child != null
                     ? TextButton(
@@ -67,7 +66,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         },
                         child: Text(
                           'Ответить',
-                          style: UBUNTU_16_400_PURPLE.copyWith(
+                          style: Style.UBUNTU_16_400_PURPLE.copyWith(
                               decoration: TextDecoration.underline),
                         ),
                       )
@@ -83,7 +82,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                     children: [
                       Text(
                         'Вы',
-                        style: UBUNTU_24_500_BLACK.copyWith(fontSize: 18),
+                        style: Style.UBUNTU_24_500_BLACK.copyWith(fontSize: 18),
                       ),
                       const SizedBox(
                         width: 15,
@@ -123,11 +122,11 @@ class _CommentWidgetState extends State<CommentWidget> {
                           height: 30,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: PURPLE),
+                              color: Palette.PURPLE),
                           child: const Center(
                             child: Icon(
                               Icons.arrow_upward_sharp,
-                              color: WHITE,
+                              color: Palette.WHITE,
                               size: 20,
                             ),
                           ),

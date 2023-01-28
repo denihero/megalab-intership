@@ -1,7 +1,7 @@
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mega_intern/core/error/failure.dart';
+import 'package:mega_intern/core/network/api/dio_client.dart';
 import 'package:mega_intern/future/auth/register/data/model/user_model.dart';
 
 abstract class RegisterDataSource {
@@ -14,7 +14,7 @@ abstract class RegisterDataSource {
 }
 
 class RegisterDataSourceImpl extends RegisterDataSource {
-  final Dio client;
+  final DioClient client;
 
   RegisterDataSourceImpl({required this.client});
 
@@ -33,14 +33,8 @@ class RegisterDataSourceImpl extends RegisterDataSource {
       'password': password,
       'password2': password2,
     });
-    final response =
-        await client.post('https://megalab.pythonanywhere.com/registration/',
-            options: Options(
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            ),
-            data: userData);
+    final response = await client.postFixed('/registration/',
+        data: userData, isFormData: true);
 
     if (response.statusCode! >= 400) {
       throw ServerFailure();

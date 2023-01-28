@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:like_button/like_button.dart';
+import 'package:mega_intern/core/common/image.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
 import 'package:mega_intern/future/home/presentation/bloc/comment_post/comment_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
@@ -68,12 +69,12 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
             elevation: 0,
             automaticallyImplyLeading: false,
             title: SvgPicture.asset(
-              'assets/icons/megalab_icon.svg',
-              color: WHITE,
+              AssetsIcon.megaLab,
+              color: Palette.WHITE,
             ),
             actions: [
               SvgIconButtonWidget(
-                icon: SvgPicture.asset('assets/icons/search.svg'),
+                icon: SvgPicture.asset(AssetsIcon.search,),
                 onPressed: () {
                   showDialog(
                       context: context,
@@ -83,14 +84,14 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
                 },
               ),
               SvgIconButtonWidget(
-                icon: SvgPicture.asset('assets/icons/profile.svg'),
+                icon: SvgPicture.asset(AssetsIcon.profile,),
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const ProfileScreen()));
                 },
               ),
               SvgIconButtonWidget(
-                icon: SvgPicture.asset('assets/icons/menu.svg'),
+                icon: SvgPicture.asset(AssetsIcon.menu,),
                 onPressed: () {
                   context.read<GetAllPostCubit>().getAllPosts();
                   context.read<GetFavouriteCubit>().getFavourite();
@@ -101,7 +102,7 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/background_news.png'),
+                    image: AssetImage(AssetsIcon.news,),
                     fit: BoxFit.cover),
               ),
               child: const Align(
@@ -125,7 +126,7 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
                   padding: const EdgeInsets.only(top: 24, left: 20, bottom: 8),
                   child: SvgIconButtonWidget(
                     padding: EdgeInsets.zero,
-                    icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+                    icon: SvgPicture.asset(AssetsIcon.arrowLeft,),
                     onPressed: () {
                       Navigator.pop(context);
                       context.read<GetFavouriteCubit>().getFavourite();
@@ -155,7 +156,7 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
                                 children: [
                                   Text(
                                     '29.11.2022',
-                                    style: UBUNTU_16_400_GREY,
+                                    style: Style.UBUNTU_16_400_GREY,
                                   ),
                                   LikeButton(
                                       likeBuilder: (bool isLiked) {
@@ -187,11 +188,11 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
                                   alignment: Alignment.topLeft,
                                   child: Text(
                                     'Заголовок новости',
-                                    style: UBUNTU_24_500_BLACK,
+                                    style: Style.UBUNTU_24_500_BLACK,
                                   )),
                               Text(
                                 '''$topText''',
-                                style: UBUNTU_16_400_GREY,
+                                style: Style.UBUNTU_16_400_GREY,
                               ),
                               const SizedBox(
                                 height: 10,
@@ -205,7 +206,7 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
                               ),
                               Text(
                                 '''$bottomText''',
-                                style: UBUNTU_16_400_GREY,
+                                style: Style.UBUNTU_16_400_GREY,
                               ),
                               const SizedBox(
                                 height: 20,
@@ -214,7 +215,7 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
                                 padding:
                                     const EdgeInsets.only(top: 10, bottom: 10),
                                 icon: SvgPicture.asset(
-                                  'assets/icons/share.svg',
+                                  AssetsIcon.share,
                                   width: 24,
                                   height: 24,
                                 ),
@@ -231,7 +232,7 @@ class _DetailScreenState extends State<DetailScreen> with AutomaticKeepAliveClie
                               ),
                               Text(
                                 'Комментарий',
-                                style: UBUNTU_24_500_BLACK,
+                                style: Style.UBUNTU_24_500_BLACK,
                               ),
                               const SizedBox(
                                 height: 20,

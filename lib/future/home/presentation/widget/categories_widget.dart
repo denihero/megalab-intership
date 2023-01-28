@@ -25,18 +25,18 @@ class _FilterSortButtonState extends State<FilterSortButton> {
       height: 35,
       width: 400,
       decoration: BoxDecoration(
-          border: Border.all(color: GREY),
+          border: Border.all(color: Palette.GREY),
           borderRadius: BorderRadius.circular(5)),
       child: BlocBuilder<GetAllTagCubit, GetAllTagState>(
         builder: (context, state) {
           if (state is GetAllTagSuccess) {
             final List<TagModel> list = state.allTag;
             return DropdownButton<String>(
-              dropdownColor: WHITE,
+              dropdownColor: Palette.WHITE,
               elevation: 5,
               underline: const SizedBox(),
-              style: UBUNTU_15_500_BLACK,
-              iconEnabledColor: BLACK,
+              style: Style.UBUNTU_15_500_BLACK,
+              iconEnabledColor: Palette.BLACK,
               alignment: const Alignment(-0.9, 0.6),
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               icon: Transform.translate(

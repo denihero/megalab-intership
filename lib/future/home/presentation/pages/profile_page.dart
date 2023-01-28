@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Text(
                       'Мои публикаций',
-                      style: UBUNTU_24_500_BLACK,
+                      style: Style.UBUNTU_24_500_BLACK,
                     ),
                     SizedBox(
                       width: 70,
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         : Center(
                             child: Text(
                               'У вас нету своих статей',
-                              style: UBUNTU_16_400_BLACK,
+                              style: Style.UBUNTU_16_400_BLACK,
                             ),
                           );
                   } else if (state is GetOwnPostLoading) {

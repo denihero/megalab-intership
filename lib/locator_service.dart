@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mega_intern/core/network/api/dio_client.dart';
 import 'package:mega_intern/future/auth/login/data/datasources/login_data_sources.dart';
 import 'package:mega_intern/future/auth/login/data/repositories/login_repository_impl.dart';
 import 'package:mega_intern/future/auth/login/domain/repositories/login_reposity.dart';
@@ -28,10 +28,10 @@ import 'future/home/data/datasources/post_data_sources.dart';
 
 final sl = GetIt.instance;
 init() {
-  final dio = Dio();
+  final DioClient dio = DioClient();
   //BloC and Cubit
   sl.registerFactory(() => RegisterCubit(sl()));
-  sl.registerFactory(() => LoginCubit(sl(),));
+  sl.registerFactory(() => LoginCubit(sl()));
   sl.registerFactory(() => GetAllPostCubit(sl()));
   sl.registerFactory(() => LikePostCubit(sl()));
   sl.registerFactory(() => GetFavouriteCubit(sl()));
@@ -50,11 +50,14 @@ init() {
 
   //Service
   sl.registerLazySingleton<RegisterDataSource>(
-      () => RegisterDataSourceImpl(client: dio));
+    () => RegisterDataSourceImpl(client: dio),
+  );
   sl.registerLazySingleton<LoginDataSource>(
-      () => LoginDataSourceImpl(client: dio));
+    () => LoginDataSourceImpl(client: dio),
+  );
   sl.registerLazySingleton<PostDataSources>(
-      () => PostDataSourcesImpl(client: dio));
+    () => PostDataSourcesImpl(client: dio),
+  );
 
   //Repositories
   sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl()));

@@ -13,6 +13,7 @@ import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
+import '../../../../core/common/image.dart';
 import '../bloc/get_all_tag/get_all_tag_cubit.dart';
 import '../widget/burger_menu_widget.dart';
 import 'profile_page.dart';
@@ -37,12 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
           automaticallyImplyLeading: false,
           title: SvgPicture.asset(
-            'assets/icons/megalab_icon.svg',
-            color: WHITE,
+            AssetsIcon.megaLab,
+            color: Palette.WHITE,
           ),
           actions: [
             SvgIconButtonWidget(
-              icon: SvgPicture.asset('assets/icons/search.svg'),
+              icon: SvgPicture.asset(AssetsIcon.search),
               onPressed: () {
                 showSearch(
                   context: context,
@@ -51,14 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             SvgIconButtonWidget(
-              icon: SvgPicture.asset('assets/icons/profile.svg'),
+              icon: SvgPicture.asset(AssetsIcon.profile),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const ProfileScreen()));
               },
             ),
             SvgIconButtonWidget(
-              icon: SvgPicture.asset('assets/icons/menu.svg'),
+              icon: SvgPicture.asset(AssetsIcon.menu),
               onPressed: () {
                 _scaffoldKey.currentState!.openEndDrawer();
               },
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/images/background_news.png'),
+                  image: AssetImage(AssetsIcon.news),
                   fit: BoxFit.cover),
             ),
             child: Align(
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(bottom: 17),
                   child: Text(
                     'Новости',
-                    style: UBUNTU_42_400_WHITE.copyWith(
+                    style: Style.UBUNTU_42_400_WHITE.copyWith(
                         fontWeight: FontWeight.w500),
                   ),
                 )),
@@ -100,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SvgIconButtonWidget(
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                  icon: SvgPicture.asset('assets/icons/sliders.svg'),
+                  icon: SvgPicture.asset(AssetsIcon.sliders),
                   onPressed: () {
                     showDialog(
                         context: context,
@@ -162,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              FooterWidget(),
+              const FooterWidget(),
             ],
           ),
         ),

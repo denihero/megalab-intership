@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/core/common/image.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
 
 import '../../../../theme/palette.dart';
@@ -22,8 +23,8 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget  {
       title: SvgIconButtonWidget(
         padding: EdgeInsets.zero,
         icon: SvgPicture.asset(
-          'assets/icons/megalab_icon.svg',
-          color: PURPLE,
+          AssetsIcon.megaLab,
+          color: Palette.PURPLE,
         ),
         onPressed: () {
           Navigator.pushReplacement(
@@ -33,15 +34,15 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget  {
       actions: [
         SvgIconButtonWidget(
           icon: SvgPicture.asset(
-            'assets/icons/search.svg',
-            color: PURPLE,
+            AssetsIcon.search,
+            color: Palette.PURPLE,
           ),
           onPressed: () {},
         ),
         SvgIconButtonWidget(
           icon: SvgPicture.asset(
-            'assets/icons/profile.svg',
-            color: PURPLE,
+            AssetsIcon.profile,
+            color: Palette.PURPLE,
           ),
           onPressed: () {
             Navigator.pushReplacement(context,
@@ -50,8 +51,8 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget  {
         ),
         SvgIconButtonWidget(
           icon: SvgPicture.asset(
-            'assets/icons/menu.svg',
-            color: PURPLE,
+            AssetsIcon.menu,
+            color: Palette.PURPLE,
           ),
           onPressed: () {
             drawerKey.currentState!.openEndDrawer();

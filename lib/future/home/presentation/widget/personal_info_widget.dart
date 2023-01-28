@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:mega_intern/core/common/string.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
-import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'package:mega_intern/future/widgets/primary_button.dart';
 import 'package:mega_intern/future/widgets/text_form_field_widget.dart';
 import 'package:mega_intern/future/widgets/text_with_icon_widget.dart';
@@ -92,22 +90,11 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                           text: 'Удалить',
                           icon: const Icon(
                             Icons.delete_outline,
-                            color: RED,
+                            color: Palette.RED,
                           ),
                           onPressed: () {},
                         ),
                       ),
-                      // TextButton(
-                      //     style: ButtonStyle(
-                      //         padding:
-                      //             MaterialStateProperty.all(EdgeInsets.zero),
-                      //         foregroundColor:
-                      //             MaterialStateProperty.all(BLACK)),
-                      //     onPressed: () {
-                      //       isEditedProfileMode.value =
-                      //           !isEditedProfileMode.value;
-                      //     },
-                      //     child: const Text('Edit Profile')),
                     ],
                   ),
                   const SizedBox(

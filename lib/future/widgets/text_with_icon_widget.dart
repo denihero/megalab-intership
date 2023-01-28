@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
 class TextWithIconWidget extends StatelessWidget {
@@ -21,7 +20,7 @@ class TextWithIconWidget extends StatelessWidget {
         children: [
           Text(
             text,
-            style: UBUNTU_13_400_BLACK.copyWith(fontSize: 14),
+            style: Style.UBUNTU_13_400_BLACK.copyWith(fontSize: 14),
           ),
           const SizedBox(
             width: 5,

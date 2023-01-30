@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_intern/future/home/data/model/home_model.dart';
+import 'package:mega_intern/future/home/presentation/bloc/comment_post/comment_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/widget/comment_widget.dart';
+import 'package:mega_intern/locator_service.dart';
 import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 

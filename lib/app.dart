@@ -26,7 +26,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<RegisterCubit>(create: (_) => sl<RegisterCubit>()),
         BlocProvider<LoginCubit>(create: (_) => sl<LoginCubit>()),
         BlocProvider<GetAllPostCubit>(create: (_) => sl<GetAllPostCubit>()),
         BlocProvider<LikePostCubit>(create: (_) => sl<LikePostCubit>()),
@@ -35,8 +34,6 @@ class App extends StatelessWidget {
         BlocProvider<GetOwnPostCubit>(create: (_) => sl<GetOwnPostCubit>()),
         BlocProvider<GetAllTagCubit>(create: (_) => sl<GetAllTagCubit>()),
         BlocProvider<SearchPostCubit>(create: (_) => sl<SearchPostCubit>()),
-        BlocProvider<PublishPostCubit>(create: (_) => sl<PublishPostCubit>()),
-        BlocProvider<CommentPostCubit>(create: (_) => sl<CommentPostCubit>()),
         BlocProvider<GetDetailPostCubit>(
             create: (_) => sl<GetDetailPostCubit>()),
       ],

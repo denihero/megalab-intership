@@ -71,7 +71,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
                       },
                       size: 35,
                       padding: const EdgeInsets.only(top: 10, right: 10),
-                      isLiked: widget.post.is_liked,
+                      isLiked: widget.post.isLiked,
                       onTap: (isFav) async {
                         await context
                             .read<LikePostCubit>()

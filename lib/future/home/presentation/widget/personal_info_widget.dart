@@ -31,7 +31,7 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
       nicknameController =
           TextEditingController(text: widget.userModel!.nickname);
       lastNameController =
-          TextEditingController(text: widget.userModel!.last_name);
+          TextEditingController(text: widget.userModel!.lastName);
     }
 
     super.initState();
@@ -61,16 +61,16 @@ class _PersonalInfoWidgetState extends State<PersonalInfoWidget> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      widget.userModel?.profile_image != null
+                      widget.userModel?.profileImage != null
                           ? CircleAvatar(
                               radius: 65,
                               backgroundColor: Colors.transparent,
                               backgroundImage: NetworkImage(
-                                  '$apiUrl${widget.userModel!.profile_image!}'),
+                                  '$apiUrl${widget.userModel!.profileImage!}'),
                             )
                           : ProfilePicture(
                               name:
-                                  '${widget.userModel!.name} ${widget.userModel!.last_name}',
+                                  '${widget.userModel!.name} ${widget.userModel!.lastName}',
                               radius: 65,
                               fontsize: 40),
                       const SizedBox(

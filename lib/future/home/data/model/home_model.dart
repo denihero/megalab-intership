@@ -12,7 +12,8 @@ class PostModel extends PostEntity with _$PostModel {
     String? title,
     String? text,
     String? image,
-    bool? is_liked,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'is_liked') bool? isLiked,
     List<CommentModel?>? comment,
     String? shortDesc,
     String? author,
@@ -41,8 +42,10 @@ class UserModel extends UserEntity with _$UserModel {
     int? id,
     String? nickname,
     String? name,
-    String? last_name,
-    String? profile_image,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'last_name') String? lastName,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'profile_image') String? profileImage,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

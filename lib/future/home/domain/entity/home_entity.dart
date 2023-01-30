@@ -5,7 +5,7 @@ class PostEntity {
     this.title,
     this.text,
     this.image,
-    this.is_liked,
+    this.isLiked,
     this.comment,
     this.shortDesc,
     this.author,
@@ -16,7 +16,7 @@ class PostEntity {
   final String? title;
   final String? text;
   final String? image;
-  final bool? is_liked;
+  final bool? isLiked;
   final List<CommentEntity?>? comment;
   final String? shortDesc;
   final String? author;
@@ -41,15 +41,15 @@ class UserEntity {
     this.id,
     this.nickname,
     this.name,
-    this.last_name,
-    this.profile_image,
+    this.lastName,
+    this.profileImage,
   });
 
   final int? id;
   final String? nickname;
   final String? name;
-  final String? last_name;
-  final String? profile_image;
+  final String? lastName;
+  final String? profileImage;
 }
 
 class TagEntity {

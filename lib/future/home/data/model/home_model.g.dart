@@ -12,7 +12,7 @@ _$_HomeModel _$$_HomeModelFromJson(Map<String, dynamic> json) => _$_HomeModel(
       title: json['title'] as String?,
       text: json['text'] as String?,
       image: json['image'] as String?,
-      is_liked: json['is_liked'] as bool?,
+      isLiked: json['is_liked'] as bool?,
       comment: (json['comment'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
@@ -29,7 +29,7 @@ Map<String, dynamic> _$$_HomeModelToJson(_$_HomeModel instance) =>
       'title': instance.title,
       'text': instance.text,
       'image': instance.image,
-      'is_liked': instance.is_liked,
+      'is_liked': instance.isLiked,
       'comment': instance.comment,
       'shortDesc': instance.shortDesc,
       'author': instance.author,
@@ -61,8 +61,8 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       id: json['id'] as int?,
       nickname: json['nickname'] as String?,
       name: json['name'] as String?,
-      last_name: json['last_name'] as String?,
-      profile_image: json['profile_image'] as String?,
+      lastName: json['last_name'] as String?,
+      profileImage: json['profile_image'] as String?,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -70,8 +70,8 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'id': instance.id,
       'nickname': instance.nickname,
       'name': instance.name,
-      'last_name': instance.last_name,
-      'profile_image': instance.profile_image,
+      'last_name': instance.lastName,
+      'profile_image': instance.profileImage,
     };
 
 _$_TagModel _$$_TagModelFromJson(Map<String, dynamic> json) => _$_TagModel(

@@ -21,9 +21,13 @@ RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RegisterModel {
   int? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get last_name => throw _privateConstructorUsedError;
-  String? get profile_image => throw _privateConstructorUsedError;
+  String? get name =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: 'last_name')
+  String? get lastName =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: 'profile_image')
+  String? get profileImage => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,8 +45,8 @@ abstract class $RegisterModelCopyWith<$Res> {
   $Res call(
       {int? id,
       String? name,
-      String? last_name,
-      String? profile_image,
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'profile_image') String? profileImage,
       String? username});
 }
 
@@ -61,8 +65,8 @@ class _$RegisterModelCopyWithImpl<$Res, $Val extends RegisterModel>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? last_name = freezed,
-    Object? profile_image = freezed,
+    Object? lastName = freezed,
+    Object? profileImage = freezed,
     Object? username = freezed,
   }) {
     return _then(_value.copyWith(
@@ -74,13 +78,13 @@ class _$RegisterModelCopyWithImpl<$Res, $Val extends RegisterModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      last_name: freezed == last_name
-          ? _value.last_name
-          : last_name // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile_image: freezed == profile_image
-          ? _value.profile_image
-          : profile_image // ignore: cast_nullable_to_non_nullable
+      profileImage: freezed == profileImage
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
               as String?,
       username: freezed == username
           ? _value.username
@@ -101,8 +105,8 @@ abstract class _$$_UserModelCopyWith<$Res>
   $Res call(
       {int? id,
       String? name,
-      String? last_name,
-      String? profile_image,
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'profile_image') String? profileImage,
       String? username});
 }
 
@@ -119,8 +123,8 @@ class __$$_UserModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? last_name = freezed,
-    Object? profile_image = freezed,
+    Object? lastName = freezed,
+    Object? profileImage = freezed,
     Object? username = freezed,
   }) {
     return _then(_$_UserModel(
@@ -132,13 +136,13 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      last_name: freezed == last_name
-          ? _value.last_name
-          : last_name // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile_image: freezed == profile_image
-          ? _value.profile_image
-          : profile_image // ignore: cast_nullable_to_non_nullable
+      profileImage: freezed == profileImage
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
               as String?,
       username: freezed == username
           ? _value.username
@@ -152,7 +156,11 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   const _$_UserModel(
-      {this.id, this.name, this.last_name, this.profile_image, this.username});
+      {this.id,
+      this.name,
+      @JsonKey(name: 'last_name') this.lastName,
+      @JsonKey(name: 'profile_image') this.profileImage,
+      this.username});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -161,16 +169,20 @@ class _$_UserModel implements _UserModel {
   final int? id;
   @override
   final String? name;
+// ignore: invalid_annotation_target
   @override
-  final String? last_name;
+  @JsonKey(name: 'last_name')
+  final String? lastName;
+// ignore: invalid_annotation_target
   @override
-  final String? profile_image;
+  @JsonKey(name: 'profile_image')
+  final String? profileImage;
   @override
   final String? username;
 
   @override
   String toString() {
-    return 'RegisterModel(id: $id, name: $name, last_name: $last_name, profile_image: $profile_image, username: $username)';
+    return 'RegisterModel(id: $id, name: $name, lastName: $lastName, profileImage: $profileImage, username: $username)';
   }
 
   @override
@@ -180,10 +192,10 @@ class _$_UserModel implements _UserModel {
             other is _$_UserModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.last_name, last_name) ||
-                other.last_name == last_name) &&
-            (identical(other.profile_image, profile_image) ||
-                other.profile_image == profile_image) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.profileImage, profileImage) ||
+                other.profileImage == profileImage) &&
             (identical(other.username, username) ||
                 other.username == username));
   }
@@ -191,7 +203,7 @@ class _$_UserModel implements _UserModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, last_name, profile_image, username);
+      Object.hash(runtimeType, id, name, lastName, profileImage, username);
 
   @JsonKey(ignore: true)
   @override
@@ -211,8 +223,8 @@ abstract class _UserModel implements RegisterModel {
   const factory _UserModel(
       {final int? id,
       final String? name,
-      final String? last_name,
-      final String? profile_image,
+      @JsonKey(name: 'last_name') final String? lastName,
+      @JsonKey(name: 'profile_image') final String? profileImage,
       final String? username}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -222,10 +234,12 @@ abstract class _UserModel implements RegisterModel {
   int? get id;
   @override
   String? get name;
-  @override
-  String? get last_name;
-  @override
-  String? get profile_image;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'last_name')
+  String? get lastName;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'profile_image')
+  String? get profileImage;
   @override
   String? get username;
   @override

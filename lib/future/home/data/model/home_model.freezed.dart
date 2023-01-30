@@ -24,8 +24,10 @@ mixin _$PostModel {
   String? get tag => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
-  bool? get is_liked => throw _privateConstructorUsedError;
+  String? get image =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: 'is_liked')
+  bool? get isLiked => throw _privateConstructorUsedError;
   List<CommentModel?>? get comment => throw _privateConstructorUsedError;
   String? get shortDesc => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
@@ -47,7 +49,7 @@ abstract class $PostModelCopyWith<$Res> {
       String? title,
       String? text,
       String? image,
-      bool? is_liked,
+      @JsonKey(name: 'is_liked') bool? isLiked,
       List<CommentModel?>? comment,
       String? shortDesc,
       String? author});
@@ -71,7 +73,7 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
     Object? title = freezed,
     Object? text = freezed,
     Object? image = freezed,
-    Object? is_liked = freezed,
+    Object? isLiked = freezed,
     Object? comment = freezed,
     Object? shortDesc = freezed,
     Object? author = freezed,
@@ -97,9 +99,9 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      is_liked: freezed == is_liked
-          ? _value.is_liked
-          : is_liked // ignore: cast_nullable_to_non_nullable
+      isLiked: freezed == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
               as bool?,
       comment: freezed == comment
           ? _value.comment
@@ -130,7 +132,7 @@ abstract class _$$_HomeModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
       String? title,
       String? text,
       String? image,
-      bool? is_liked,
+      @JsonKey(name: 'is_liked') bool? isLiked,
       List<CommentModel?>? comment,
       String? shortDesc,
       String? author});
@@ -152,7 +154,7 @@ class __$$_HomeModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? text = freezed,
     Object? image = freezed,
-    Object? is_liked = freezed,
+    Object? isLiked = freezed,
     Object? comment = freezed,
     Object? shortDesc = freezed,
     Object? author = freezed,
@@ -178,9 +180,9 @@ class __$$_HomeModelCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      is_liked: freezed == is_liked
-          ? _value.is_liked
-          : is_liked // ignore: cast_nullable_to_non_nullable
+      isLiked: freezed == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
               as bool?,
       comment: freezed == comment
           ? _value._comment
@@ -207,7 +209,7 @@ class _$_HomeModel implements _HomeModel {
       this.title,
       this.text,
       this.image,
-      this.is_liked,
+      @JsonKey(name: 'is_liked') this.isLiked,
       final List<CommentModel?>? comment,
       this.shortDesc,
       this.author})
@@ -226,8 +228,10 @@ class _$_HomeModel implements _HomeModel {
   final String? text;
   @override
   final String? image;
+// ignore: invalid_annotation_target
   @override
-  final bool? is_liked;
+  @JsonKey(name: 'is_liked')
+  final bool? isLiked;
   final List<CommentModel?>? _comment;
   @override
   List<CommentModel?>? get comment {
@@ -245,7 +249,7 @@ class _$_HomeModel implements _HomeModel {
 
   @override
   String toString() {
-    return 'PostModel(id: $id, tag: $tag, title: $title, text: $text, image: $image, is_liked: $is_liked, comment: $comment, shortDesc: $shortDesc, author: $author)';
+    return 'PostModel(id: $id, tag: $tag, title: $title, text: $text, image: $image, isLiked: $isLiked, comment: $comment, shortDesc: $shortDesc, author: $author)';
   }
 
   @override
@@ -258,8 +262,7 @@ class _$_HomeModel implements _HomeModel {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.is_liked, is_liked) ||
-                other.is_liked == is_liked) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
             const DeepCollectionEquality().equals(other._comment, _comment) &&
             (identical(other.shortDesc, shortDesc) ||
                 other.shortDesc == shortDesc) &&
@@ -275,7 +278,7 @@ class _$_HomeModel implements _HomeModel {
       title,
       text,
       image,
-      is_liked,
+      isLiked,
       const DeepCollectionEquality().hash(_comment),
       shortDesc,
       author);
@@ -301,7 +304,7 @@ abstract class _HomeModel implements PostModel {
       final String? title,
       final String? text,
       final String? image,
-      final bool? is_liked,
+      @JsonKey(name: 'is_liked') final bool? isLiked,
       final List<CommentModel?>? comment,
       final String? shortDesc,
       final String? author}) = _$_HomeModel;
@@ -319,8 +322,9 @@ abstract class _HomeModel implements PostModel {
   String? get text;
   @override
   String? get image;
-  @override
-  bool? get is_liked;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'is_liked')
+  bool? get isLiked;
   @override
   List<CommentModel?>? get comment;
   @override
@@ -558,9 +562,13 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 mixin _$UserModel {
   int? get id => throw _privateConstructorUsedError;
   String? get nickname => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get last_name => throw _privateConstructorUsedError;
-  String? get profile_image => throw _privateConstructorUsedError;
+  String? get name =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: 'last_name')
+  String? get lastName =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: 'profile_image')
+  String? get profileImage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -577,8 +585,8 @@ abstract class $UserModelCopyWith<$Res> {
       {int? id,
       String? nickname,
       String? name,
-      String? last_name,
-      String? profile_image});
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'profile_image') String? profileImage});
 }
 
 /// @nodoc
@@ -597,8 +605,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = freezed,
     Object? nickname = freezed,
     Object? name = freezed,
-    Object? last_name = freezed,
-    Object? profile_image = freezed,
+    Object? lastName = freezed,
+    Object? profileImage = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -613,13 +621,13 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      last_name: freezed == last_name
-          ? _value.last_name
-          : last_name // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile_image: freezed == profile_image
-          ? _value.profile_image
-          : profile_image // ignore: cast_nullable_to_non_nullable
+      profileImage: freezed == profileImage
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -636,8 +644,8 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       {int? id,
       String? nickname,
       String? name,
-      String? last_name,
-      String? profile_image});
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'profile_image') String? profileImage});
 }
 
 /// @nodoc
@@ -654,8 +662,8 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? nickname = freezed,
     Object? name = freezed,
-    Object? last_name = freezed,
-    Object? profile_image = freezed,
+    Object? lastName = freezed,
+    Object? profileImage = freezed,
   }) {
     return _then(_$_UserModel(
       id: freezed == id
@@ -670,13 +678,13 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      last_name: freezed == last_name
-          ? _value.last_name
-          : last_name // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      profile_image: freezed == profile_image
-          ? _value.profile_image
-          : profile_image // ignore: cast_nullable_to_non_nullable
+      profileImage: freezed == profileImage
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -686,7 +694,11 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   const _$_UserModel(
-      {this.id, this.nickname, this.name, this.last_name, this.profile_image});
+      {this.id,
+      this.nickname,
+      this.name,
+      @JsonKey(name: 'last_name') this.lastName,
+      @JsonKey(name: 'profile_image') this.profileImage});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -697,14 +709,18 @@ class _$_UserModel implements _UserModel {
   final String? nickname;
   @override
   final String? name;
+// ignore: invalid_annotation_target
   @override
-  final String? last_name;
+  @JsonKey(name: 'last_name')
+  final String? lastName;
+// ignore: invalid_annotation_target
   @override
-  final String? profile_image;
+  @JsonKey(name: 'profile_image')
+  final String? profileImage;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, nickname: $nickname, name: $name, last_name: $last_name, profile_image: $profile_image)';
+    return 'UserModel(id: $id, nickname: $nickname, name: $name, lastName: $lastName, profileImage: $profileImage)';
   }
 
   @override
@@ -716,16 +732,16 @@ class _$_UserModel implements _UserModel {
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.last_name, last_name) ||
-                other.last_name == last_name) &&
-            (identical(other.profile_image, profile_image) ||
-                other.profile_image == profile_image));
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.profileImage, profileImage) ||
+                other.profileImage == profileImage));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, nickname, name, last_name, profile_image);
+      Object.hash(runtimeType, id, nickname, name, lastName, profileImage);
 
   @JsonKey(ignore: true)
   @override
@@ -743,11 +759,12 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {final int? id,
-      final String? nickname,
-      final String? name,
-      final String? last_name,
-      final String? profile_image}) = _$_UserModel;
+          {final int? id,
+          final String? nickname,
+          final String? name,
+          @JsonKey(name: 'last_name') final String? lastName,
+          @JsonKey(name: 'profile_image') final String? profileImage}) =
+      _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -758,10 +775,12 @@ abstract class _UserModel implements UserModel {
   String? get nickname;
   @override
   String? get name;
-  @override
-  String? get last_name;
-  @override
-  String? get profile_image;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'last_name')
+  String? get lastName;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'profile_image')
+  String? get profileImage;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

@@ -22,22 +22,41 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  late final TextEditingController nameController;
-  late final TextEditingController surnameController;
-  late final TextEditingController nicknameController;
-  late final TextEditingController passwordController;
-  late final TextEditingController password2Controller;
+  late final TextEditingController _nameController;
+  late final TextEditingController _surnameController;
+  late final TextEditingController _nicknameController;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _password2Controller;
+  late final ScrollController _scrollController;
+  late final FocusNode _nicknameFocusNode;
+  late final FocusNode _passwordFocusNode;
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    nameController = TextEditingController();
-    surnameController = TextEditingController();
-    nicknameController = TextEditingController();
-    passwordController = TextEditingController();
-    password2Controller = TextEditingController();
+    _nameController = TextEditingController();
+    _surnameController = TextEditingController();
+    _nicknameController = TextEditingController();
+    _passwordController = TextEditingController();
+    _password2Controller = TextEditingController();
+    _scrollController = ScrollController();
+    _nicknameFocusNode = FocusNode();
+    _passwordFocusNode = FocusNode();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _surnameController.dispose();
+    _nicknameController.dispose();
+    _passwordController.dispose();
+    _password2Controller.dispose();
+    _scrollController.dispose();
+    _nicknameFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -58,7 +77,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         create: (context) => sl<RegisterCubit>(),
         child: Center(
           child: SingleChildScrollView(
-            reverse: true,
+            controller: _scrollController,
             child: Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -92,28 +111,44 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             children: [
                               TextFormFieldWidget(
                                 title: 'Имя',
-                                controller: nameController,
+                                controller: _nameController,
                                 enabled: true,
                               ),
                               TextFormFieldWidget(
                                 title: 'Фамилия',
-                                controller: surnameController,
+                                controller: _surnameController,
                                 enabled: true,
                               ),
                               TextFormFieldWidget(
                                 title: 'Никнейм',
-                                controller: nicknameController,
+                                controller: _nicknameController,
                                 enabled: true,
+                                focusNode: _nicknameFocusNode,
+                                onEditComplete: () {
+                                  _scrollController.animateTo(120,
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      curve: Curves.easeIn);
+                                  _nicknameFocusNode.nextFocus();
+                                },
                               ),
                               TextFormFieldWidget(
                                 title: 'Пароль',
-                                controller: passwordController,
+                                controller: _passwordController,
+                                focusNode: _passwordFocusNode,
                                 enabled: true,
                                 obscureText: true,
+                                onEditComplete: () {
+                                  _scrollController.animateTo(220,
+                                      duration:
+                                      const Duration(milliseconds: 200),
+                                      curve: Curves.easeIn);
+                                  _passwordFocusNode.nextFocus();
+                                },
                               ),
                               TextFormFieldWidget(
                                 title: 'Подтверждение пароля',
-                                controller: password2Controller,
+                                controller: _password2Controller,
                                 enabled: true,
                                 obscureText: true,
                               ),
@@ -127,17 +162,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    if (passwordController.text ==
-                                        password2Controller.text) {
+                                    if (_passwordController.text ==
+                                        _password2Controller.text) {
                                       context
                                           .read<RegisterCubit>()
                                           .registerCubit(
-                                              name: nameController.text,
-                                              surname: surnameController.text,
-                                              nickname: nicknameController.text,
-                                              password: passwordController.text,
+                                              name: _nameController.text,
+                                              surname: _surnameController.text,
+                                              nickname:
+                                                  _nicknameController.text,
+                                              password:
+                                                  _passwordController.text,
                                               password2:
-                                                  password2Controller.text);
+                                                  _password2Controller.text);
                                       FocusManager.instance.primaryFocus
                                           ?.unfocus();
                                     } else {

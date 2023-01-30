@@ -37,6 +37,9 @@ class App extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true
+        ),
         home: const RegistrationScreen(),
       ),
     );

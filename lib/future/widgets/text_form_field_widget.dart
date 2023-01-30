@@ -3,7 +3,7 @@ import 'package:mega_intern/theme/palette.dart';
 import 'package:mega_intern/theme/style.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  const   TextFormFieldWidget({
+  const TextFormFieldWidget({
     Key? key,
     required this.title,
     this.padding = const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
@@ -15,10 +15,15 @@ class TextFormFieldWidget extends StatelessWidget {
     this.height,
     this.borderRadius = 10,
     this.maxLines = 1,
-    this.obscureText = false, this.controller,
+    this.obscureText = false,
+    this.controller,
+    this.keys,
+    this.onEditComplete,
+    this.focusNode,
   }) : super(key: key);
 
   final String title;
+  final GlobalKey? keys;
   final EdgeInsets padding;
   final EdgeInsets contentPadding;
   final String? initialValue;
@@ -29,6 +34,8 @@ class TextFormFieldWidget extends StatelessWidget {
   final double borderRadius;
   final int? maxLines;
   final TextEditingController? controller;
+  final VoidCallback? onEditComplete;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +54,7 @@ class TextFormFieldWidget extends StatelessWidget {
           SizedBox(
             height: height,
             child: TextFormField(
+              key: keys,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
@@ -56,8 +64,10 @@ class TextFormFieldWidget extends StatelessWidget {
               controller: controller,
               keyboardType: TextInputType.multiline,
               maxLines: maxLines,
+              focusNode: focusNode,
               obscureText: obscureText,
               textInputAction: TextInputAction.next,
+              onEditingComplete: onEditComplete,
               //initialValue: controller != null ? controller?.text : (initialValue ?? ''),
               //readOnly: enabled,
               decoration: InputDecoration(

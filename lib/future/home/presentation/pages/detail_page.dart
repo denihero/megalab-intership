@@ -128,7 +128,7 @@ class _DetailScreenState extends State<DetailScreen>
           ),
         ),
         body: BlocProvider<CommentPostCubit>(
-          create: (context) => sl<CommentPostCubit>(),
+          create: (context) =>  sl<CommentPostCubit>(),
           child: SingleChildScrollView(
             child: Column(
               children: [

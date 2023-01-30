@@ -112,17 +112,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               TextFormFieldWidget(
                                 title: 'Имя',
                                 controller: _nameController,
+                                height: 45,
                                 enabled: true,
                               ),
                               TextFormFieldWidget(
                                 title: 'Фамилия',
                                 controller: _surnameController,
                                 enabled: true,
+                                height: 45,
                               ),
                               TextFormFieldWidget(
                                 title: 'Никнейм',
                                 controller: _nicknameController,
                                 enabled: true,
+                                height: 45,
                                 focusNode: _nicknameFocusNode,
                                 onEditComplete: () {
                                   _scrollController.animateTo(120,
@@ -137,6 +140,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 controller: _passwordController,
                                 focusNode: _passwordFocusNode,
                                 enabled: true,
+                                height: 45,
                                 obscureText: true,
                                 onEditComplete: () {
                                   _scrollController.animateTo(220,
@@ -150,6 +154,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 title: 'Подтверждение пароля',
                                 controller: _password2Controller,
                                 enabled: true,
+                                height: 45,
                                 obscureText: true,
                               ),
                               const SizedBox(
@@ -200,7 +205,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          Navigator.push(
+                                          Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>

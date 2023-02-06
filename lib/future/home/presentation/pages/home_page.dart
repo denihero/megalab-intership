@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mega_intern/core/storage/storage.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_all_post/get_all_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_user/get_user_cubit.dart';
@@ -16,8 +17,8 @@ import 'package:mega_intern/theme/style.dart';
 
 import '../../../../core/common/image.dart';
 import '../bloc/get_all_tag/get_all_tag_cubit.dart';
+import '../bloc/get_own_post/get_own_post_cubit.dart';
 import '../widget/burger_menu_widget.dart';
-import 'profile_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,6 +29,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  late String nickname;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      context.read<GetAllPostCubit>().getAllPosts();
+      context.read<GetFavouriteCubit>().getFavourite();
+      context.read<GetUserCubit>().getUser();
+      context.read<GetAllTagCubit>().getAllTag();
+      nickname = (await SecureStorage.readData('user'))!;
+      if (!mounted) return;
+      context.read<GetOwnPostCubit>().getOwnPostCubit(nickname);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

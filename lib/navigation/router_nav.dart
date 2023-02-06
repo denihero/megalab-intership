@@ -7,18 +7,20 @@ import 'package:mega_intern/future/home/presentation/pages/profile_page.dart';
 import 'package:auto_route/auto_route.dart';
 import '../future/auth/register/presentation/pages/registration_page.dart';
 import '../future/home/data/model/home_model.dart';
-
+import 'guard.dart';
 
 part 'router_nav.gr.dart';
 
 @AdaptiveAutoRouter(
   routes: <AutoRoute>[
     AutoRoute(page: LoginScreen),
-    AutoRoute(page: RegistrationScreen, initial: true),
-    AutoRoute(page: HomeScreen),
+    AutoRoute(page: RegistrationScreen,),
+    AutoRoute(page: HomeScreen,initial: true, guards: [AuthGuard]),
     AutoRoute(page: FavouriteScreen),
     AutoRoute(page: ProfileScreen),
     AutoRoute(page: DetailScreen),
   ],
 )
-class AppRouter extends _$AppRouter {}
+class AppRouter extends _$AppRouter {
+  AppRouter({required super.authGuard});
+}

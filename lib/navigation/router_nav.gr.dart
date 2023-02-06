@@ -13,7 +13,12 @@
 part of 'router_nav.dart';
 
 class _$AppRouter extends RootStackRouter {
-  _$AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+  _$AppRouter({
+    GlobalKey<NavigatorState>? navigatorKey,
+    required this.authGuard,
+  }) : super(navigatorKey);
+
+  final AuthGuard authGuard;
 
   @override
   final Map<String, PageFactory> pagesMap = {
@@ -67,11 +72,12 @@ class _$AppRouter extends RootStackRouter {
         ),
         RouteConfig(
           RegistrationScreenRoute.name,
-          path: '/',
+          path: '/registration-screen',
         ),
         RouteConfig(
           HomeScreenRoute.name,
-          path: '/home-screen',
+          path: '/',
+          guards: [authGuard],
         ),
         RouteConfig(
           FavouriteScreenRoute.name,
@@ -106,7 +112,7 @@ class RegistrationScreenRoute extends PageRouteInfo<void> {
   const RegistrationScreenRoute()
       : super(
           RegistrationScreenRoute.name,
-          path: '/',
+          path: '/registration-screen',
         );
 
   static const String name = 'RegistrationScreenRoute';
@@ -118,7 +124,7 @@ class HomeScreenRoute extends PageRouteInfo<void> {
   const HomeScreenRoute()
       : super(
           HomeScreenRoute.name,
-          path: '/home-screen',
+          path: '/',
         );
 
   static const String name = 'HomeScreenRoute';

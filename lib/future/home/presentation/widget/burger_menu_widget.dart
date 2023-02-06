@@ -1,13 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mega_intern/core/storage/storage.dart';
 import 'package:mega_intern/future/auth/login/presentation/bloc/login_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favourite_cubit.dart';
 import 'package:mega_intern/navigation/router_nav.dart';
 
-import '../../../auth/login/presentation/page/login_page.dart';
-import '../pages/favourite_page.dart';
-import '../pages/profile_page.dart';
 
 class BurgerMenuWidget extends StatelessWidget {
   const BurgerMenuWidget({Key? key}) : super(key: key);
@@ -40,8 +38,9 @@ class BurgerMenuWidget extends StatelessWidget {
           ListTile(
             title: const Text('Выйти'),
             leading: const Icon(Icons.exit_to_app),
-            onTap: () {
+            onTap: () async{
               context.read<LoginCubit>().logoutCubit();
+              await SecureStorage.storage.deleteAll();
               context.router.replaceAll([const RegistrationScreenRoute()]);
             },
           )

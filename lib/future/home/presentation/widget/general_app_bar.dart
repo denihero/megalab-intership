@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mega_intern/core/common/image.dart';
@@ -27,8 +28,7 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget  {
           color: Palette.PURPLE,
         ),
         onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+          context.router.replaceNamed('/home-screen');
         },
       ),
       actions: [
@@ -45,8 +45,7 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget  {
             color: Palette.PURPLE,
           ),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (_) => const ProfileScreen()));
+            context.router.replaceNamed('/favourite-screen');
           },
         ),
         SvgIconButtonWidget(

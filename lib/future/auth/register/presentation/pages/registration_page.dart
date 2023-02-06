@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -205,12 +206,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const LoginScreen()),
-                                          );
+                                          context.router.replaceNamed('/login-screen');
                                         },
                                       style: const TextStyle(
                                           color: Palette.BLUE,

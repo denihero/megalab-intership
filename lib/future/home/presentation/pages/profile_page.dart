@@ -152,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   return const SizedBox();
                 },
               ),
-               FooterWidget(),
+               const FooterWidget(),
             ],
           ),
         ),

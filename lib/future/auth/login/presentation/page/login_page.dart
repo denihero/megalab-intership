@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,8 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
               nickname = (await SecureStorage.readData('user'));
               if (!mounted) return;
               context.read<GetOwnPostCubit>().getOwnPostCubit(nickname!);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (_) => const HomeScreen()));
+              context.router.replaceNamed('/home-screen');
             });
           }
         },
@@ -123,12 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const RegistrationScreen()),
-                                  );
+                                  context.router.replaceNamed('/');
                                 },
                               style: const TextStyle(
                                   color: Palette.BLUE,

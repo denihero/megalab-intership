@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,8 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SvgIconButtonWidget(
               icon: SvgPicture.asset(AssetsIcon.profile),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const ProfileScreen()));
+                context.router.pushNamed('/profile-screen');
               },
             ),
             SvgIconButtonWidget(
@@ -68,8 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(AssetsIcon.news),
-                  fit: BoxFit.cover),
+                  image: AssetImage(AssetsIcon.news), fit: BoxFit.cover),
             ),
             child: Align(
                 alignment: Alignment.bottomCenter,
@@ -77,8 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(bottom: 17),
                   child: Text(
                     'Новости',
-                    style: Style.UBUNTU_42_400_WHITE.copyWith(
-                        fontWeight: FontWeight.w500),
+                    style: Style.UBUNTU_42_400_WHITE
+                        .copyWith(fontWeight: FontWeight.w500),
                   ),
                 )),
           ),
@@ -86,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       endDrawer: const BurgerMenuWidget(),
       body: RefreshIndicator(
-        onRefresh: () async{
+        onRefresh: () async {
           context.read<GetAllPostCubit>().getAllPosts();
           context.read<GetFavouriteCubit>().getFavourite();
           context.read<GetUserCubit>().getUser();
@@ -120,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (context,index){
+                        itemBuilder: (context, index) {
                           return const PostCardShimmerLoading();
                         },
                         separatorBuilder: (BuildContext context, int index) {

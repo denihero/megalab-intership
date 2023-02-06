@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mega_intern/core/common/image.dart';
@@ -36,8 +37,7 @@ class FooterWidget extends StatelessWidget {
                   foregroundColor: MaterialStateProperty.all(Palette.WHITE),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const ProfileScreen()));
+                  context.router.pushNamed('/profile-screen');
                 },
                 child: Text(
                   'Мой профиль',
@@ -49,10 +49,7 @@ class FooterWidget extends StatelessWidget {
                   foregroundColor: MaterialStateProperty.all(Palette.WHITE),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const FavouriteScreen()));
+                  context.router.pushNamed('/favourite-screen');
                 },
                 child: Text(
                   'Избранные новости',

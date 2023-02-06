@@ -10,12 +10,14 @@ import 'package:mega_intern/future/home/presentation/bloc/get_favourite/get_favo
 import 'package:mega_intern/future/home/presentation/bloc/get_own_post/get_own_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/like_post/like_post_cubit.dart';
 import 'package:mega_intern/future/home/presentation/bloc/search_post/search_post_cubit.dart';
-
 import 'future/home/presentation/bloc/get_user/get_user_cubit.dart';
 import 'locator_service.dart';
+import 'navigation/router_nav.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  App({Key? key}) : super(key: key);
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +34,13 @@ class App extends StatelessWidget {
         BlocProvider<GetDetailPostCubit>(
             create: (_) => sl<GetDetailPostCubit>()),
       ],
-      child: MaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+      child: MaterialApp.router(
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true
         ),
-        home: const RegistrationScreen(),
       ),
     );
   }

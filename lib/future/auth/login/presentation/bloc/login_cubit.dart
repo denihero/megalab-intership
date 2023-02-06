@@ -22,8 +22,8 @@ class LoginCubit extends Cubit<LoginState> {
     final token = await login.login(nickname: nickname, password: password);
 
     token.fold((l) {
-      emit(LoginError(_mapFailureToMessage(l)));
       isLoading = false;
+      emit(LoginError(_mapFailureToMessage(l)));
     }, (r) async {
       emit(LoginSuccess(r));
       SecureStorage.writeData(r.token!, 'mega');

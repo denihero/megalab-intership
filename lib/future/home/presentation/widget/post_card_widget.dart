@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,6 +12,7 @@ import 'package:mega_intern/future/home/presentation/pages/detail_page.dart';
 import 'package:mega_intern/future/home/presentation/widget/share_window_widget.dart';
 import 'package:mega_intern/future/widgets/internet_image.dart';
 import 'package:mega_intern/future/widgets/svg_icon_widget.dart';
+import 'package:mega_intern/navigation/router_nav.dart';
 import 'package:mega_intern/theme/style.dart';
 
 class PostCardWidget extends StatefulWidget {
@@ -30,12 +32,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
       onTap: () async {
         context.read<GetDetailPostCubit>().getDetailPost(widget.post.id!);
         if (!mounted) return;
-        Navigator.push(
-              context,
-            MaterialPageRoute(
-                builder: (_) => DetailScreen(
-                      post: widget.post,
-                    )));
+        context.router.push(DetailScreenRoute(post: widget.post));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -76,7 +73,7 @@ class _PostCardWidgetState extends State<PostCardWidget> {
                         await context
                             .read<LikePostCubit>()
                             .likePost(widget.post.id!);
-                        if(!mounted){
+                        if (!mounted) {
                           return !isFav;
                         }
                         context.read<GetFavouriteCubit>().getFavourite();
@@ -112,24 +109,21 @@ class _PostCardWidgetState extends State<PostCardWidget> {
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => DetailScreen(
-                                post: widget.post,
-                              )));
+                  context.router.push(DetailScreenRoute(post: widget.post));
                 },
                 child: Text(
                   'Читать дальше>>',
-                  style: Style.UBUNTU_16_400_PURPLE.copyWith(
-                      decoration: TextDecoration.underline),
+                  style: Style.UBUNTU_16_400_PURPLE
+                      .copyWith(decoration: TextDecoration.underline),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: SvgIconButtonWidget(
-                icon: SvgPicture.asset(AssetsIcon.share,),
+                icon: SvgPicture.asset(
+                  AssetsIcon.share,
+                ),
                 onPressed: () {
                   showModalBottomSheet(
                       context: context,
